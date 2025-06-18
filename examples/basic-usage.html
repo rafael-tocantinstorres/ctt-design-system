@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTT Design System - Basic Usage</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+        }
+        .example-section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .example-section h3 {
+            margin-top: 0;
+        }
+        .component-demo {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CTT Design System - Basic Usage Examples</h1>
+    
+    <div class="example-section">
+        <h3>1. Basic Button Usage</h3>
+        <div class="component-demo">
+            <ctt-button label="Default Button"></ctt-button>
+            <ctt-button primary label="Primary Button"></ctt-button>
+        </div>
+    </div>
+    
+    <div class="example-section">
+        <h3>2. Button Sizes</h3>
+        <div class="component-demo">
+            <ctt-button size="small" label="Small"></ctt-button>
+            <ctt-button size="medium" label="Medium"></ctt-button>
+            <ctt-button size="large" label="Large"></ctt-button>
+        </div>
+    </div>
+    
+    <div class="example-section">
+        <h3>3. Custom Background Color</h3>
+        <div class="component-demo">
+            <ctt-button backgroundColor="#28a745" label="Custom Green"></ctt-button>
+            <ctt-button backgroundColor="#dc3545" label="Custom Red"></ctt-button>
+        </div>
+    </div>
+    
+    <div class="example-section">
+        <h3>4. Event Handling</h3>
+        <div class="component-demo">
+            <ctt-button id="event-button" label="Click Me!"></ctt-button>
+            <p id="event-output">Click the button to see the event output</p>
+        </div>
+    </div>
+
+    <!-- Load the design system -->
+    <script type="module">
+        // In a real app, you would install via npm and import
+        // import '@ctt/design-system';
+        
+        // For this example, we'll load from the local build
+        import '../dist/index.esm.js';
+        
+        // Event handling example
+        document.getElementById('event-button').addEventListener('ctt-click', (e) => {
+            document.getElementById('event-output').textContent = 
+                `Button clicked at ${new Date().toLocaleTimeString()}`;
+        });
+    </script>
+</body>
+</html>

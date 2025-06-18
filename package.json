@@ -1,0 +1,76 @@
+{
+  "name": "@ctt/design-system",
+  "version": "1.0.0",
+  "description": "CTT Design System - Framework agnostic component library",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./tokens": {
+      "import": "./dist/tokens/index.esm.js",
+      "require": "./dist/tokens/index.js"
+    },
+    "./css": "./dist/styles.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./tokens.css": "./dist/tokens.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "npm run build:tokens && npm run build:components && npm run build:css",
+    "build:tokens": "node scripts/build-tokens.js",
+    "build:components": "rollup -c",
+    "build:css": "node scripts/build-css.js",
+    "dev": "rollup -c -w",
+    "test": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build",
+    "version:patch": "npm version patch && npm run build && npm publish",
+    "version:minor": "npm version minor && npm run build && npm publish",
+    "version:major": "npm version major && npm run build && npm publish",
+    "watch": "concurrently \"npm run dev\" \"npm run storybook\"",
+    "release": "npm run build && npm publish",
+    "generate:component": "node scripts/generate-component.js"
+  },
+  "keywords": [
+    "design-system",
+    "web-components",
+    "lit",
+    "tokens",
+    "css"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^3.3.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@storybook/addon-a11y": "^9.0.11",
+    "@storybook/addon-docs": "^9.0.11",
+    "@storybook/addon-vitest": "^9.0.11",
+    "@storybook/web-components-vite": "^9.0.11",
+    "@vitest/browser": "^3.2.3",
+    "@vitest/coverage-v8": "^3.2.3",
+    "concurrently": "^8.2.2",
+    "fs-extra": "^11.2.0",
+    "glob": "^10.3.10",
+    "playwright": "^1.53.0",
+    "postcss": "^8.4.31",
+    "rollup": "^4.6.1",
+    "rollup-plugin-copy": "^3.5.0",
+    "storybook": "^9.0.11",
+    "vitest": "^3.2.3"
+  }
+}
