@@ -4,7 +4,7 @@ import { Button } from '../components/Button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 export default {
-  title: 'Example/Button',
+  title: 'Components/Button',
   tags: ['autodocs'],
   render: (args) => Button(args),
   argTypes: {

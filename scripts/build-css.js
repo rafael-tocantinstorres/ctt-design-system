@@ -1,6 +1,6 @@
-const fs = require('fs-extra');
-const path = require('path');
-const { glob } = require('glob');
+import fs from 'fs-extra';
+import path from 'path';
+import { glob } from 'glob';
 
 async function buildCSS() {
   console.log('Building CSS bundle...');

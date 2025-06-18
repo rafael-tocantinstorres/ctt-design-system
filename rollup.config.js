@@ -1,6 +1,7 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import { terser } from '@rollup/plugin-terser';
+import terser from '@rollup/plugin-terser';
 import copy from 'rollup-plugin-copy';
+import postcss from 'rollup-plugin-postcss';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -15,9 +16,15 @@ export default [
     },
     plugins: [
       nodeResolve(),
+      postcss({
+        extract: true,
+        minimize: isProduction
+      }),
       copy({
         targets: [
           { src: 'src/tokens/*.css', dest: 'dist/tokens' },
+          { src: 'src/assets/fonts.css', dest: 'dist/assets' },
+          { src: 'src/assets/fonts/*', dest: 'dist/assets/fonts' },
           { src: 'README.md', dest: 'dist' }
         ]
       }),
@@ -36,6 +43,10 @@ export default [
     },
     plugins: [
       nodeResolve(),
+      postcss({
+        extract: true,
+        minimize: isProduction
+      }),
       isProduction && terser()
     ].filter(Boolean),
     external: ['lit', 'lit/directives/style-map.js']

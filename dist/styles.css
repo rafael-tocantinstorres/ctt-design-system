@@ -1,0 +1,731 @@
+/* src\styles.css */
+/**
+ * CTT Design System - Main Styles
+ * Import this file to get all design system styles including fonts
+ */
+
+/* Import fonts first */
+@import './assets/fonts.css';
+
+/* Import design tokens */
+@import './tokens/tokens.css';
+
+/* Base styles using the design system */
+body {
+  font-family: var(--ctt-typography-font-families-primary);
+  font-size: var(--ctt-typography-font-sizes-base);
+  font-weight: var(--ctt-typography-font-weights-normal);
+  line-height: var(--ctt-typography-line-heights-normal);
+  color: var(--ctt-colors-base-text-primary);
+  background-color: var(--ctt-colors-base-background-primary);
+}
+
+/* Ensure font loading optimization */
+* {
+  font-display: swap;
+}
+
+/* src\tokens\tokens.css */
+/**
+ * CTT Design System - Design Tokens
+ * CSS Custom Properties for all design tokens
+ */
+
+:root {
+  /* Core Colors - Primary */
+  --ctt-colors-core-primary-50: #f0f1ff;
+  --ctt-colors-core-primary-100: #e4e6ff;
+  --ctt-colors-core-primary-200: #cccefd;
+  --ctt-colors-core-primary-300: #a5a9fa;
+  --ctt-colors-core-primary-400: #7b7bf5;
+  --ctt-colors-core-primary-500: #555ab9;
+  --ctt-colors-core-primary-600: #4449a0;
+  --ctt-colors-core-primary-700: #3a3e88;
+  --ctt-colors-core-primary-800: #2f3370;
+  --ctt-colors-core-primary-900: #252858;
+
+  /* Core Colors - Secondary */
+  --ctt-colors-core-secondary-50: #f9f9f9;
+  --ctt-colors-core-secondary-100: #f0f0f0;
+  --ctt-colors-core-secondary-200: #e5e5e5;
+  --ctt-colors-core-secondary-300: #d4d4d4;
+  --ctt-colors-core-secondary-400: #a3a3a3;
+  --ctt-colors-core-secondary-500: #737373;
+  --ctt-colors-core-secondary-600: #525252;
+  --ctt-colors-core-secondary-700: #404040;
+  --ctt-colors-core-secondary-800: #262626;
+  --ctt-colors-core-secondary-900: #171717;
+
+  /* Core Colors - Success */
+  --ctt-colors-core-success-50: #f0fdf4;
+  --ctt-colors-core-success-100: #dcfce7;
+  --ctt-colors-core-success-200: #bbf7d0;
+  --ctt-colors-core-success-300: #86efac;
+  --ctt-colors-core-success-400: #4ade80;
+  --ctt-colors-core-success-500: #22c55e;
+  --ctt-colors-core-success-600: #16a34a;
+  --ctt-colors-core-success-700: #15803d;
+  --ctt-colors-core-success-800: #166534;
+  --ctt-colors-core-success-900: #14532d;
+
+  /* Core Colors - Warning */
+  --ctt-colors-core-warning-50: #fffbeb;
+  --ctt-colors-core-warning-100: #fef3c7;
+  --ctt-colors-core-warning-200: #fde68a;
+  --ctt-colors-core-warning-300: #fcd34d;
+  --ctt-colors-core-warning-400: #fbbf24;
+  --ctt-colors-core-warning-500: #f59e0b;
+  --ctt-colors-core-warning-600: #d97706;
+  --ctt-colors-core-warning-700: #b45309;
+  --ctt-colors-core-warning-800: #92400e;
+  --ctt-colors-core-warning-900: #78350f;
+
+  /* Core Colors - Error */
+  --ctt-colors-core-error-50: #fef2f2;
+  --ctt-colors-core-error-100: #fee2e2;
+  --ctt-colors-core-error-200: #fecaca;
+  --ctt-colors-core-error-300: #fca5a5;
+  --ctt-colors-core-error-400: #f87171;
+  --ctt-colors-core-error-500: #ef4444;
+  --ctt-colors-core-error-600: #dc2626;
+  --ctt-colors-core-error-700: #b91c1c;
+  --ctt-colors-core-error-800: #991b1b;
+  --ctt-colors-core-error-900: #7f1d1d;
+
+  /* Base Colors - Neutral */
+  --ctt-colors-base-neutral-white: #ffffff;
+  --ctt-colors-base-neutral-50: #fafafa;
+  --ctt-colors-base-neutral-100: #f5f5f5;
+  --ctt-colors-base-neutral-200: #e5e5e5;
+  --ctt-colors-base-neutral-300: #d4d4d4;
+  --ctt-colors-base-neutral-400: #a3a3a3;
+  --ctt-colors-base-neutral-500: #737373;
+  --ctt-colors-base-neutral-600: #525252;
+  --ctt-colors-base-neutral-700: #404040;
+  --ctt-colors-base-neutral-800: #262626;
+  --ctt-colors-base-neutral-900: #171717;
+  --ctt-colors-base-neutral-black: #000000;
+
+  /* Base Colors - Text */
+  --ctt-colors-base-text-primary: #333333;
+  --ctt-colors-base-text-secondary: #737373;
+  --ctt-colors-base-text-tertiary: #a3a3a3;
+  --ctt-colors-base-text-inverse: #ffffff;
+  --ctt-colors-base-text-disabled: #d4d4d4;
+
+  /* Base Colors - Background */
+  --ctt-colors-base-background-primary: #ffffff;
+  --ctt-colors-base-background-secondary: #fafafa;
+  --ctt-colors-base-background-tertiary: #f5f5f5;
+  --ctt-colors-base-background-inverse: #171717;
+  --ctt-colors-base-background-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Base Colors - Border */
+  --ctt-colors-base-border-primary: #e5e5e5;
+  --ctt-colors-base-border-secondary: #d4d4d4;
+  --ctt-colors-base-border-focus: #555ab9;
+  --ctt-colors-base-border-error: #ef4444;
+  --ctt-colors-base-border-disabled: #f5f5f5;
+
+  /* Base Colors - Shadow */
+  --ctt-colors-base-shadow-sm: rgba(0, 0, 0, 0.05);
+  --ctt-colors-base-shadow-md: rgba(0, 0, 0, 0.15);
+  --ctt-colors-base-shadow-lg: rgba(0, 0, 0, 0.25);
+
+  /* Typography - Font Families */
+  --ctt-typography-font-families-primary: 'ActoCTT', 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ctt-typography-font-families-secondary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --ctt-typography-font-families-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+
+  /* Typography - Font Sizes */
+  --ctt-typography-font-sizes-xs: 0.75rem;
+  --ctt-typography-font-sizes-sm: 0.875rem;
+  --ctt-typography-font-sizes-base: 1rem;
+  --ctt-typography-font-sizes-lg: 1.125rem;
+  --ctt-typography-font-sizes-xl: 1.25rem;
+  --ctt-typography-font-sizes-2xl: 1.5rem;
+  --ctt-typography-font-sizes-3xl: 1.875rem;
+  --ctt-typography-font-sizes-4xl: 2.25rem;
+  --ctt-typography-font-sizes-5xl: 3rem;
+  --ctt-typography-font-sizes-6xl: 3.75rem;
+
+  /* Typography - Font Weights */
+  --ctt-typography-font-weights-thin: 100;
+  --ctt-typography-font-weights-extralight: 200;
+  --ctt-typography-font-weights-light: 300;
+  --ctt-typography-font-weights-normal: 400;
+  --ctt-typography-font-weights-medium: 500;
+  --ctt-typography-font-weights-semibold: 600;
+  --ctt-typography-font-weights-bold: 700;
+  --ctt-typography-font-weights-extrabold: 800;
+  --ctt-typography-font-weights-black: 900;
+
+  /* Typography - Line Heights */
+  --ctt-typography-line-heights-none: 1;
+  --ctt-typography-line-heights-tight: 1.25;
+  --ctt-typography-line-heights-snug: 1.375;
+  --ctt-typography-line-heights-normal: 1.5;
+  --ctt-typography-line-heights-relaxed: 1.625;
+  --ctt-typography-line-heights-loose: 2;
+
+  /* Typography - Letter Spacing */
+  --ctt-typography-letter-spacing-tighter: -0.05em;
+  --ctt-typography-letter-spacing-tight: -0.025em;
+  --ctt-typography-letter-spacing-normal: 0em;
+  --ctt-typography-letter-spacing-wide: 0.025em;
+  --ctt-typography-letter-spacing-wider: 0.05em;
+  --ctt-typography-letter-spacing-widest: 0.1em;
+}
+
+/* src\tokens\example.css */
+:root {
+  /* Brand Colors - Primary */
+  --brand-primary-100: #F9CCD3;
+  --brand-primary-200: #F299A7;
+  --brand-primary-300: #EC667C;
+  --brand-primary-400: #E53350;
+  --brand-primary-500: #DF0024;
+  --brand-primary-600: #C7001E;
+  --brand-primary-700: #B10018;
+
+  /* Brand Colors - Secondary */
+  --brand-secondary-100: #CCCCCC;
+  --brand-secondary-200: #99999D;
+  --brand-secondary-300: #666666;
+  --brand-secondary-400: #333333;
+  --brand-secondary-500: #000000;
+
+  /* Brand Colors - Teal */
+  --brand-teal-100: #CCF2F0;
+  --brand-teal-200: #99E5E1;
+  --brand-teal-300: #66D8D2;
+  --brand-teal-400: #33CBC3;
+  --brand-teal-500: #00BEB4;
+  --brand-teal-600: #009C97;
+
+  /* Brand Colors - Green */
+  --brand-green-100: #F0F6DA;
+  --brand-green-200: #E1EDB5;
+  --brand-green-300: #D2E490;
+  --brand-green-400: #C3DB6B;
+  --brand-green-500: #B4D246;
+  --brand-green-600: #A5C81F;
+
+  /* Brand Colors - Yellow */
+  --brand-yellow-100: #FFFBCC;
+  --brand-yellow-200: #FFF799;
+  --brand-yellow-300: #FFF366;
+  --brand-yellow-400: #FFEF33;
+  --brand-yellow-500: #FFEB00;
+  --brand-yellow-600: #E6D400;
+
+  /* Brand Colors - Purple */
+  --brand-purple-100: #E6D2E6;
+  --brand-purple-200: #CDA5CD;
+  --brand-purple-300: #B478B4;
+  --brand-purple-400: #9B4B9B;
+  --brand-purple-500: #821E82;
+  --brand-purple-600: #690B69;
+
+    /* TOKENS */
+
+  /* Core Colors - Primary */
+  --core-color-primary-light: var(--brand-primary-400); /* #E53350 */
+  --core-color-primary-main: var(--brand-primary-500);  /* #DF0024 */
+  --core-color-primary-dark: var(--brand-primary-600);  /* #C7001E */
+
+  /* Core Colors - Secondary */
+  --core-color-secondary-light: var(--brand-secondary-300); /* #666666 */
+  --core-color-secondary-main: var(--brand-secondary-400);  /* #333333 */
+  --core-color-secondary-dark: var(--brand-secondary-500);  /* #000000 */
+
+  /* Core Colors - New */
+  --core-color-new-light: var(--brand-purple-200); /* #CDA5CD */
+  --core-color-new-main: var(--brand-purple-400);  /* #9B4B9B */
+
+  /* Core Colors - Informative */
+  --core-color-informative-light: var(--brand-teal-200); /* #99E5E1 */
+  --core-color-informative-main: var(--brand-teal-400);  /* #33CBC3 */
+
+  /* Core Colors - Success */
+  --core-color-success-light: var(--brand-green-200); /* #E1EDB5 */
+  --core-color-success-main: var(--brand-green-400);  /* #C3DB6B */
+
+  /* Core Colors - Warning */
+  --core-color-warning-light: var(--brand-yellow-200); /* #FFF799 */
+  --core-color-warning-main: var(--brand-yellow-400);  /* #FFEF33 */
+
+  /* Core Colors - Negative */
+  --core-color-negative-light: var(--brand-primary-200); /* #F299A7 */
+  --core-color-negative-main: var(--brand-primary-700);  /* #B10018 */
+
+  /* Neutral Colors */
+  --core-color-neutral-100: #FFFFFF; /* White */
+  --core-color-neutral-200: #F7F7F7;
+  --core-color-neutral-300: #F2F2F2;
+  --core-color-neutral-400: #E9E5E5;
+  --core-color-neutral-500: var(--brand-secondary-100); /* #CCCCCC */
+  --core-color-neutral-600: var(--brand-secondary-200); /* #99999D */
+  --core-color-neutral-700: var(--brand-secondary-300); /* #666666 */
+  --core-color-neutral-800: var(--brand-secondary-400); /* #333333 */
+  --core-color-neutral-900: var(--brand-secondary-500); /* #000000 */
+
+  /* Core Size Scale */
+  --core-size-scale: 1rem;
+
+  /* Core Border Radius - Base calculation: {core.size.SCALE} / 100 */
+  --core-border-radius-base: calc(var(--core-size-scale) / 100); /* 0.16px */
+  
+  /* Core Border Radius Values */
+  --core-border-radius-0: 0px;
+  --core-border-radius-6: calc(var(--core-border-radius-base) * 6.25); /* 1px */
+  --core-border-radius-12: calc(var(--core-border-radius-base) * 12.5); /* 2px */
+  --core-border-radius-25: calc(var(--core-border-radius-base) * 25); /* 4px */
+  --core-border-radius-50: calc(var(--core-border-radius-base) * 50); /* 8px */
+  --core-border-radius-100: calc(var(--core-border-radius-base) * 100); /* 16px */
+  --core-border-radius-200: calc(var(--core-border-radius-base) * 200); /* 32px */
+  --core-border-radius-pill: 1000px;
+
+  /* Core Border Width */
+  --core-border-width-0: 0px;
+  --core-border-width-1: 1px;
+  --core-border-width-2: 2px;
+  --core-border-width-3: 3px;
+  --core-border-width-4: 4px;
+  --core-border-width-5: 5px;
+  --core-border-width-6: 6px;
+
+
+  /* Core Intensity */
+  --core-intensity-box-shadow: 0.3;
+
+  /* Core Box Shadow */
+  --core-box-shadow-none: none;
+  --core-box-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, var(--core-intensity-box-shadow));
+  --core-box-shadow-s: 0 2px 4px 0 rgba(0, 0, 0, var(--core-intensity-box-shadow));
+  --core-box-shadow-m: 0 2px 8px 0 rgba(0, 0, 0, var(--core-intensity-box-shadow));
+  --core-box-shadow-l: 0 4px 16px 0 rgba(0, 0, 0, var(--core-intensity-box-shadow));
+
+  
+
+}
+
+
+
+/* src\tokens\button-tokens.css */
+/**
+ * CTT Button Component - Tokens & Styles
+ * Using CTT Design System tokens
+ */
+
+/* Import the main tokens CSS file */
+@import './tokens.css';
+
+/* Button-specific CSS Custom Properties */
+:root {
+  /* Button Spacing */
+  --ctt-button-padding-small: 10px 16px;
+  --ctt-button-padding-medium: 11px 20px;
+  --ctt-button-padding-large: 12px 24px;
+  
+  /* Button Border Radius */
+  --ctt-button-border-radius: 3em;
+  
+  /* Button Transitions */
+  --ctt-button-transition: all 0.2s ease-in-out;
+  
+  /* Button Transform */
+  --ctt-button-hover-transform: translateY(-1px);
+}
+
+/* Base Button Styles */
+.ctt-button {
+  display: inline-block;
+  cursor: pointer;
+  border: 0;
+  border-radius: var(--ctt-button-border-radius);
+  font-weight: var(--ctt-typography-font-weights-bold);
+  line-height: var(--ctt-typography-line-heights-none);
+  font-family: var(--ctt-typography-font-families-primary);
+  transition: var(--ctt-button-transition);
+  text-decoration: none;
+  text-align: center;
+  outline: none;
+  position: relative;
+}
+
+.ctt-button:focus {
+  outline: 2px solid var(--ctt-colors-base-border-focus);
+  outline-offset: 2px;
+}
+
+.ctt-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none !important;
+}
+
+/* Button Variants */
+.ctt-button--primary {
+  background-color: var(--ctt-colors-core-primary-500);
+  color: var(--ctt-colors-base-neutral-white);
+}
+
+.ctt-button--primary:hover:not(:disabled) {
+  background-color: var(--ctt-colors-core-primary-600);
+  transform: var(--ctt-button-hover-transform);
+}
+
+.ctt-button--primary:active:not(:disabled) {
+  background-color: var(--ctt-colors-core-primary-700);
+  transform: translateY(0);
+}
+
+.ctt-button--secondary {
+  background-color: transparent;
+  color: var(--ctt-colors-base-text-primary);
+  box-shadow: var(--ctt-colors-base-shadow-md) 0px 0px 0px 1px inset;
+}
+
+.ctt-button--secondary:hover:not(:disabled) {
+  background-color: var(--ctt-colors-base-background-secondary);
+  transform: var(--ctt-button-hover-transform);
+}
+
+.ctt-button--secondary:active:not(:disabled) {
+  background-color: var(--ctt-colors-base-background-tertiary);
+  transform: translateY(0);
+}
+
+/* Button Sizes */
+.ctt-button--small {
+  padding: var(--ctt-button-padding-small);
+  font-size: var(--ctt-typography-font-sizes-xs);
+}
+
+.ctt-button--medium {
+  padding: var(--ctt-button-padding-medium);
+  font-size: var(--ctt-typography-font-sizes-sm);
+}
+
+.ctt-button--large {
+  padding: var(--ctt-button-padding-large);
+  font-size: var(--ctt-typography-font-sizes-base);
+}
+
+/* Additional Button Variants (for future use) */
+.ctt-button--success {
+  background-color: var(--ctt-colors-core-success-500);
+  color: var(--ctt-colors-base-neutral-white);
+}
+
+.ctt-button--success:hover:not(:disabled) {
+  background-color: var(--ctt-colors-core-success-600);
+  transform: var(--ctt-button-hover-transform);
+}
+
+.ctt-button--warning {
+  background-color: var(--ctt-colors-core-warning-500);
+  color: var(--ctt-colors-base-neutral-white);
+}
+
+.ctt-button--warning:hover:not(:disabled) {
+  background-color: var(--ctt-colors-core-warning-600);
+  transform: var(--ctt-button-hover-transform);
+}
+
+.ctt-button--error {
+  background-color: var(--ctt-colors-core-error-500);
+  color: var(--ctt-colors-base-neutral-white);
+}
+
+.ctt-button--error:hover:not(:disabled) {
+  background-color: var(--ctt-colors-core-error-600);
+  transform: var(--ctt-button-hover-transform);
+}
+
+/* Ghost variant */
+.ctt-button--ghost {
+  background-color: transparent;
+  color: var(--ctt-colors-core-primary-500);
+  border: none;
+}
+
+.ctt-button--ghost:hover:not(:disabled) {
+  background-color: var(--ctt-colors-core-primary-50);
+  transform: var(--ctt-button-hover-transform);
+}
+
+/* src\tokens\-icon-button-tokens.css */
+.ctt--icon-button {
+  /* Base styles */
+  display: block;
+  font-family: var(--ctt-typography-font-families-primary);
+}
+
+.ctt--icon-button--default {
+  /* Default variant styles */
+}
+
+.ctt--icon-button--small {
+  /* Small size styles */
+}
+
+.ctt--icon-button--medium {
+  /* Medium size styles */
+}
+
+.ctt--icon-button--large {
+  /* Large size styles */
+}
+
+/* src\stories\page.css */
+.storybook-page {
+  margin: 0 auto;
+  padding: 48px 20px;
+  max-width: 600px;
+  color: #333;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.storybook-page h2 {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.storybook-page p {
+  margin: 1em 0;
+}
+
+.storybook-page a {
+  color: inherit;
+}
+
+.storybook-page ul {
+  margin: 1em 0;
+  padding-left: 30px;
+}
+
+.storybook-page li {
+  margin-bottom: 8px;
+}
+
+.storybook-page .tip {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+  border-radius: 1em;
+  background: #e7fdd8;
+  padding: 4px 12px;
+  color: #357a14;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 12px;
+}
+
+.storybook-page .tip-wrapper {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.storybook-page .tip-wrapper svg {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 3px;
+  margin-right: 4px;
+  width: 12px;
+  height: 12px;
+}
+
+.storybook-page .tip-wrapper svg path {
+  fill: #1ea7fd;
+}
+
+
+/* src\stories\header.css */
+.storybook-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.storybook-header svg {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.storybook-header h1 {
+  display: inline-block;
+  vertical-align: top;
+  margin: 6px 0 6px 10px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.storybook-header button + button {
+  margin-left: 10px;
+}
+
+.storybook-header .welcome {
+  margin-right: 10px;
+  color: #333;
+  font-size: 14px;
+}
+
+
+/* src\stories\button.css */
+.storybook-button {
+  display: inline-block;
+  cursor: pointer;
+  border: 0;
+  border-radius: 3em;
+  font-weight: 700;
+  line-height: 1;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.storybook-button--primary {
+  background-color: #555ab9;
+  color: white;
+}
+.storybook-button--secondary {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+  background-color: transparent;
+  color: #333;
+}
+.storybook-button--small {
+  padding: 10px 16px;
+  font-size: 12px;
+}
+.storybook-button--medium {
+  padding: 11px 20px;
+  font-size: 14px;
+}
+.storybook-button--large {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+
+/* src\assets\fonts.css */
+/**
+ * ActoCTT Font Family
+ * Custom font definitions for the CTT Design System
+ */
+
+/* ActoCTT Thin */
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-Thin.eot');
+  src: url('./fonts/ActoCTT-Thin.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-ThinItalic.eot');
+  src: url('./fonts/ActoCTT-ThinItalic.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-ThinItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ActoCTT Light */
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-Light.eot');
+  src: url('./fonts/ActoCTT-Light.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-LightItalic.eot');
+  src: url('./fonts/ActoCTT-LightItalic.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ActoCTT Book (Regular) */
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-Book.eot');
+  src: url('./fonts/ActoCTT-Book.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-Book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-BookItalic.eot');
+  src: url('./fonts/ActoCTT-BookItalic.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-BookItalic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ActoCTT Medium */
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-Medium.eot');
+  src: url('./fonts/ActoCTT-Medium.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-MediumItalic.eot');
+  src: url('./fonts/ActoCTT-MediumItalic.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ActoCTT Bold */
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-Bold.eot');
+  src: url('./fonts/ActoCTT-Bold.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ActoCTT';
+  src: url('./fonts/ActoCTT-BoldItalic.eot');
+  src: url('./fonts/ActoCTT-BoldItalic.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/ActoCTT-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+

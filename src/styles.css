@@ -1,0 +1,25 @@
+/**
+ * CTT Design System - Main Styles
+ * Import this file to get all design system styles including fonts
+ */
+
+/* Import fonts first */
+@import './assets/fonts.css';
+
+/* Import design tokens */
+@import './tokens/tokens.css';
+
+/* Base styles using the design system */
+body {
+  font-family: var(--ctt-typography-font-families-primary);
+  font-size: var(--ctt-typography-font-sizes-base);
+  font-weight: var(--ctt-typography-font-weights-normal);
+  line-height: var(--ctt-typography-line-heights-normal);
+  color: var(--ctt-colors-base-text-primary);
+  background-color: var(--ctt-colors-base-background-primary);
+}
+
+/* Ensure font loading optimization */
+* {
+  font-display: swap;
+}
