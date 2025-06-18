@@ -6,7 +6,7 @@ export { Page } from './components/Page.js';
 
 // Export tokens for programmatic access
 export { tokens } from './tokens/index.js';
-export { buttonTokens, tokenStyles } from './tokens/utils.js';
+export { buttonTokens, tokenStyles, typographyHelpers, getCSSVar } from './tokens/utils.js';
 
 // Auto-register components as custom elements for framework-agnostic usage
 import { LitElement, html, css } from 'lit';

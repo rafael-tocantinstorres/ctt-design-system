@@ -95,6 +95,35 @@ export class AppModule {}
 </ctt-button>
 ```
 
+### Using Fonts Only
+
+```css
+/* Import fonts CSS */
+@import '@ctt/design-system/fonts.css';
+
+.my-element {
+  font-family: 'ActoCTT', Arial, sans-serif;
+  font-weight: 400; /* Book/Regular */
+}
+
+/* Available font weights: */
+.thin { font-weight: 250; }
+.light { font-weight: 300; }
+.regular { font-weight: 400; } /* Book */
+.medium { font-weight: 500; }
+.bold { font-weight: 700; }
+.black { font-weight: 900; }
+```
+
+```html
+<!-- Include fonts in HTML -->
+<link rel="stylesheet" href="node_modules/@ctt/design-system/dist/assets/fonts.css">
+
+<!-- Optional: Preload critical fonts for better performance -->
+<link rel="preload" href="node_modules/@ctt/design-system/dist/assets/fonts/ActoCTT-Book.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="node_modules/@ctt/design-system/dist/assets/fonts/ActoCTT-Bold.woff2" as="font" type="font/woff2" crossorigin>
+```
+
 ### Using Design Tokens Only
 
 ```javascript
@@ -141,8 +170,18 @@ import { Button, CttButton } from '@ctt/design-system';
 // Tokens only
 import { tokens } from '@ctt/design-system/tokens';
 
-// CSS bundle
+// CSS bundle (includes fonts and tokens)
 import '@ctt/design-system/css';
+
+// Fonts only
+import '@ctt/design-system/fonts.css';
+```
+
+```css
+/* CSS imports */
+@import '@ctt/design-system/css'; /* Full styles */
+@import '@ctt/design-system/fonts.css'; /* Fonts only */
+@import '@ctt/design-system/tokens.css'; /* Tokens only */
 ```
 
 ## Component Props

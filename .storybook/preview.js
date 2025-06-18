@@ -1,3 +1,6 @@
+// Import design system styles
+import '../src/styles.css';
+
 /** @type { import('@storybook/web-components-vite').Preview } */
 const preview = {
   parameters: {

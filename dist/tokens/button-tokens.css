@@ -8,13 +8,13 @@
 
 /* Button-specific CSS Custom Properties */
 :root {
-  /* Button Spacing */
-  --ctt-button-padding-small: 10px 16px;
-  --ctt-button-padding-medium: 11px 20px;
-  --ctt-button-padding-large: 12px 24px;
+  /* Button Spacing - Using core dimension tokens */
+  --ctt-button-padding-small: var(--ctt-core-dimension-50) var(--ctt-core-dimension-100);   /* 8px 16px */
+  --ctt-button-padding-medium: var(--ctt-core-dimension-75) var(--ctt-core-dimension-150);  /* 12px 24px */
+  --ctt-button-padding-large: var(--ctt-core-dimension-100) var(--ctt-core-dimension-200);  /* 16px 32px */
   
-  /* Button Border Radius */
-  --ctt-button-border-radius: 3em;
+  /* Button Border Radius - Using base border radius tokens */
+  --ctt-button-border-radius: var(--ctt-base-border-radius-pill);
   
   /* Button Transitions */
   --ctt-button-transition: all 0.2s ease-in-out;
@@ -29,9 +29,9 @@
   cursor: pointer;
   border: 0;
   border-radius: var(--ctt-button-border-radius);
-  font-weight: var(--ctt-typography-font-weights-bold);
-  line-height: var(--ctt-typography-line-heights-none);
-  font-family: var(--ctt-typography-font-families-primary);
+  font-weight: var(--ctt-base-font-weight-label);
+  line-height: var(--ctt-core-line-height-xs);
+  font-family: var(--ctt-base-font-family-label);
   transition: var(--ctt-button-transition);
   text-decoration: none;
   text-align: center;
@@ -40,8 +40,8 @@
 }
 
 .ctt-button:focus {
-  outline: 2px solid var(--ctt-colors-base-border-focus);
-  outline-offset: 2px;
+  outline: var(--ctt-core-border-width-2) solid var(--ctt-core-color-primary-main);
+  outline-offset: var(--ctt-core-border-width-2);
 }
 
 .ctt-button:disabled {
@@ -52,91 +52,91 @@
 
 /* Button Variants */
 .ctt-button--primary {
-  background-color: var(--ctt-colors-core-primary-500);
-  color: var(--ctt-colors-base-neutral-white);
+  background-color: var(--ctt-base-color-selectable-primary-unselected-default-bg);
+  color: var(--ctt-base-color-selectable-primary-unselected-default-fg);
 }
 
 .ctt-button--primary:hover:not(:disabled) {
-  background-color: var(--ctt-colors-core-primary-600);
+  background-color: var(--ctt-base-color-selectable-primary-unselected-hover-bg);
   transform: var(--ctt-button-hover-transform);
 }
 
 .ctt-button--primary:active:not(:disabled) {
-  background-color: var(--ctt-colors-core-primary-700);
+  background-color: var(--ctt-base-color-selectable-primary-unselected-active-bg);
   transform: translateY(0);
 }
 
 .ctt-button--secondary {
-  background-color: transparent;
-  color: var(--ctt-colors-base-text-primary);
-  box-shadow: var(--ctt-colors-base-shadow-md) 0px 0px 0px 1px inset;
+  background-color: var(--ctt-base-color-selectable-bg-default);
+  color: var(--ctt-base-color-selectable-fg-default);
+  border: var(--ctt-base-border-width-selectable-s) solid var(--ctt-base-color-selectable-border-default);
 }
 
 .ctt-button--secondary:hover:not(:disabled) {
-  background-color: var(--ctt-colors-base-background-secondary);
+  background-color: var(--ctt-base-color-page-bg-cloudy);
   transform: var(--ctt-button-hover-transform);
 }
 
 .ctt-button--secondary:active:not(:disabled) {
-  background-color: var(--ctt-colors-base-background-tertiary);
+  background-color: var(--ctt-core-color-neutral-300);
   transform: translateY(0);
 }
 
 /* Button Sizes */
 .ctt-button--small {
   padding: var(--ctt-button-padding-small);
-  font-size: var(--ctt-typography-font-sizes-xs);
+  font-size: var(--ctt-base-font-size-label-s);
 }
 
 .ctt-button--medium {
   padding: var(--ctt-button-padding-medium);
-  font-size: var(--ctt-typography-font-sizes-sm);
+  font-size: var(--ctt-base-font-size-label-m);
 }
 
 .ctt-button--large {
   padding: var(--ctt-button-padding-large);
-  font-size: var(--ctt-typography-font-sizes-base);
+  font-size: var(--ctt-base-font-size-label-l);
 }
 
 /* Additional Button Variants (for future use) */
 .ctt-button--success {
-  background-color: var(--ctt-colors-core-success-500);
-  color: var(--ctt-colors-base-neutral-white);
+  background-color: var(--ctt-base-color-feedback-success-bg-main);
+  color: var(--ctt-base-color-feedback-fg-clear);
 }
 
 .ctt-button--success:hover:not(:disabled) {
-  background-color: var(--ctt-colors-core-success-600);
+  background-color: var(--ctt-brand-green-600);
   transform: var(--ctt-button-hover-transform);
 }
 
 .ctt-button--warning {
-  background-color: var(--ctt-colors-core-warning-500);
-  color: var(--ctt-colors-base-neutral-white);
+  background-color: var(--ctt-base-color-feedback-warning-bg-main);
+  color: var(--ctt-base-color-feedback-fg-default);
 }
 
 .ctt-button--warning:hover:not(:disabled) {
-  background-color: var(--ctt-colors-core-warning-600);
+  background-color: var(--ctt-brand-yellow-600);
   transform: var(--ctt-button-hover-transform);
 }
 
 .ctt-button--error {
-  background-color: var(--ctt-colors-core-error-500);
-  color: var(--ctt-colors-base-neutral-white);
+  background-color: var(--ctt-base-color-feedback-error-bg-main);
+  color: var(--ctt-base-color-feedback-fg-clear);
 }
 
 .ctt-button--error:hover:not(:disabled) {
-  background-color: var(--ctt-colors-core-error-600);
+  background-color: var(--ctt-brand-primary-600);
   transform: var(--ctt-button-hover-transform);
 }
 
 /* Ghost variant */
 .ctt-button--ghost {
   background-color: transparent;
-  color: var(--ctt-colors-core-primary-500);
+  color: var(--ctt-base-color-content-fg-brand);
   border: none;
 }
 
 .ctt-button--ghost:hover:not(:disabled) {
-  background-color: var(--ctt-colors-core-primary-50);
+  background-color: var(--ctt-brand-primary-100);
   transform: var(--ctt-button-hover-transform);
 }

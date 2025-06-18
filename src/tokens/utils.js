@@ -105,3 +105,36 @@ export const buttonTokens = {
     large: tokens.typography.scale.button.large,
   },
 };
+
+/**
+ * Helper function to get CSS custom property value
+ * @param {string} property - CSS custom property name (without --)
+ * @param {string} prefix - CSS variable prefix (default: 'ctt')
+ * @returns {string} CSS var() function
+ */
+export function getCSSVar(property, prefix = 'ctt') {
+  return `var(--${prefix}-${property})`;
+}
+
+/**
+ * Typography helper functions for consistent usage
+ */
+export const typographyHelpers = {
+  // Font family helpers
+  getFontFamily: (type = 'primary') => tokens.typography.fontFamilies[type] || tokens.typography.fontFamilies.primary,
+  
+  // Font size helpers
+  getFontSize: (size = 'base') => tokens.typography.fontSizes[size] || tokens.typography.fontSizes.base,
+  
+  // Font weight helpers
+  getFontWeight: (weight = 'normal') => tokens.typography.fontWeights[weight] || tokens.typography.fontWeights.normal,
+  
+  // Line height helpers
+  getLineHeight: (height = 'normal') => tokens.typography.lineHeights[height] || tokens.typography.lineHeights.normal,
+  
+  // Typography scale helpers
+  getTypographyScale: (scale = 'bodyMedium') => tokens.typography.scale[scale] || tokens.typography.scale.bodyMedium,
+  
+  // Button typography helpers
+  getButtonTypography: (size = 'medium') => tokens.typography.scale.button[size] || tokens.typography.scale.button.medium,
+};

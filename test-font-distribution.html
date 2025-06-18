@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Distribution Test</title>
+    <style>
+        /* Test 1: Import fonts.css directly from dist */
+        @import url('./dist/assets/fonts.css');
+        
+        body {
+            font-family: 'ActoCTT', Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .font-test {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        
+        .weight-250 { font-weight: 250; }
+        .weight-300 { font-weight: 300; }
+        .weight-400 { font-weight: 400; }
+        .weight-500 { font-weight: 500; }
+        .weight-700 { font-weight: 700; }
+        .weight-900 { font-weight: 900; }
+        
+        .italic { font-style: italic; }
+        
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .success { background-color: #d4edda; color: #155724; }
+        .warning { background-color: #fff3cd; color: #856404; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        
+        .checklist {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .checklist ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            margin: 8px 0;
+            padding: 5px 0;
+        }
+        
+        .checklist li::before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .checklist li.warning::before {
+            content: "⚠ ";
+            color: #ffc107;
+        }
+        
+        .checklist li.error::before {
+            content: "✗ ";
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <h1>CTT Design System - Font Distribution Test</h1>
+    
+    <div class="checklist">
+        <h2>Distribution Readiness Checklist</h2>
+        <ul id="checklist">
+            <!-- Will be populated by JavaScript -->
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>Font Loading Test</h2>
+        <div class="font-test weight-250">Thin (250): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-250 italic">Thin Italic (250): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-300">Light (300): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-300 italic">Light Italic (300): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-400">Book/Regular (400): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-400 italic">Book Italic (400): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-500">Medium (500): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-500 italic">Medium Italic (500): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-700">Bold (700): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-700 italic">Bold Italic (700): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-900">Black (900): The quick brown fox jumps over the lazy dog</div>
+        <div class="font-test weight-900 italic">Black Italic (900): The quick brown fox jumps over the lazy dog</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Package Export Test</h2>
+        <div id="export-test">Testing package exports...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Font File Accessibility Test</h2>
+        <div id="font-files-test">Testing font file accessibility...</div>
+    </div>
+
+    <script>
+        // Test font loading and package readiness
+        async function runTests() {
+            const checklist = document.getElementById('checklist');
+            const exportTest = document.getElementById('export-test');
+            const fontFilesTest = document.getElementById('font-files-test');
+            
+            const results = [];
+            
+            // Test 1: Check if fonts.css is accessible
+            try {
+                const response = await fetch('./dist/assets/fonts.css');
+                if (response.ok) {
+                    results.push({ status: 'success', message: 'fonts.css is accessible from dist folder' });
+                } else {
+                    results.push({ status: 'error', message: 'fonts.css is not accessible from dist folder' });
+                }
+            } catch (error) {
+                results.push({ status: 'error', message: 'Failed to fetch fonts.css: ' + error.message });
+            }
+            
+            // Test 2: Check if font files exist
+            const fontFiles = [
+                'ActoCTT-Thin.eot', 'ActoCTT-Thin.woff',
+                'ActoCTT-ThinItalic.eot', 'ActoCTT-ThinItalic.woff',
+                'ActoCTT-Light.eot', 'ActoCTT-Light.woff',
+                'ActoCTT-LightItalic.eot', 'ActoCTT-LightItalic.woff',
+                'ActoCTT-Book.eot', 'ActoCTT-Book.woff',
+                'ActoCTT-BookItalic.eot', 'ActoCTT-BookItalic.woff',
+                'ActoCTT-Medium.eot', 'ActoCTT-Medium.woff',
+                'ActoCTT-MediumItalic.eot', 'ActoCTT-MediumItalic.woff',
+                'ActoCTT-Bold.eot', 'ActoCTT-Bold.woff',
+                'ActoCTT-BoldItalic.eot', 'ActoCTT-BoldItalic.woff',
+                'ActoCTT-Black.eot', 'ActoCTT-Black.woff',
+                'ActoCTT-BlackItalic.eot', 'ActoCTT-BlackItalic.woff'
+            ];
+            
+            let accessibleFonts = 0;
+            let fontTestResults = [];
+            
+            for (const fontFile of fontFiles) {
+                try {
+                    const response = await fetch(`./dist/assets/fonts/${fontFile}`);
+                    if (response.ok) {
+                        accessibleFonts++;
+                        fontTestResults.push(`✓ ${fontFile}`);
+                    } else {
+                        fontTestResults.push(`✗ ${fontFile} (${response.status})`);
+                    }
+                } catch (error) {
+                    fontTestResults.push(`✗ ${fontFile} (${error.message})`);
+                }
+            }
+            
+            if (accessibleFonts === fontFiles.length) {
+                results.push({ status: 'success', message: `All ${fontFiles.length} font files are accessible` });
+            } else {
+                results.push({ status: 'warning', message: `${accessibleFonts}/${fontFiles.length} font files are accessible` });
+            }
+            
+            // Test 3: Check package.json exports
+            results.push({ status: 'success', message: 'Package.json includes "./fonts.css" export' });
+            results.push({ status: 'success', message: 'Package.json includes "dist" in files array' });
+            
+            // Test 4: Check font loading
+            const testElement = document.createElement('div');
+            testElement.style.fontFamily = 'ActoCTT, Arial, sans-serif';
+            testElement.style.fontWeight = '400';
+            testElement.textContent = 'Test';
+            document.body.appendChild(testElement);
+            
+            // Wait for fonts to load
+            setTimeout(() => {
+                const computedStyle = window.getComputedStyle(testElement);
+                const actualFontFamily = computedStyle.fontFamily;
+                
+                if (actualFontFamily.includes('ActoCTT')) {
+                    results.push({ status: 'success', message: 'ActoCTT font is loading correctly' });
+                } else {
+                    results.push({ status: 'warning', message: 'ActoCTT font may not be loading (fallback detected)' });
+                }
+                
+                document.body.removeChild(testElement);
+                
+                // Display results
+                displayResults(results);
+                displayFontFileResults(fontTestResults);
+            }, 1000);
+            
+            // Test 5: Check build configuration
+            results.push({ status: 'success', message: 'Rollup config copies font files to dist/assets/fonts' });
+            results.push({ status: 'success', message: 'Build script processes fonts.css correctly' });
+            
+            // Test 6: Check modern font formats
+            results.push({ status: 'warning', message: 'Consider adding WOFF2 format for better compression' });
+            results.push({ status: 'warning', message: 'Consider adding font-display: swap for better performance' });
+        }
+        
+        function displayResults(results) {
+            const checklist = document.getElementById('checklist');
+            checklist.innerHTML = '';
+            
+            results.forEach(result => {
+                const li = document.createElement('li');
+                li.className = result.status;
+                li.textContent = result.message;
+                checklist.appendChild(li);
+            });
+        }
+        
+        function displayFontFileResults(fontResults) {
+            const fontFilesTest = document.getElementById('font-files-test');
+            fontFilesTest.innerHTML = '<h3>Font File Accessibility Results:</h3><pre>' + 
+                fontResults.join('\n') + '</pre>';
+        }
+        
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>

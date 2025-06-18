@@ -1,194 +1,167 @@
 # CTT Design System - Design Tokens
 
-This directory contains the design tokens for the CTT Design System, providing a centralized way to manage colors, typography, and other design values across all components.
+This document explains the structure and usage of the CTT Design System tokens.
 
-## Structure
+## Token Architecture
+
+Our design tokens follow a **three-tier architecture** for better maintainability and scalability:
 
 ```
-tokens/
-├── colors.js           # Color tokens (core and base colors)
-├── typography.js       # Typography tokens (fonts, sizes, weights, etc.)
-├── index.js           # Main export file
-├── utils.js           # Utility functions for working with tokens
-├── tokens.css         # CSS custom properties
-├── button-tokens.css  # Component-specific tokens example
-└── README.md          # This file
+Brand Tokens → Core Tokens → Base Tokens → Component Tokens
 ```
 
-## Usage
-
-### JavaScript/Lit Components
-
-```javascript
-import { tokens } from '../tokens/index.js';
-import { buttonTokens, tokenStyles } from '../tokens/utils.js';
-
-// Direct token access
-const primaryColor = tokens.colors.core.primary[500];
-const fontFamily = tokens.typography.fontFamilies.primary;
-
-// Using utility functions
-const styles = tokenStyles({
-  backgroundColor: 'colors.core.primary.500',
-  color: 'colors.base.neutral.white',
-  fontSize: 'typography.fontSizes.base'
-});
-
-// Pre-defined component tokens
-const buttonStyle = buttonTokens.primary;
-```
-
-### CSS
-
-Import the CSS tokens file:
+### 1. Brand Tokens (Primitive)
+Raw color values that define your brand palette. These should rarely change.
 
 ```css
-@import '../tokens/tokens.css';
+--ctt-brand-primary-500: #DF0024;
+--ctt-brand-teal-400: #33CBC3;
+```
 
-.my-component {
-  background-color: var(--ctt-colors-core-primary-500);
-  color: var(--ctt-colors-base-neutral-white);
-  font-family: var(--ctt-typography-font-families-primary);
-  font-size: var(--ctt-typography-font-sizes-base);
-  font-weight: var(--ctt-typography-font-weights-bold);
-}
+### 2. Core Tokens (System)
+Semantic assignments of brand tokens to system-level concepts.
+
+```css
+--ctt-core-color-primary-main: var(--ctt-brand-primary-500);
+--ctt-core-color-informative-main: var(--ctt-brand-teal-400);
+```
+
+### 3. Base Tokens (Component-level)
+Context-specific tokens that components use directly.
+
+```css
+--ctt-base-color-selectable-primary-unselected-default-bg: var(--ctt-core-color-primary-main);
+--ctt-base-font-size-label-m: var(--ctt-core-font-size-scaled-100);
 ```
 
 ## Token Categories
 
 ### Colors
 
+#### Brand Colors
+- **Primary**: `--ctt-brand-primary-{100-700}`
+- **Secondary**: `--ctt-brand-secondary-{100-500}`
+- **Teal**: `--ctt-brand-teal-{100-600}`
+- **Green**: `--ctt-brand-green-{100-600}`
+- **Yellow**: `--ctt-brand-yellow-{100-600}`
+- **Purple**: `--ctt-brand-purple-{100-600}`
+
 #### Core Colors
-- **Primary**: Main brand colors (`primary.50` to `primary.900`)
-- **Secondary**: Secondary brand colors
-- **Success**: Success state colors
-- **Warning**: Warning state colors
-- **Error**: Error state colors
+- **Primary**: `--ctt-core-color-primary-{light|main|dark}`
+- **Secondary**: `--ctt-core-color-secondary-{light|main|dark}`
+- **Feedback**: `--ctt-core-color-{success|warning|negative|informative}-{light|main}`
+- **Neutral**: `--ctt-core-color-neutral-{100-900}`
 
 #### Base Colors
-- **Neutral**: Grayscale colors from white to black
-- **Text**: Semantic text colors (primary, secondary, tertiary, etc.)
-- **Background**: Background colors for different contexts
-- **Border**: Border colors for different states
-- **Shadow**: Shadow colors with different opacities
+- **Page**: `--ctt-base-color-page-bg-{default|cloudy}`
+- **Container**: `--ctt-base-color-container-{bg|border}-{default|disabled|selected}`
+- **Selectable**: `--ctt-base-color-selectable-{primary|secondary}-{state}-{property}`
+- **Feedback**: `--ctt-base-color-feedback-{type}-{bg|fg}-{variant}`
+- **Content**: `--ctt-base-color-content-fg-{main|weak|clear|strong|brand}`
 
 ### Typography
 
 #### Font Families
-- **Primary**: Main UI font (Nunito Sans)
-- **Secondary**: Alternative sans-serif
-- **Mono**: Monospace font for code
+```css
+--ctt-core-font-family-brand: 'ActoCTT', sans-serif;
+--ctt-base-font-family-{body|title|display|label}
+```
 
 #### Font Sizes
-Scale from `xs` (12px) to `6xl` (60px) using rem units for scalability.
+```css
+--ctt-core-font-size-scaled-{75|87|100|112|125|162|206|225|262|300|400|425}
+--ctt-base-font-size-{body|title|display|label}-{s|m|l|xl}
+```
 
 #### Font Weights
-From `thin` (100) to `black` (900).
-
-#### Line Heights
-From `none` (1) to `loose` (2) for different content types.
-
-#### Typography Scale
-Pre-defined combinations for common use cases:
-- Headings (`h1` to `h6`)
-- Body text (`bodyLarge`, `body`, `bodySmall`)
-- Component-specific (`button.small`, `button.medium`, `button.large`)
-- Utility (`caption`, `overline`, `code`)
-
-## Utility Functions
-
-### `getToken(path, tokensObj)`
-Get a token value by dot-separated path:
-```javascript
-const primaryColor = getToken('colors.core.primary.500');
+```css
+--ctt-core-font-weight-{250|300|400|500|700|900}
+--ctt-base-font-weight-{body|title-s-m|title-l-xl|display|label}
 ```
 
-### `getTokenCSSVar(path, prefix)`
-Get CSS custom property name:
-```javascript
-const cssVar = getTokenCSSVar('colors.core.primary.500'); // --ctt-colors-core-primary-500
+### Spacing & Sizing
+
+#### Dimensions
+```css
+--ctt-core-dimension-{0|25|50|75|100|150|200|250|300|350|400|450|500}
 ```
 
-### `tokenStyles(styles)`
-Convert token paths to values for styleMap:
-```javascript
-const styles = tokenStyles({
-  backgroundColor: 'colors.core.primary.500',
-  fontSize: 'typography.fontSizes.base'
-});
+#### Border Radius
+```css
+--ctt-core-border-radius-{0|6|12|25|50|100|200|pill}
+--ctt-base-border-radius-{none|xs|s|m|pill}
 ```
 
-### `tokensToCSSProperties(obj, prefix, parent)`
-Convert token object to CSS custom properties:
-```javascript
-const cssProps = tokensToCSSProperties(tokens.colors.core.primary, 'ctt', 'colors-core-primary');
+#### Border Width
+```css
+--ctt-core-border-width-{0-6}
+--ctt-base-border-width-{selectable|container}-{none|s|m|l}
 ```
 
-## Adding New Tokens
-
-1. **Colors**: Add to `colors.js` in the appropriate section
-2. **Typography**: Add to `typography.js` in the appropriate category
-3. **CSS Variables**: Update `tokens.css` with new CSS custom properties
-4. **Utilities**: Update component-specific tokens in `utils.js` if needed
-
-## Examples
-
-### Creating a New Component with Tokens
-
-```javascript
-import { html } from 'lit';
-import { styleMap } from 'lit/directives/style-map.js';
-import { tokens } from '../tokens/index.js';
-
-export const Card = ({ title, content }) => {
-  const cardStyles = {
-    backgroundColor: tokens.colors.base.background.primary,
-    border: `1px solid ${tokens.colors.base.border.primary}`,
-    borderRadius: '8px',
-    padding: '16px',
-    fontFamily: tokens.typography.fontFamilies.primary,
-  };
-
-  const titleStyles = {
-    fontSize: tokens.typography.fontSizes.lg,
-    fontWeight: tokens.typography.fontWeights.semibold,
-    color: tokens.colors.base.text.primary,
-    marginBottom: '8px',
-  };
-
-  return html`
-    <div style=${styleMap(cardStyles)}>
-      <h3 style=${styleMap(titleStyles)}>${title}</h3>
-      <p>${content}</p>
-    </div>
-  `;
-};
+### Shadows
+```css
+--ctt-core-box-shadow-{none|xs|s|m|l}
+--ctt-base-box-shadow-container-{none|xs|s|m|l}
 ```
 
-### Using CSS Variables
+## Usage Guidelines
+
+### ✅ Do
+- Use base tokens in components: `color: var(--ctt-base-color-content-fg-main)`
+- Reference core tokens in base tokens: `--ctt-base-color-page-bg-default: var(--ctt-core-color-neutral-100)`
+- Use brand tokens only in core tokens: `--ctt-core-color-primary-main: var(--ctt-brand-primary-500)`
+
+### ❌ Don't
+- Use brand tokens directly in components: `color: var(--ctt-brand-primary-500)` ❌
+- Skip the token hierarchy: `--ctt-base-color-button-bg: #DF0024` ❌
+- Create component-specific colors without base tokens
+
+## Migration from Legacy Tokens
+
+Legacy tokens are temporarily aliased for backward compatibility:
 
 ```css
-.card {
-  background-color: var(--ctt-colors-base-background-primary);
-  border: 1px solid var(--ctt-colors-base-border-primary);
-  border-radius: 8px;
-  padding: 16px;
-  font-family: var(--ctt-typography-font-families-primary);
-}
+/* Legacy */
+--ctt-colors-core-primary-500
 
-.card__title {
-  font-size: var(--ctt-typography-font-sizes-lg);
-  font-weight: var(--ctt-typography-font-weights-semibold);
-  color: var(--ctt-colors-base-text-primary);
-  margin-bottom: 8px;
+/* New */
+--ctt-core-color-primary-main
+```
+
+## Component Integration
+
+### Example: Button Component
+```css
+.ctt-button--primary {
+  background-color: var(--ctt-base-color-selectable-primary-unselected-default-bg);
+  color: var(--ctt-base-color-selectable-primary-unselected-default-fg);
+  font-size: var(--ctt-base-font-size-label-m);
+  padding: var(--ctt-core-dimension-75) var(--ctt-core-dimension-150);
+  border-radius: var(--ctt-base-border-radius-pill);
 }
 ```
 
-## Best Practices
+## Benefits of This Structure
 
-1. **Use semantic tokens**: Prefer `colors.base.text.primary` over `colors.core.secondary.800`
-2. **Consistent naming**: Follow the established naming conventions
-3. **Scalable units**: Use rem for font sizes and consistent spacing
-4. **Component tokens**: Create component-specific token combinations for reusability
-5. **CSS Custom Properties**: Use CSS variables for better performance and theme switching
-6. **Documentation**: Document any new tokens or patterns you add
+1. **Maintainability**: Change brand colors in one place, updates cascade through the system
+2. **Scalability**: Easy to add new components without creating token conflicts
+3. **Consistency**: Semantic naming ensures consistent usage across components
+4. **Flexibility**: Multiple levels allow for fine-grained control when needed
+5. **Documentation**: Clear hierarchy makes the system self-documenting
+
+## File Structure
+
+```
+src/tokens/
+├── tokens.css          # Main token definitions
+├── button-tokens.css   # Button-specific tokens and styles
+├── example.css         # Legacy tokens (deprecated)
+└── README.md          # This documentation
+```
+
+## Next Steps
+
+1. **Audit existing components** to use the new token structure
+2. **Remove legacy token dependencies** once migration is complete
+3. **Create component-specific token files** for complex components
+4. **Document component token usage** in component README files
