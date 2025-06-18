@@ -1,13 +1,16 @@
 /**
- * Typography Documentation Styles
- * Visual showcase of typography tokens with ActoCTT font family
+ * Typography Documentation Styles - FOR STORYBOOK ONLY
+ * These styles are used only for Storybook documentation and should NOT be imported in production
+ * 
+ * Usage in Storybook stories:
+ * import '../styles/storybook/typography-docs.css';
  */
 
 /* ==========================================================================
-   TYPOGRAPHY CLASSES - Based on design tokens
+   TYPOGRAPHY CLASSES FOR STORYBOOK DISPLAY - Based on design tokens
    ========================================================================== */
 
-/* Body Typography */
+/* Body Typography - For Storybook Display */
 .base-typography-body-s {
   font-family: 'ActoCTT', sans-serif;
   font-weight: var(--ctt-base-font-weight-body);
@@ -29,7 +32,7 @@
   line-height: var(--ctt-core-line-height-m);
 }
 
-/* Title Typography - Desktop */
+/* Title Typography - Desktop - For Storybook Display */
 .base-typography-title-desktop-s {
   font-family: 'ActoCTT', sans-serif;
   font-weight: var(--ctt-base-font-weight-title-s-m);
@@ -58,7 +61,7 @@
   line-height: var(--ctt-core-line-height-s);
 }
 
-/* Title Typography - Tablet */
+/* Title Typography - Tablet - For Storybook Display */
 .base-typography-title-tablet-s {
   font-family: 'ActoCTT', sans-serif;
   font-weight: var(--ctt-base-font-weight-title-s-m);
@@ -80,7 +83,7 @@
   line-height: var(--ctt-core-line-height-s);
 }
 
-/* Title Typography - Mobile */
+/* Title Typography - Mobile - For Storybook Display */
 .base-typography-title-mobile-s {
   font-family: 'ActoCTT', sans-serif;
   font-weight: var(--ctt-base-font-weight-title-s-m);
@@ -95,7 +98,7 @@
   line-height: var(--ctt-core-line-height-s);
 }
 
-/* Display Typography - Desktop */
+/* Display Typography - Desktop - For Storybook Display */
 .base-typography-display-desktop-s {
   font-family: 'ActoCTT', sans-serif;
   font-weight: var(--ctt-base-font-weight-display);
@@ -117,7 +120,7 @@
   line-height: var(--ctt-core-line-height-s);
 }
 
-/* Display Typography - Tablet */
+/* Display Typography - Tablet - For Storybook Display */
 .base-typography-display-tablet-s {
   font-family: 'ActoCTT', sans-serif;
   font-weight: var(--ctt-base-font-weight-display);
@@ -132,7 +135,7 @@
   line-height: var(--ctt-core-line-height-s);
 }
 
-/* Display Typography - Mobile */
+/* Display Typography - Mobile - For Storybook Display */
 .base-typography-display-mobile-s {
   font-family: 'ActoCTT', sans-serif;
   font-weight: var(--ctt-base-font-weight-display);
@@ -140,7 +143,7 @@
   line-height: var(--ctt-core-line-height-s);
 }
 
-/* Label Typography */
+/* Label Typography - For Storybook Display */
 .base-typography-label-s {
   font-family: 'ActoCTT', sans-serif;
   font-weight: var(--ctt-base-font-weight-label);
@@ -495,12 +498,10 @@
   font-size: var(--ctt-base-font-size-display-l) !important;
 }
 
+/* Label typography overrides */
 .sample-text.base-typography-label-s,
 .sample-text.base-typography-label-m,
 .sample-text.base-typography-label-l {
-  /* Label samples */
-  border-left: 4px solid var(--ctt-core-color-success-main);
-  display: block;
   font-family: 'ActoCTT', sans-serif !important;
   font-weight: var(--ctt-base-font-weight-label) !important;
   line-height: var(--ctt-core-line-height-xs) !important;
@@ -516,51 +517,4 @@
 
 .sample-text.base-typography-label-l {
   font-size: var(--ctt-base-font-size-label-l) !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .typography-container {
-    padding: 1rem;
-  }
-  
-  .typography-section h1 {
-    font-size: 2rem;
-  }
-  
-  .typography-section h2 {
-    font-size: 1.5rem;
-  }
-  
-  .typography-sample {
-    padding: 1.5rem;
-  }
-  
-  .font-showcase {
-    padding: 1.5rem;
-  }
-  
-  .scale-showcase {
-    padding: 1.5rem;
-  }
-  
-  .detail-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-  }
-  
-  .detail-label {
-    min-width: auto;
-    margin-right: 0;
-  }
-  
-  /* Adjust display typography for mobile */
-  .scale-item .base-typography-display-desktop-l {
-    font-size: 2.5rem; /* Smaller on mobile for readability */
-  }
-  
-  .scale-item .base-typography-display-desktop-m {
-    font-size: 2rem;
-  }
 }

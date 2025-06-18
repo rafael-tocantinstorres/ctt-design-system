@@ -1,4 +1,4 @@
-import "./Colors.css";
+import "../styles/storybook/colors-docs.css";
 
 export default {
   title: 'Design System/Colors',

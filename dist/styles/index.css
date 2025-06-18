@@ -1,0 +1,43 @@
+/**
+ * CTT Design System - Main Styles Entry Point
+ * Import this file to get all design system styles for production use
+ * 
+ * This file includes:
+ * - Design tokens (CSS custom properties)
+ * - Utility classes for colors, typography, spacing
+ * - Component styles
+ * - Font imports
+ * 
+ * Usage:
+ * @import 'path/to/ctt-design-system/src/styles/index.css';
+ */
+
+/* Import fonts first */
+@import '../assets/fonts.css';
+
+/* Import design tokens */
+@import './foundations/tokens.css';
+
+/* Import utility classes */
+@import './foundations/colors.css';
+@import './foundations/typography.css';
+@import './foundations/spacing.css';
+
+/* Import component styles */
+@import './components/button.css';
+@import './components/icon-button.css';
+
+/* Base styles using the design system */
+body {
+  font-family: var(--ctt-base-font-family-body);
+  font-size: var(--ctt-base-font-size-body-m);
+  font-weight: var(--ctt-base-font-weight-body);
+  line-height: var(--ctt-core-line-height-m);
+  color: var(--ctt-base-color-text-primary);
+  background-color: var(--ctt-base-color-page-bg-default);
+}
+
+/* Ensure font loading optimization */
+* {
+  font-display: swap;
+}

@@ -1,6 +1,9 @@
 /**
- * Colors Documentation Styles
- * Consistent styling for color swatches and documentation
+ * Colors Documentation Styles - FOR STORYBOOK ONLY
+ * These styles are used only for Storybook documentation and should NOT be imported in production
+ * 
+ * Usage in Storybook stories:
+ * import '../styles/storybook/colors-docs.css';
  */
 
 /* ==========================================================================
@@ -238,7 +241,7 @@
   font-family: 'ActoCTT', sans-serif;
 }
 
-/* Color Swatches for Individual Colors */
+/* Color Swatches for Individual Colors - FOR STORYBOOK DISPLAY ONLY */
 
 /* Core Colors */
 .primary-main { background-color: var(--ctt-core-color-primary-main); }
@@ -263,8 +266,8 @@
 .success-light { background-color: var(--ctt-core-color-success-light); }
 .warning-main { background-color: var(--ctt-core-color-warning-main); }
 .warning-light { background-color: var(--ctt-core-color-warning-light); }
-.error-main { background-color: var(--ctt-core-color-error-main); }
-.error-light { background-color: var(--ctt-core-color-error-light); }
+.error-main { background-color: var(--ctt-core-color-negative-main); }
+.error-light { background-color: var(--ctt-core-color-negative-light); }
 .informative-main { background-color: var(--ctt-core-color-informative-main); }
 .informative-light { background-color: var(--ctt-core-color-informative-light); }
 .new-main { background-color: var(--ctt-core-color-new-main); }
@@ -426,33 +429,4 @@
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
-}
-
-.usage-note strong {
-  color: var(--ctt-core-color-secondary-dark);
-  font-weight: 600;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .colors-container {
-    padding: 1rem;
-  }
-  
-  .color-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .color-category {
-    padding: 1rem;
-  }
-  
-  .colors-section h1 {
-    font-size: 2rem;
-  }
-  
-  .colors-section h2 {
-    font-size: 1.5rem;
-  }
 }

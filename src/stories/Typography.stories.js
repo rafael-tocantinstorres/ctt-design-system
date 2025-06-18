@@ -1,5 +1,5 @@
 import { typography, baseTypographySizes } from "../tokens/typography.js";
-import "./Typography.css";
+import "../styles/storybook/typography-docs.css";
 
 export default {
   title: 'Design System/Typography',
