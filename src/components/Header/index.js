@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
-import { Button } from './Button';
-import '../stories/header.css';
+import { Button } from '../Button/index.js';
+import '../../styles/components/header.css';
 
 export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => html`
   <header>

@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
-import { Header } from './Header';
-import '../stories/page.css';
+import { Header } from '../Header/index.js';
+import '../../styles/components/page.css';
 
 export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => html`
   <article>

@@ -1,4 +1,4 @@
-import { IconButton } from '../components/IconButton.js';
+import { IconButton } from '../components/IconButton/index.js';
 import { fn } from 'storybook/test';
 
 export default {

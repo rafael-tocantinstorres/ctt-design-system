@@ -517,24 +517,6 @@ const typographyHelpers = {
   getButtonTypography: (size = 'medium') => tokens.typography.scale.button[size] || tokens.typography.scale.button.medium,
 };
 
-/** IconButton component */
-const IconButton = ({ variant = 'default', size = 'medium', ...props }) => {
-  const styles = {
-    fontFamily: tokens.typography.fontFamilies.label,
-    // Add your component styles here
-  };
-
-  return html`
-    <div
-      class=${['ctt--icon-button', `ctt--icon-button--${variant}`, `ctt--icon-button--${size}`].join(' ')}
-      style=${styleMap(styles)}
-    >
-      <!-- Your component content here -->
-      <slot></slot>
-    </div>
-  `;
-};
-
 /** Primary UI component for user interaction */
 const Button = ({ primary, backgroundColor = null, size, label, onClick }) => {
   const mode = primary ? 'ctt-button--primary' : 'ctt-button--secondary';
@@ -561,6 +543,25 @@ const Button = ({ primary, backgroundColor = null, size, label, onClick }) => {
     >
       ${label}
     </button>
+  `;
+};
+
+/** IconButton component */
+const IconButton = ({ variant = 'default', size = 'medium', ...props }) => {
+  const styles = {
+    fontFamily: tokens.typography.fontFamilies.label,
+    // Add your component styles here
+  };
+
+  return html`
+    <div
+      class=${['ctt--icon-button', `ctt--icon-button--${variant}`, `ctt--icon-button--${size}`].join(' ')}
+      style=${styleMap(styles)}
+      ...=${props}
+    >
+      <!-- Your component content here -->
+      <slot></slot>
+    </div>
   `;
 };
 
@@ -663,8 +664,15 @@ const Page = ({ user, onLogin, onLogout, onCreateAccount }) => html`
   </article>
 `;
 
-// Export all components
-
+/**
+ * Button Web Component
+ * 
+ * A web component wrapper for the Button component.
+ * This allows the component to be used in any framework or vanilla HTML.
+ * 
+ * Usage:
+ * <ctt-button primary size="medium" label="Click me"></ctt-button>
+ */
 class CttButton extends LitElement {
   static properties = {
     primary: { type: Boolean },
@@ -692,23 +700,49 @@ class CttButton extends LitElement {
       backgroundColor: this.backgroundColor,
       size: this.size,
       label: this.label,
-      onClick: () => this.dispatchEvent(new CustomEvent('ctt-click', {
-        bubbles: true,
-        composed: true
-      }))
+      onClick: () => this._handleClick()
     });
+  }
+
+  /**
+   * Handle click events and dispatch custom events
+   */
+  _handleClick() {
+    this.dispatchEvent(new CustomEvent('ctt-click', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        primary: this.primary,
+        size: this.size,
+        label: this.label
+      }
+    }));
   }
 }
 
+// Register custom element
+if (!customElements.get('ctt-button')) {
+  customElements.define('ctt-button', CttButton);
+}
+
+/**
+ * IconButton Web Component
+ * 
+ * A web component wrapper for the IconButton component.
+ * This allows the component to be used in any framework or vanilla HTML.
+ * 
+ * Usage:
+ * <ctt-icon-button variant="primary" size="medium"></ctt-icon-button>
+ */
 class CttIconButton extends LitElement {
   static properties = {
     variant: { type: String },
-    size: { type: String }
+    size: { type: String },
   };
 
   static styles = css`
     :host {
-      display: inline-block;
+      display: block;
     }
   `;
 
@@ -722,22 +756,175 @@ class CttIconButton extends LitElement {
     return IconButton({
       variant: this.variant,
       size: this.size,
-      onClick: () => this.dispatchEvent(new CustomEvent('ctt-icon-click', {
-        bubbles: true,
-        composed: true
-      }))
     });
+  }
+
+  /**
+   * Handle click events and dispatch custom events
+   */
+  _handleClick(event) {
+    this.dispatchEvent(new CustomEvent('ctt-icon-button-click', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        variant: this.variant,
+        size: this.size
+      }
+    }));
   }
 }
 
-// Register custom elements
-if (!customElements.get('ctt-button')) {
-  customElements.define('ctt-button', CttButton);
-}
-
+// Register custom element
 if (!customElements.get('ctt-icon-button')) {
   customElements.define('ctt-icon-button', CttIconButton);
 }
 
-export { Button, CttButton, CttIconButton, Header, IconButton, Page, buttonTokens, getCSSVar, tokenStyles, tokens, typographyHelpers };
+/**
+ * Header Web Component
+ * 
+ * A web component wrapper for the Header component.
+ * This allows the component to be used in any framework or vanilla HTML.
+ * 
+ * Usage:
+ * <ctt-header user="John Doe"></ctt-header>
+ */
+class CttHeader extends LitElement {
+  static properties = {
+    user: { type: String },
+  };
+
+  static styles = css`
+    :host {
+      display: block;
+    }
+  `;
+
+  constructor() {
+    super();
+    this.user = null;
+  }
+
+  render() {
+    return Header({
+      user: this.user,
+      onLogin: () => this._handleLogin(),
+      onLogout: () => this._handleLogout(),
+      onCreateAccount: () => this._handleCreateAccount(),
+    });
+  }
+
+  /**
+   * Handle login events
+   */
+  _handleLogin() {
+    this.dispatchEvent(new CustomEvent('ctt-header-login', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+
+  /**
+   * Handle logout events
+   */
+  _handleLogout() {
+    this.dispatchEvent(new CustomEvent('ctt-header-logout', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+
+  /**
+   * Handle create account events
+   */
+  _handleCreateAccount() {
+    this.dispatchEvent(new CustomEvent('ctt-header-create-account', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+}
+
+// Register custom element
+if (!customElements.get('ctt-header')) {
+  customElements.define('ctt-header', CttHeader);
+}
+
+/**
+ * Page Web Component
+ * 
+ * A web component wrapper for the Page component.
+ * This allows the component to be used in any framework or vanilla HTML.
+ * 
+ * Usage:
+ * <ctt-page user="John Doe"></ctt-page>
+ */
+class CttPage extends LitElement {
+  static properties = {
+    user: { type: String },
+  };
+
+  static styles = css`
+    :host {
+      display: block;
+    }
+  `;
+
+  constructor() {
+    super();
+    this.user = null;
+  }
+
+  render() {
+    return Page({
+      user: this.user,
+      onLogin: () => this._handleLogin(),
+      onLogout: () => this._handleLogout(),
+      onCreateAccount: () => this._handleCreateAccount(),
+    });
+  }
+
+  /**
+   * Handle login events
+   */
+  _handleLogin() {
+    this.dispatchEvent(new CustomEvent('ctt-page-login', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+
+  /**
+   * Handle logout events
+   */
+  _handleLogout() {
+    this.dispatchEvent(new CustomEvent('ctt-page-logout', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+
+  /**
+   * Handle create account events
+   */
+  _handleCreateAccount() {
+    this.dispatchEvent(new CustomEvent('ctt-page-create-account', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+}
+
+// Register custom element
+if (!customElements.get('ctt-page')) {
+  customElements.define('ctt-page', CttPage);
+}
+
+export { Button, CttButton, CttHeader, CttIconButton, CttPage, Header, IconButton, Page, buttonTokens, getCSSVar, tokenStyles, tokens, typographyHelpers };
 //# sourceMappingURL=index.esm.js.map

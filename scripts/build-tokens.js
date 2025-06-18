@@ -18,7 +18,6 @@ async function buildTokens() {
     
     // Copy CSS tokens
     await fs.copy('src/tokens/tokens.css', 'dist/tokens.css');
-    await fs.copy('src/tokens/button-tokens.css', 'dist/button-tokens.css');
     
     // Generate CSS custom properties from JS tokens
     const cssVariables = generateCSSVariables(tokens);
