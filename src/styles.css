@@ -9,6 +9,10 @@
 /* Import design tokens */
 @import './tokens/tokens.css';
 
+/* Import design tokens documentation styles */
+@import './stories/Colors.css';
+@import './stories/Typography.css';
+
 /* Base styles using the design system */
 body {
   font-family: var(--ctt-typography-font-families-primary);

@@ -1,0 +1,566 @@
+/**
+ * Typography Documentation Styles
+ * Visual showcase of typography tokens with ActoCTT font family
+ */
+
+/* ==========================================================================
+   TYPOGRAPHY CLASSES - Based on design tokens
+   ========================================================================== */
+
+/* Body Typography */
+.base-typography-body-s {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-body);
+  font-size: var(--ctt-base-font-size-body-s);
+  line-height: var(--ctt-core-line-height-m);
+}
+
+.base-typography-body-m {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-body);
+  font-size: var(--ctt-base-font-size-body-m);
+  line-height: var(--ctt-core-line-height-m);
+}
+
+.base-typography-body-l {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-body);
+  font-size: var(--ctt-base-font-size-body-l);
+  line-height: var(--ctt-core-line-height-m);
+}
+
+/* Title Typography - Desktop */
+.base-typography-title-desktop-s {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-title-s-m);
+  font-size: var(--ctt-base-font-size-title-s);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.base-typography-title-desktop-m {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-title-s-m);
+  font-size: var(--ctt-base-font-size-title-m);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.base-typography-title-desktop-l {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-title-l-xl);
+  font-size: var(--ctt-base-font-size-title-l);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.base-typography-title-desktop-xl {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-title-l-xl);
+  font-size: var(--ctt-base-font-size-title-xl);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+/* Title Typography - Tablet */
+.base-typography-title-tablet-s {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-title-s-m);
+  font-size: var(--ctt-base-font-size-title-s);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.base-typography-title-tablet-m {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-title-s-m);
+  font-size: var(--ctt-base-font-size-title-m);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.base-typography-title-tablet-l {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-title-l-xl);
+  font-size: var(--ctt-base-font-size-title-l);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+/* Title Typography - Mobile */
+.base-typography-title-mobile-s {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-title-s-m);
+  font-size: var(--ctt-base-font-size-title-s);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.base-typography-title-mobile-m {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-title-s-m);
+  font-size: var(--ctt-base-font-size-title-m);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+/* Display Typography - Desktop */
+.base-typography-display-desktop-s {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-display);
+  font-size: var(--ctt-base-font-size-display-s);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.base-typography-display-desktop-m {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-display);
+  font-size: var(--ctt-base-font-size-display-m);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.base-typography-display-desktop-l {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-display);
+  font-size: var(--ctt-base-font-size-display-l);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+/* Display Typography - Tablet */
+.base-typography-display-tablet-s {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-display);
+  font-size: var(--ctt-base-font-size-display-s);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.base-typography-display-tablet-m {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-display);
+  font-size: var(--ctt-base-font-size-display-m);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+/* Display Typography - Mobile */
+.base-typography-display-mobile-s {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-display);
+  font-size: var(--ctt-base-font-size-display-s);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+/* Label Typography */
+.base-typography-label-s {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-label);
+  font-size: var(--ctt-base-font-size-label-s);
+  line-height: var(--ctt-core-line-height-xs);
+}
+
+.base-typography-label-m {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-label);
+  font-size: var(--ctt-base-font-size-label-m);
+  line-height: var(--ctt-core-line-height-xs);
+}
+
+.base-typography-label-l {
+  font-family: 'ActoCTT', sans-serif;
+  font-weight: var(--ctt-base-font-weight-label);
+  font-size: var(--ctt-base-font-size-label-l);
+  line-height: var(--ctt-core-line-height-xs);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY DOCUMENTATION STYLES
+   ========================================================================== */
+
+.typography-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'ActoCTT', sans-serif;
+  color: var(--ctt-core-color-secondary-main);
+}
+
+.typography-section {
+  margin-bottom: 4rem !important;
+}
+
+.typography-section h1 {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ctt-core-color-secondary-dark);
+}
+
+.typography-section h2 {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.typography-section h3 {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem 0;
+  color: var(--ctt-core-color-secondary-dark);
+}
+
+/* Font Showcase */
+.font-showcase {
+  background: var(--ctt-core-color-neutral-100);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.font-sample {
+  text-align: center;
+}
+
+.font-name {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ctt-core-color-secondary-dark);
+  margin: 0 0 0.5rem 0;
+}
+
+.font-description {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 1rem;
+  color: var(--ctt-core-color-secondary-main);
+  margin: 0 0 2rem 0;
+}
+
+.font-specimen {
+  background: var(--ctt-core-color-neutral-200);
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.specimen-text {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: var(--ctt-core-color-secondary-dark);
+  margin: 0 0 0.75rem 0;
+}
+
+.specimen-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Typography Showcase */
+.typography-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.typography-sample {
+  background: var(--ctt-core-color-neutral-100);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sample-text {
+  margin: 0 0 1.5rem 0;
+  padding-left: 1rem;
+}
+
+.sample-details {
+  background: var(--ctt-core-color-neutral-200);
+  border-radius: 6px;
+  padding: 1rem;
+  font-size: 0.875rem;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--ctt-core-color-secondary-dark);
+  min-width: 100px;
+  margin-right: 0.5rem;
+}
+
+.detail-row code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  background: var(--ctt-core-color-neutral-100);
+  padding: 0.125rem 0.375rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  color: var(--ctt-core-color-primary-main);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+}
+
+.detail-row span:not(.detail-label) {
+  color: var(--ctt-core-color-secondary-main);
+}
+
+/* Responsive Notes */
+.responsive-note {
+  background: var(--ctt-core-color-informative-light);
+  border: 1px solid var(--ctt-core-color-informative-main);
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1rem 0 2rem 0;
+  font-size: 0.875rem;
+  color: var(--ctt-core-color-secondary-dark);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.responsive-note strong {
+  color: var(--ctt-core-color-secondary-dark);
+  font-weight: 600;
+}
+
+/* Usage Guidelines */
+.usage-guidelines {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.guideline-item {
+  background: var(--ctt-core-color-neutral-100);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.guideline-item h4 {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ctt-core-color-secondary-dark);
+  margin: 0 0 0.75rem 0;
+  border-bottom: 1px solid var(--ctt-core-color-neutral-400);
+  padding-bottom: 0.5rem;
+}
+
+.guideline-item p {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ctt-core-color-secondary-main);
+  margin: 0;
+}
+
+/* Typography Scale Overview */
+.scale-showcase {
+  background: var(--ctt-core-color-neutral-100);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.scale-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--ctt-core-color-neutral-300);
+}
+
+.scale-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.scale-item div {
+  color: var(--ctt-core-color-secondary-dark);
+  margin: 0;
+}
+
+.scale-item code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  background: var(--ctt-core-color-neutral-200);
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--ctt-core-color-primary-main);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+}
+
+/* Ensure sample text doesn't have conflicting styles */
+.sample-text {
+  margin: 0 0 1.5rem 0 !important;
+  color: var(--ctt-core-color-secondary-dark) !important;
+  /* Remove any default heading margins that might interfere */
+}
+
+/* Typography classes should override sample-text styling */
+.sample-text.base-typography-body-s,
+.sample-text.base-typography-body-m,
+.sample-text.base-typography-body-l {
+  /* Body text samples should not have heading-like styling */
+  border-left: 4px solid var(--ctt-core-color-secondary-main);
+  /* Ensure typography properties take precedence */
+  font-family: 'ActoCTT', sans-serif !important;
+  font-weight: var(--ctt-base-font-weight-body) !important;
+  line-height: var(--ctt-core-line-height-m) !important;
+}
+
+.sample-text.base-typography-body-s {
+  font-size: var(--ctt-base-font-size-body-s) !important;
+}
+
+.sample-text.base-typography-body-m {
+  font-size: var(--ctt-base-font-size-body-m) !important;
+}
+
+.sample-text.base-typography-body-l {
+  font-size: var(--ctt-base-font-size-body-l) !important;
+}
+
+/* Title typography overrides */
+.sample-text.base-typography-title-desktop-s,
+.sample-text.base-typography-title-desktop-m,
+.sample-text.base-typography-title-tablet-s,
+.sample-text.base-typography-title-tablet-m,
+.sample-text.base-typography-title-tablet-l,
+.sample-text.base-typography-title-mobile-s,
+.sample-text.base-typography-title-mobile-m {
+  font-family: 'ActoCTT', sans-serif !important;
+  font-weight: var(--ctt-base-font-weight-title-s-m) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+.sample-text.base-typography-title-desktop-l,
+.sample-text.base-typography-title-desktop-xl {
+  font-family: 'ActoCTT', sans-serif !important;
+  font-weight: var(--ctt-base-font-weight-title-l-xl) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+.sample-text.base-typography-title-desktop-s,
+.sample-text.base-typography-title-tablet-s,
+.sample-text.base-typography-title-mobile-s {
+  font-size: var(--ctt-base-font-size-title-s) !important;
+}
+
+.sample-text.base-typography-title-desktop-m,
+.sample-text.base-typography-title-tablet-m,
+.sample-text.base-typography-title-mobile-m {
+  font-size: var(--ctt-base-font-size-title-m) !important;
+}
+
+.sample-text.base-typography-title-desktop-l,
+.sample-text.base-typography-title-tablet-l {
+  font-size: var(--ctt-base-font-size-title-l) !important;
+}
+
+.sample-text.base-typography-title-desktop-xl {
+  font-size: var(--ctt-base-font-size-title-xl) !important;
+}
+
+/* Display typography overrides */
+.sample-text.base-typography-display-desktop-s,
+.sample-text.base-typography-display-tablet-s,
+.sample-text.base-typography-display-mobile-s {
+  font-family: 'ActoCTT', sans-serif !important;
+  font-weight: var(--ctt-base-font-weight-display) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+  font-size: var(--ctt-base-font-size-display-s) !important;
+}
+
+.sample-text.base-typography-display-desktop-m,
+.sample-text.base-typography-display-tablet-m {
+  font-family: 'ActoCTT', sans-serif !important;
+  font-weight: var(--ctt-base-font-weight-display) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+  font-size: var(--ctt-base-font-size-display-m) !important;
+}
+
+.sample-text.base-typography-display-desktop-l {
+  font-family: 'ActoCTT', sans-serif !important;
+  font-weight: var(--ctt-base-font-weight-display) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+  font-size: var(--ctt-base-font-size-display-l) !important;
+}
+
+.sample-text.base-typography-label-s,
+.sample-text.base-typography-label-m,
+.sample-text.base-typography-label-l {
+  /* Label samples */
+  border-left: 4px solid var(--ctt-core-color-success-main);
+  display: block;
+  font-family: 'ActoCTT', sans-serif !important;
+  font-weight: var(--ctt-base-font-weight-label) !important;
+  line-height: var(--ctt-core-line-height-xs) !important;
+}
+
+.sample-text.base-typography-label-s {
+  font-size: var(--ctt-base-font-size-label-s) !important;
+}
+
+.sample-text.base-typography-label-m {
+  font-size: var(--ctt-base-font-size-label-m) !important;
+}
+
+.sample-text.base-typography-label-l {
+  font-size: var(--ctt-base-font-size-label-l) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .typography-container {
+    padding: 1rem;
+  }
+  
+  .typography-section h1 {
+    font-size: 2rem;
+  }
+  
+  .typography-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .typography-sample {
+    padding: 1.5rem;
+  }
+  
+  .font-showcase {
+    padding: 1.5rem;
+  }
+  
+  .scale-showcase {
+    padding: 1.5rem;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .detail-label {
+    min-width: auto;
+    margin-right: 0;
+  }
+  
+  /* Adjust display typography for mobile */
+  .scale-item .base-typography-display-desktop-l {
+    font-size: 2.5rem; /* Smaller on mobile for readability */
+  }
+  
+  .scale-item .base-typography-display-desktop-m {
+    font-size: 2rem;
+  }
+}

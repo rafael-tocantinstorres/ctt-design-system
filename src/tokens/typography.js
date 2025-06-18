@@ -31,6 +31,31 @@ export const fontSizes = {
   '8xl': '4.25rem',  // 68px - matches --ctt-core-font-size-scaled-425
 };
 
+// Base Typography Sizes - Semantic assignments
+export const baseTypographySizes = {
+  body: {
+    s: '0.875rem',   // 14px - --ctt-base-font-size-body-s
+    m: '1rem',       // 16px - --ctt-base-font-size-body-m
+    l: '1.125rem',   // 18px - --ctt-base-font-size-body-l
+  },
+  title: {
+    s: '1.25rem',    // 20px - --ctt-base-font-size-title-s
+    m: '1.625rem',   // 26px - --ctt-base-font-size-title-m
+    l: '2.0625rem',  // 33px - --ctt-base-font-size-title-l
+    xl: '2.625rem',  // 42px - --ctt-base-font-size-title-xl
+  },
+  display: {
+    s: '2.25rem',    // 36px - --ctt-base-font-size-display-s
+    m: '3rem',       // 48px - --ctt-base-font-size-display-m
+    l: '4.25rem',    // 68px - --ctt-base-font-size-display-l
+  },
+  label: {
+    s: '0.875rem',   // 14px - --ctt-base-font-size-label-s
+    m: '1rem',       // 16px - --ctt-base-font-size-label-m
+    l: '1.125rem',   // 18px - --ctt-base-font-size-label-l
+  },
+};
+
 // Font Weights - Aligned with CSS core tokens
 export const fontWeights = {
   thin: 250,        // matches --ctt-core-font-weight-250

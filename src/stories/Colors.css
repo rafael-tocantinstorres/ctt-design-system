@@ -1,0 +1,212 @@
+/**
+ * Colors Documentation Styles
+ * Consistent styling for color swatches and documentation
+ */
+
+/* ==========================================================================
+   COLORS DOCUMENTATION STYLES
+   ========================================================================== */
+
+.colors-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'ActoCTT', sans-serif;
+  color: var(--ctt-core-color-secondary-main);
+}
+
+.colors-section {
+  margin-bottom: 3rem;
+}
+
+.colors-section h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ctt-core-color-secondary-dark);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.colors-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--ctt-core-color-secondary-main);
+  border-bottom: 2px solid var(--ctt-core-color-primary-main);
+  padding-bottom: 0.5rem;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.colors-section h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem 0;
+  color: var(--ctt-core-color-secondary-dark);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.colors-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ctt-core-color-secondary-main);
+  margin-bottom: 1rem;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+/* Color Swatches */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.color-category {
+  background: var(--ctt-core-color-neutral-100);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.color-category h4 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--ctt-core-color-secondary-dark);
+  border-bottom: 1px solid var(--ctt-core-color-neutral-400);
+  padding-bottom: 0.5rem;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.color-swatches {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.color-swatch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.color-swatch:hover {
+  background-color: var(--ctt-core-color-neutral-200);
+}
+
+.color-preview {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.color-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.color-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--ctt-core-color-secondary-dark);
+  margin: 0 0 0.25rem 0;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.color-value {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 0.75rem;
+  color: var(--ctt-core-color-secondary-main);
+  margin: 0 0 0.25rem 0;
+  background: var(--ctt-core-color-neutral-200);
+  padding: 0.125rem 0.25rem;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.color-token {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 0.7rem;
+  color: var(--ctt-core-color-secondary-light);
+  margin: 0;
+  font-style: italic;
+}
+
+/* Usage Guidelines */
+.usage-note {
+  background: var(--ctt-core-color-informative-light);
+  border: 1px solid var(--ctt-core-color-informative-main);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.usage-note h4 {
+  color: var(--ctt-core-color-secondary-dark);
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.usage-note p {
+  color: var(--ctt-core-color-secondary-main);
+  margin: 0 0 0.75rem 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.usage-note p:last-child {
+  margin-bottom: 0;
+}
+
+.usage-note ul {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+  color: var(--ctt-core-color-secondary-main);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.usage-note li {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.usage-note strong {
+  color: var(--ctt-core-color-secondary-dark);
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .colors-container {
+    padding: 1rem;
+  }
+  
+  .color-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .color-category {
+    padding: 1rem;
+  }
+  
+  .colors-section h1 {
+    font-size: 2rem;
+  }
+  
+  .colors-section h2 {
+    font-size: 1.5rem;
+  }
+}

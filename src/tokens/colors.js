@@ -1,128 +1,165 @@
 /**
  * Design Tokens - Colors
  * Core and Base color definitions for the CTT Design System
+ * These match the CSS custom properties in tokens.css
  */
 
-// Core Colors - Primary palette
-export const coreColors = {
+// Brand Colors - Raw color values (Primitive tokens)
+export const brandColors = {
   primary: {
-    50: '#f0f1ff',
-    100: '#e4e6ff',
-    200: '#cccefd',
-    300: '#a5a9fa',
-    400: '#7b7bf5',
-    500: '#555ab9', // Current primary
-    600: '#4449a0',
-    700: '#3a3e88',
-    800: '#2f3370',
-    900: '#252858',
+    100: '#F9CCD3',
+    200: '#F299A7',
+    300: '#EC667C',
+    400: '#E53350',
+    500: '#DF0024',
+    600: '#C7001E',
+    700: '#B10018',
   },
   
   secondary: {
-    50: '#f9f9f9',
-    100: '#f0f0f0',
-    200: '#e5e5e5',
-    300: '#d4d4d4',
-    400: '#a3a3a3',
-    500: '#737373',
-    600: '#525252',
-    700: '#404040',
-    800: '#262626',
-    900: '#171717',
+    100: '#CCCCCC',
+    200: '#99999D',
+    300: '#666666',
+    400: '#333333',
+    500: '#000000',
   },
 
-  success: {
-    50: '#f0fdf4',
-    100: '#dcfce7',
-    200: '#bbf7d0',
-    300: '#86efac',
-    400: '#4ade80',
-    500: '#22c55e',
-    600: '#16a34a',
-    700: '#15803d',
-    800: '#166534',
-    900: '#14532d',
+  teal: {
+    100: '#CCF2F0',
+    200: '#99E5E1',
+    300: '#66D8D2',
+    400: '#33CBC3',
+    500: '#00BEB4',
+    600: '#009C97',
   },
 
-  warning: {
-    50: '#fffbeb',
-    100: '#fef3c7',
-    200: '#fde68a',
-    300: '#fcd34d',
-    400: '#fbbf24',
-    500: '#f59e0b',
-    600: '#d97706',
-    700: '#b45309',
-    800: '#92400e',
-    900: '#78350f',
+  green: {
+    100: '#F0F6DA',
+    200: '#E1EDB5',
+    300: '#D2E490',
+    400: '#C3DB6B',
+    500: '#B4D246',
+    600: '#A5C81F',
   },
 
-  error: {
-    50: '#fef2f2',
-    100: '#fee2e2',
-    200: '#fecaca',
-    300: '#fca5a5',
-    400: '#f87171',
-    500: '#ef4444',
-    600: '#dc2626',
-    700: '#b91c1c',
-    800: '#991b1b',
-    900: '#7f1d1d',
+  yellow: {
+    100: '#FFFBCC',
+    200: '#FFF799',
+    300: '#FFF366',
+    400: '#FFEF33',
+    500: '#FFEB00',
+    600: '#E6D400',
+  },
+
+  purple: {
+    100: '#E6D2E6',
+    200: '#CDA5CD',
+    300: '#B478B4',
+    400: '#9B4B9B',
+    500: '#821E82',
+    600: '#690B69',
   },
 };
 
-// Base Colors - Neutral and semantic colors
-export const baseColors = {
-  // Neutral grays
+// Core Colors - Semantic color assignments (System tokens)
+export const coreColors = {
+  primary: {
+    light: '#E53350', // --ctt-brand-primary-400
+    main: '#DF0024',  // --ctt-brand-primary-500
+    dark: '#C7001E',  // --ctt-brand-primary-600
+  },
+  
+  secondary: {
+    light: '#666666', // --ctt-brand-secondary-300
+    main: '#333333',  // --ctt-brand-secondary-400
+    dark: '#000000',  // --ctt-brand-secondary-500
+  },
+
+  new: {
+    light: '#CDA5CD', // --ctt-brand-purple-200
+    main: '#9B4B9B',  // --ctt-brand-purple-400
+  },
+
+  informative: {
+    light: '#99E5E1', // --ctt-brand-teal-200
+    main: '#33CBC3',  // --ctt-brand-teal-400
+  },
+
+  success: {
+    light: '#E1EDB5', // --ctt-brand-green-200
+    main: '#C3DB6B',  // --ctt-brand-green-400
+  },
+
+  warning: {
+    light: '#FFF799', // --ctt-brand-yellow-200
+    main: '#FFEF33',  // --ctt-brand-yellow-400
+  },
+
+  error: {
+    light: '#F299A7', // --ctt-brand-primary-200
+    main: '#B10018',  // --ctt-brand-primary-700
+  },
+
   neutral: {
-    white: '#ffffff',
-    50: '#fafafa',
-    100: '#f5f5f5',
-    200: '#e5e5e5',
-    300: '#d4d4d4',
-    400: '#a3a3a3',
-    500: '#737373',
-    600: '#525252',
-    700: '#404040',
-    800: '#262626',
-    900: '#171717',
-    black: '#000000',
+    100: '#FFFFFF',
+    200: '#F7F7F7',
+    300: '#F2F2F2',
+    400: '#E9E5E5',
+    500: '#CCCCCC', // --ctt-brand-secondary-100
+    600: '#99999D', // --ctt-brand-secondary-200
+    700: '#666666', // --ctt-brand-secondary-300
+    800: '#333333', // --ctt-brand-secondary-400
+    900: '#000000', // --ctt-brand-secondary-500
+  },
+};
+
+// Base Colors - Component-level semantic colors
+export const baseColors = {
+  // Page colors
+  page: {
+    bgDefault: '#FFFFFF',  // --ctt-core-color-neutral-100
+    bgCloudy: '#F7F7F7',   // --ctt-core-color-neutral-200
   },
 
-  // Semantic colors
+  // Container colors
+  container: {
+    bgDefault: '#FFFFFF',   // --ctt-core-color-neutral-100
+    bgDisabled: '#F2F2F2',  // --ctt-core-color-neutral-300
+    borderDefault: '#99999D', // --ctt-core-color-neutral-600
+    borderDisabled: '#CCCCCC', // --ctt-core-color-neutral-500
+    borderSelected: '#C7001E', // --ctt-core-color-primary-dark
+  },
+
+  // Text colors
   text: {
-    primary: '#333333', // Current secondary text
-    secondary: '#737373',
-    tertiary: '#a3a3a3',
-    inverse: '#ffffff',
-    disabled: '#d4d4d4',
+    primary: '#333333',   // --ctt-core-color-secondary-main
+    secondary: '#666666', // --ctt-core-color-secondary-light
+    tertiary: '#99999D',  // --ctt-core-color-neutral-600
+    inverse: '#FFFFFF',   // --ctt-core-color-neutral-100
+    disabled: '#CCCCCC',  // --ctt-core-color-neutral-500
   },
 
+  // Background colors
   background: {
-    primary: '#ffffff',
-    secondary: '#fafafa',
-    tertiary: '#f5f5f5',
-    inverse: '#171717',
-    overlay: 'rgba(0, 0, 0, 0.5)',
+    primary: '#FFFFFF',   // --ctt-core-color-neutral-100
+    secondary: '#F7F7F7', // --ctt-core-color-neutral-200
+    tertiary: '#F2F2F2',  // --ctt-core-color-neutral-300
+    inverse: '#000000',   // --ctt-core-color-secondary-dark
   },
 
+  // Border colors
   border: {
-    primary: '#e5e5e5',
-    secondary: '#d4d4d4',
-    focus: '#555ab9',
-    error: '#ef4444',
-    disabled: '#f5f5f5',
-  },
-
-  shadow: {
-    sm: 'rgba(0, 0, 0, 0.05)',
-    md: 'rgba(0, 0, 0, 0.15)', // Current button shadow
-    lg: 'rgba(0, 0, 0, 0.25)',
+    primary: '#E9E5E5',   // --ctt-core-color-neutral-400
+    secondary: '#CCCCCC', // --ctt-core-color-neutral-500
+    focus: '#DF0024',     // --ctt-core-color-primary-main
+    error: '#B10018',     // --ctt-core-color-negative-main
+    disabled: '#F2F2F2',  // --ctt-core-color-neutral-300
   },
 };
 
 // Combined export for easy access
 export const colors = {
+  brand: brandColors,
   core: coreColors,
   base: baseColors,
 };
