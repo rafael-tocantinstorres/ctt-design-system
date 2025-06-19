@@ -246,7 +246,7 @@
   --ctt-base-border-radius-scale: 1;
   --ctt-base-border-radius-none: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-0));
   --ctt-base-border-radius-xs: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-25));
-  --ctt-base-border-radius-s: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-100));
+  --ctt-base-border-radius-s: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-50));
   --ctt-base-border-radius-m: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-200));
   --ctt-base-border-radius-pill: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-pill));
 

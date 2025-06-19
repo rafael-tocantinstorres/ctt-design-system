@@ -435,7 +435,7 @@
   --ctt-base-border-radius-scale: 1;
   --ctt-base-border-radius-none: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-0));
   --ctt-base-border-radius-xs: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-25));
-  --ctt-base-border-radius-s: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-100));
+  --ctt-base-border-radius-s: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-50));
   --ctt-base-border-radius-m: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-200));
   --ctt-base-border-radius-pill: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-pill));
 
@@ -1384,7 +1384,9 @@
 
 .ctt-button:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  background-color: var(--ctt-base-color-selectable-disabled-bg);
+  color: var(--ctt-base-color-selectable-fg-weak);
+  border: var(--ctt-core-border-width-1) solid var(--ctt-base-color-container-border-disabled);
   transform: none !important;
 }
 

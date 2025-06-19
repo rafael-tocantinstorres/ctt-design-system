@@ -65,7 +65,9 @@
 
 .ctt-button:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  background-color: var(--ctt-base-color-selectable-disabled-bg);
+  color: var(--ctt-base-color-selectable-fg-weak);
+  border: var(--ctt-core-border-width-1) solid var(--ctt-base-color-container-border-disabled);
   transform: none !important;
 }
 
