@@ -61,6 +61,17 @@
      CORE TOKENS - Semantic color assignments (System tokens)
      ========================================================================== */
 
+  /* Core Colors - Neutral */
+  --ctt-core-color-neutral-100: #FFFFFF;
+  --ctt-core-color-neutral-200: #F7F7F7;
+  --ctt-core-color-neutral-300: #F2F2F2;
+  --ctt-core-color-neutral-400: #E9E5E5;
+  --ctt-core-color-neutral-500: var(--ctt-brand-secondary-100);
+  --ctt-core-color-neutral-600: var(--ctt-brand-secondary-200);
+  --ctt-core-color-neutral-700: var(--ctt-brand-secondary-300);
+  --ctt-core-color-neutral-800: var(--ctt-brand-secondary-400);
+  --ctt-core-color-neutral-900: var(--ctt-brand-secondary-500);
+
   /* Core Colors - Primary */
   --ctt-core-color-primary-light: var(--ctt-brand-primary-400);
   --ctt-core-color-primary-main: var(--ctt-brand-primary-500);
@@ -70,6 +81,11 @@
   --ctt-core-color-secondary-light: var(--ctt-brand-secondary-300);
   --ctt-core-color-secondary-main: var(--ctt-brand-secondary-400);
   --ctt-core-color-secondary-dark: var(--ctt-brand-secondary-500);
+
+  /* Core Colors - tertiary */
+  --ctt-core-color-tertiary-light: var(--ctt-core-color-neutral-100);
+  --ctt-core-color-tertiary-main: var(--ctt-core-color-primary-dark);
+  --ctt-core-color-tertiary-dark: var(--ctt-brand-secondary-400);
 
   /* Core Colors - New */
   --ctt-core-color-new-light: var(--ctt-brand-purple-200);
@@ -90,17 +106,6 @@
   /* Core Colors - Negative */
   --ctt-core-color-negative-light: var(--ctt-brand-primary-200);
   --ctt-core-color-negative-main: var(--ctt-brand-primary-700);
-
-  /* Core Colors - Neutral */
-  --ctt-core-color-neutral-100: #FFFFFF;
-  --ctt-core-color-neutral-200: #F7F7F7;
-  --ctt-core-color-neutral-300: #F2F2F2;
-  --ctt-core-color-neutral-400: #E9E5E5;
-  --ctt-core-color-neutral-500: var(--ctt-brand-secondary-100);
-  --ctt-core-color-neutral-600: var(--ctt-brand-secondary-200);
-  --ctt-core-color-neutral-700: var(--ctt-brand-secondary-300);
-  --ctt-core-color-neutral-800: var(--ctt-brand-secondary-400);
-  --ctt-core-color-neutral-900: var(--ctt-brand-secondary-500);
 
   /* ==========================================================================
      CORE SIZING & SPACING SYSTEM
@@ -241,7 +246,7 @@
   --ctt-base-border-radius-scale: 1;
   --ctt-base-border-radius-none: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-0));
   --ctt-base-border-radius-xs: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-25));
-  --ctt-base-border-radius-s: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-100));
+  --ctt-base-border-radius-s: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-50));
   --ctt-base-border-radius-m: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-200));
   --ctt-base-border-radius-pill: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-pill));
 
@@ -317,6 +322,17 @@
   --ctt-base-color-selectable-secondary-unselected-active-bg: var(--ctt-core-color-secondary-main);
   --ctt-base-color-selectable-secondary-unselected-active-border: var(--ctt-core-color-secondary-dark);
   --ctt-base-color-selectable-secondary-unselected-active-fg: var(--ctt-core-color-neutral-100);
+
+    /* Base Color - Selectable Tertiary */
+  --ctt-base-color-selectable-tertiary-unselected-default-bg: var(--ctt-core-color-tertiary-light);
+  --ctt-base-color-selectable-tertiary-unselected-default-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-default-fg: var(--ctt-core-color-tertiary-dark);
+  --ctt-base-color-selectable-tertiary-unselected-hover-bg: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-hover-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-hover-fg: var(--ctt-core-color-tertiary-light);
+  --ctt-base-color-selectable-tertiary-unselected-active-bg: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-active-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-active-fg: var(--ctt-core-color-tertiary-light);
 
   /* Base Color - Feedback */
   --ctt-base-color-feedback-fg-default: var(--ctt-core-color-neutral-800);

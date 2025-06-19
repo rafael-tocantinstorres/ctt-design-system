@@ -11,17 +11,28 @@
 :root {
   /* Button Spacing - Using core dimension tokens */
   --ctt-button-padding-small: var(--ctt-core-dimension-50) var(--ctt-core-dimension-100);   /* 8px 16px */
-  --ctt-button-padding-medium: var(--ctt-core-dimension-75) var(--ctt-core-dimension-150);  /* 12px 24px */
-  --ctt-button-padding-large: var(--ctt-core-dimension-100) var(--ctt-core-dimension-200);  /* 16px 32px */
+  --ctt-button-padding-medium: var(--ctt-core-dimension-50) var(--ctt-core-dimension-100);  /* 8px 16px */
+  --ctt-button-padding-large: var(--ctt-core-dimension-50) var(--ctt-core-dimension-150);  /* 16px 24px */
+
+  /* Button Height */
+  --ctt-button-height-small: var(--ctt-core-dimension-200);   /* 32px */
+  --ctt-button-height-medium: var(--ctt-core-dimension-300);  /* 40px */
+  --ctt-button-height-large: var(--ctt-core-dimension-400);  /* 64px */
+
   
-  /* Button Border Radius - Using base border radius tokens */
-  --ctt-button-border-radius: var(--ctt-base-border-radius-pill);
+  /* Button Border Radius Options */
+  --ctt-button-border-radius-pill: var(--ctt-base-border-radius-pill);
+  --ctt-button-border-radius-small: var(--ctt-base-border-radius-s);
+  --ctt-button-border-radius-extra-small: var(--ctt-base-border-radius-xs);
   
   /* Button Transitions */
   --ctt-button-transition: all 0.2s ease-in-out;
   
   /* Button Transform */
   --ctt-button-hover-transform: translateY(-1px);
+  
+  /* Button Icon Spacing */
+  --ctt-button-icon-gap: var(--ctt-core-dimension-50); /* 8px */
 }
 
 /* ==========================================================================
@@ -29,11 +40,13 @@
    ========================================================================== */
 
 .ctt-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   border: 0;
-  border-radius: var(--ctt-button-border-radius);
-  font-weight: var(--ctt-base-font-weight-label);
+  border-radius: var(--ctt-button-border-radius-pill);
+  font-weight: var( --ctt-base-font-weight-display);
   line-height: var(--ctt-core-line-height-xs);
   font-family: var(--ctt-base-font-family-label);
   transition: var(--ctt-button-transition);
@@ -42,6 +55,7 @@
   outline: none;
   position: relative;
   box-sizing: border-box;
+  gap: var(--ctt-button-icon-gap);
 }
 
 .ctt-button:focus {
@@ -77,18 +91,39 @@
 
 /* Secondary Button */
 .ctt-button--secondary {
-  background-color: var(--ctt-base-color-selectable-bg-default);
-  color: var(--ctt-base-color-selectable-fg-default);
+  background-color: var(--ctt-base-color-selectable-secondary-unselected-default-bg);
+  color: var(--ctt-base-color-selectable-secondary-unselected-default-fg);
   border: var(--ctt-base-border-width-selectable-s) solid var(--ctt-base-color-selectable-border-default);
 }
 
 .ctt-button--secondary:hover:not(:disabled) {
-  background-color: var(--ctt-base-color-page-bg-cloudy);
+  background-color: var(--ctt-base-color-selectable-secondary-unselected-hover-bg);
   transform: var(--ctt-button-hover-transform);
 }
 
 .ctt-button--secondary:active:not(:disabled) {
-  background-color: var(--ctt-core-color-neutral-300);
+  background-color: var(--ctt-base-color-selectable-secondary-unselected-hover-bg);
+  transform: translateY(0);
+}
+
+/* Tertiary Button */
+.ctt-button--tertiary {
+  background-color: var(--ctt-base-color-selectable-tertiary-unselected-default-bg);
+  color: var(--ctt-base-color-selectable-tertiary-unselected-default-fg);
+  border: var(--ctt-core-border-width-1) solid var(--ctt-base-color-selectable-tertiary-unselected-default-border);
+}
+
+.ctt-button--tertiary:hover:not(:disabled) {
+  background-color: var(--ctt-base-color-selectable-tertiary-unselected-hover-bg);
+  color: var(--ctt-base-color-selectable-tertiary-unselected-hover-fg);
+  border-color: var(--ctt-base-color-selectable-tertiary-unselected-hover-border);
+  transform: var(--ctt-button-hover-transform);
+}
+
+.ctt-button--tertiary:active:not(:disabled) {
+  background-color: var(--ctt-base-color-selectable-tertiary-unselected-active-bg);
+  color: var(--ctt-base-color-selectable-tertiary-unselected-active-fg);
+  border-color: var(--ctt-base-color-selectable-tertiary-unselected-active-border);
   transform: translateY(0);
 }
 
@@ -164,16 +199,71 @@
 .ctt-button--small {
   padding: var(--ctt-button-padding-small);
   font-size: var(--ctt-base-font-size-label-s);
+  height: var(--ctt-button-height-small);
 }
 
 .ctt-button--medium {
   padding: var(--ctt-button-padding-medium);
   font-size: var(--ctt-base-font-size-label-m);
+  height: var(--ctt-button-height-medium);
 }
 
 .ctt-button--large {
   padding: var(--ctt-button-padding-large);
   font-size: var(--ctt-base-font-size-label-l);
+  height: var(--ctt-button-height-large);
+}
+
+/* ==========================================================================
+   BUTTON BORDER RADIUS VARIANTS
+   ========================================================================== */
+
+.ctt-button--pill {
+  border-radius: var(--ctt-button-border-radius-pill);
+}
+
+.ctt-button--small-radius {
+  border-radius: var(--ctt-button-border-radius-small);
+}
+
+.ctt-button--extra-small-radius {
+  border-radius: var(--ctt-button-border-radius-extra-small);
+}
+
+/* ==========================================================================
+   BUTTON ICON STYLES
+   ========================================================================== */
+
+.ctt-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ctt-button__icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+.ctt-button__icon--left {
+  margin-right: 0; /* Gap is handled by parent flexbox */
+}
+
+.ctt-button__icon--right {
+  margin-left: 0; /* Gap is handled by parent flexbox */
+}
+
+.ctt-button__label {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Icon-only buttons */
+.ctt-button:not(:has(.ctt-button__label)) .ctt-button__icon,
+.ctt-button:empty .ctt-button__icon {
+  margin: 0;
 }
 
 /* ==========================================================================

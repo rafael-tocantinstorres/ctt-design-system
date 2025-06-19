@@ -182,19 +182,19 @@ export const typographyScale = {
   button: {
     large: {
       fontSize: fontSizes.lg,    // 18px - matches --ctt-base-font-size-label-l
-      fontWeight: fontWeights.bold,
+      fontWeight: fontWeights.normal,
       lineHeight: lineHeights.xs,
       fontFamily: fontFamilies.label,
     },
     medium: {
       fontSize: fontSizes.base,  // 16px - matches --ctt-base-font-size-label-m
-      fontWeight: fontWeights.bold,
+      fontWeight: fontWeights.normal,
       lineHeight: lineHeights.xs,
       fontFamily: fontFamilies.label,
     },
     small: {
       fontSize: fontSizes.sm,    // 14px - matches --ctt-base-font-size-label-s
-      fontWeight: fontWeights.bold,
+      fontWeight: fontWeights.normal,
       lineHeight: lineHeights.xs,
       fontFamily: fontFamilies.label,
     },

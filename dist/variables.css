@@ -173,15 +173,15 @@
   --ctt-typography-scale-labelsmall-lineheight: 100%;
   --ctt-typography-scale-labelsmall-fontfamily: 'ActoCTT', sans-serif;
   --ctt-typography-scale-button-large-fontsize: 1.125rem;
-  --ctt-typography-scale-button-large-fontweight: 700;
+  --ctt-typography-scale-button-large-fontweight: 400;
   --ctt-typography-scale-button-large-lineheight: 100%;
   --ctt-typography-scale-button-large-fontfamily: 'ActoCTT', sans-serif;
   --ctt-typography-scale-button-medium-fontsize: 1rem;
-  --ctt-typography-scale-button-medium-fontweight: 700;
+  --ctt-typography-scale-button-medium-fontweight: 400;
   --ctt-typography-scale-button-medium-lineheight: 100%;
   --ctt-typography-scale-button-medium-fontfamily: 'ActoCTT', sans-serif;
   --ctt-typography-scale-button-small-fontsize: 0.875rem;
-  --ctt-typography-scale-button-small-fontweight: 700;
+  --ctt-typography-scale-button-small-fontweight: 400;
   --ctt-typography-scale-button-small-lineheight: 100%;
   --ctt-typography-scale-button-small-fontfamily: 'ActoCTT', sans-serif;
   --ctt-typography-scale-h1-fontsize: 2.625rem;
