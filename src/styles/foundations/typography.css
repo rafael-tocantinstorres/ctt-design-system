@@ -16,21 +16,21 @@
   font-family: var(--ctt-base-font-family-body) !important;
   font-weight: var(--ctt-base-font-weight-body) !important;
   font-size: var(--ctt-base-font-size-body-s) !important;
-  line-height: var(--ctt-core-line-height-m) !important;
+  line-height: var(--ctt-core-line-height-l) !important;
 }
 
 .ctt-body-m {
   font-family: var(--ctt-base-font-family-body) !important;
   font-weight: var(--ctt-base-font-weight-body) !important;
   font-size: var(--ctt-base-font-size-body-m) !important;
-  line-height: var(--ctt-core-line-height-m) !important;
+  line-height: var(--ctt-core-line-height-l) !important;
 }
 
 .ctt-body-l {
   font-family: var(--ctt-base-font-family-body) !important;
   font-weight: var(--ctt-base-font-weight-body) !important;
   font-size: var(--ctt-base-font-size-body-l) !important;
-  line-height: var(--ctt-core-line-height-m) !important;
+  line-height: var(--ctt-core-line-height-l) !important;
 }
 
 /* ==========================================================================

@@ -216,10 +216,10 @@
 
   /* Base Font Weight */
   --ctt-base-font-weight-body: var(--ctt-core-font-weight-400);
-  --ctt-base-font-weight-title-s-m: var(--ctt-core-font-weight-700);
-  --ctt-base-font-weight-title-l-xl: var(--ctt-core-font-weight-400);
+  --ctt-base-font-weight-title-s-m: var(--ctt-core-font-weight-500);
+  --ctt-base-font-weight-title-l-xl: var(--ctt-core-font-weight-500);
   --ctt-base-font-weight-display: var(--ctt-core-font-weight-400);
-  --ctt-base-font-weight-label: var(--ctt-core-font-weight-700);
+  --ctt-base-font-weight-label: var(--ctt-core-font-weight-500);
 
   /* Base Font Size - Body */
   --ctt-base-font-size-body-s: var(--ctt-core-font-size-scaled-87);  /* 14px */
