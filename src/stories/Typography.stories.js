@@ -1,5 +1,6 @@
 import { typography, baseTypographySizes } from "../tokens/typography.js";
-import "../styles/storybook/typography-docs.css";
+import "../styles/foundations/typography.css";
+import "../styles/storybook/storybook-docs.css";
 
 export default {
   title: 'Design System/Typography',
@@ -14,24 +15,33 @@ export default {
 
 // Font Family Showcase
 export const FontFamily = () => `
-  <div class="typography-container">
-    <div class="typography-section">
+  <div class="docs-container">
+    <div class="docs-section">
       <h1>Typography</h1>
       <p>Our typography system provides a consistent hierarchy and readable text across all screen sizes and contexts. All typography uses the ActoCTT font family to maintain brand consistency.</p>
+      
+      <div class="usage-note">
+        <h4>How to Use Typography</h4>
+        <p>Apply typography styles using foundation utility classes:</p>
+        <ul>
+          <li><strong>Body Text:</strong> Use <code class="class-display">.ctt-body-s</code>, <code class="class-display">.ctt-body-m</code>, or <code class="class-display">.ctt-body-l</code></li>
+          <li><strong>Titles:</strong> Use <code class="class-display">.ctt-title-s</code>, <code class="class-display">.ctt-title-m</code>, <code class="class-display">.ctt-title-l</code>, or <code class="class-display">.ctt-title-xl</code></li>
+          <li><strong>Display Text:</strong> Use <code class="class-display">.ctt-display-s</code>, <code class="class-display">.ctt-display-m</code>, or <code class="class-display">.ctt-display-l</code></li>
+          <li><strong>Labels:</strong> Use <code class="class-display">.ctt-label-s</code>, <code class="class-display">.ctt-label-m</code>, or <code class="class-display">.ctt-label-l</code></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="typography-section">
+    <div class="docs-section">
       <h2>Font Family</h2>
-      <div class="font-showcase">
-        <div class="font-sample">
-          <h3 class="font-name">ActoCTT</h3>
-          <p class="font-description">Primary brand font used throughout the design system</p>
-          <div class="font-specimen">
-            <p class="specimen-text">The quick brown fox jumps over the lazy dog</p>
-            <p class="specimen-text">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-            <p class="specimen-text">abcdefghijklmnopqrstuvwxyz</p>
-            <p class="specimen-text">0123456789 !@#$%^&*()</p>
-          </div>
+      <div class="showcase-item" style="text-align: center;">
+        <h4 style="font-family: 'ActoCTT', sans-serif; font-size: 2rem; font-weight: 700; color: var(--ctt-core-color-secondary-dark); margin: 0 0 0.5rem 0;">ActoCTT</h4>
+        <p style="font-family: 'ActoCTT', sans-serif; font-size: 1rem; color: var(--ctt-core-color-secondary-main); margin: 0 0 2rem 0;">Primary brand font used throughout the design system</p>
+        <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1.5rem;">
+          <p style="font-family: 'ActoCTT', sans-serif; font-size: 1.125rem; line-height: 1.4; color: var(--ctt-core-color-secondary-dark); margin: 0 0 0.75rem 0;">The quick brown fox jumps over the lazy dog</p>
+          <p style="font-family: 'ActoCTT', sans-serif; font-size: 1.125rem; line-height: 1.4; color: var(--ctt-core-color-secondary-dark); margin: 0 0 0.75rem 0;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+          <p style="font-family: 'ActoCTT', sans-serif; font-size: 1.125rem; line-height: 1.4; color: var(--ctt-core-color-secondary-dark); margin: 0 0 0.75rem 0;">abcdefghijklmnopqrstuvwxyz</p>
+          <p style="font-family: 'ActoCTT', sans-serif; font-size: 1.125rem; line-height: 1.4; color: var(--ctt-core-color-secondary-dark); margin: 0;">0123456789 !@#$%^&*()</p>
         </div>
       </div>
     </div>
@@ -42,80 +52,80 @@ FontFamily.storyName = 'Font Family';
 
 // Body Typography
 export const BodyTypography = () => `
-  <div class="typography-container">
-    <div class="typography-section">
+  <div class="docs-container">
+    <div class="docs-section">
       <h2>Body Typography</h2>
       <p>Body text is used for general content and reading. It provides optimal readability across different screen sizes.</p>
 
-      <div class="typography-showcase">
-        <div class="typography-sample">
-          <div class="sample-text base-typography-body-s">
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="ctt-body-s" style="margin: 0 0 1.5rem 0; padding-left: 1rem;">
             <p>Small Body Text - The quick brown fox jumps over the lazy dog. This text demonstrates the small body typography style used for secondary content, captions, and fine print. Notice how the font size and line height create comfortable reading for smaller text.</p>
           </div>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-body-s</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-body-s</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.body.s} (14px)</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.body.s} (14px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Weight:</span>
-              <span>${typography.fontWeights.normal}</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.normal}</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-body-s</code>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-body-s</code>
             </div>
           </div>
         </div>
 
-        <div class="typography-sample">
-          <div class="sample-text base-typography-body-m">
+        <div class="showcase-item">
+          <div class="ctt-body-m" style="margin: 0 0 1.5rem 0; padding-left: 1rem;">
             Medium Body Text - The quick brown fox jumps over the lazy dog. This text demonstrates the medium body typography style used for primary content and general reading. This is the most commonly used body text size.
           </div>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-body-m</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-body-m</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.body.m} (16px)</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.body.m} (16px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Weight:</span>
-              <span>${typography.fontWeights.normal}</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.normal}</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-body-m</code>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-body-m</code>
             </div>
           </div>
         </div>
 
-        <div class="typography-sample">
-          <div class="sample-text base-typography-body-l">
+        <div class="showcase-item">
+          <div class="ctt-body-l" style="margin: 0 0 1.5rem 0; padding-left: 1rem;">
             Large Body Text - The quick brown fox jumps over the lazy dog. This text demonstrates the large body typography style used for emphasized content and introductory paragraphs.
           </div>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-body-l</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-body-l</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.body.l} (18px)</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.body.l} (18px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Weight:</span>
-              <span>${typography.fontWeights.normal}</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.normal}</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-body-l</code>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-body-l</code>
             </div>
           </div>
         </div>
@@ -128,219 +138,104 @@ BodyTypography.storyName = 'Body Typography';
 
 // Title Typography
 export const TitleTypography = () => `
-  <div class="typography-container">
-    <div class="typography-section">
+  <div class="docs-container">
+    <div class="docs-section">
       <h2>Title Typography</h2>
       <p>Titles create hierarchy and structure in content. They are available in different sizes optimized for desktop, tablet, and mobile viewports.</p>
 
-      <h3>Desktop Titles</h3>
-      <div class="typography-showcase">
-        <div class="typography-sample">
-          <h4 class="sample-text base-typography-title-desktop-s">
-            Small Desktop Title
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <h4 class="ctt-title-s" style="margin: 0 0 1.5rem 0;">
+            Small Title - The quick brown fox jumps over the lazy dog
           </h4>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-title-desktop-s</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-title-s</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.title.s} (20px)</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.title.s} (20px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Weight:</span>
-              <span>${typography.fontWeights.bold}</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.bold}</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-title-s</code>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-title-s</code>
             </div>
           </div>
         </div>
 
-        <div class="typography-sample">
-          <h3 class="sample-text base-typography-title-desktop-m">
-            Medium Desktop Title
+        <div class="showcase-item">
+          <h3 class="ctt-title-m" style="margin: 0 0 1.5rem 0;">
+            Medium Title - The quick brown fox jumps over the lazy dog
           </h3>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-title-desktop-m</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-title-m</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.title.m} (26px)</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.title.m} (26px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Weight:</span>
-              <span>${typography.fontWeights.bold}</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.bold}</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-title-m</code>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-title-m</code>
             </div>
           </div>
         </div>
 
-        <div class="typography-sample">
-          <h2 class="sample-text base-typography-title-desktop-l">
-            Large Desktop Title
+        <div class="showcase-item">
+          <h2 class="ctt-title-l" style="margin: 0 0 1.5rem 0;">
+            Large Title - The quick brown fox jumps over the lazy dog
           </h2>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-title-desktop-l</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-title-l</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.title.l} (33px)</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.title.l} (33px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Weight:</span>
-              <span>${typography.fontWeights.normal}</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.normal}</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-title-l</code>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-title-l</code>
             </div>
           </div>
         </div>
 
-        <div class="typography-sample">
-          <h1 class="sample-text base-typography-title-desktop-xl">
-            Extra Large Desktop Title
+        <div class="showcase-item">
+          <h1 class="ctt-title-xl" style="margin: 0 0 1.5rem 0;">
+            Extra Large Title - The quick brown fox jumps over the lazy dog
           </h1>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-title-desktop-xl</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-title-xl</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.title.xl} (42px)</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.title.xl} (42px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Weight:</span>
-              <span>${typography.fontWeights.normal}</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.normal}</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-title-xl</code>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Tablet Titles</h3>
-      <div class="responsive-note">
-        <strong>Responsive Design:</strong> Tablet titles use the same font sizes as desktop but may have different responsive behavior in your application layout.
-      </div>
-
-      <div class="typography-showcase">
-        <div class="typography-sample">
-          <h4 class="sample-text base-typography-title-tablet-s">
-            Small Tablet Title
-          </h4>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-title-tablet-s</code>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.title.s} (20px)</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-title-s</code>
-            </div>
-          </div>
-        </div>
-
-        <div class="typography-sample">
-          <h3 class="sample-text base-typography-title-tablet-m">
-            Medium Tablet Title
-          </h3>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-title-tablet-m</code>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.title.m} (26px)</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-title-m</code>
-            </div>
-          </div>
-        </div>
-
-        <div class="typography-sample">
-          <h2 class="sample-text base-typography-title-tablet-l">
-            Large Tablet Title
-          </h2>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-title-tablet-l</code>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.title.l} (33px)</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-title-l</code>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Mobile Titles</h3>
-      <div class="responsive-note">
-        <strong>Mobile Optimization:</strong> Mobile titles are optimized for smaller screens and touch interfaces.
-      </div>
-
-      <div class="typography-showcase">
-        <div class="typography-sample">
-          <h4 class="sample-text base-typography-title-mobile-s">
-            Small Mobile Title
-          </h4>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-title-mobile-s</code>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.title.s} (20px)</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-title-s</code>
-            </div>
-          </div>
-        </div>
-
-        <div class="typography-sample">
-          <h3 class="sample-text base-typography-title-mobile-m">
-            Medium Mobile Title
-          </h3>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-title-mobile-m</code>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>${baseTypographySizes.title.m} (26px)</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-title-m</code>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-title-xl</code>
             </div>
           </div>
         </div>
@@ -353,68 +248,80 @@ TitleTypography.storyName = 'Title Typography';
 
 // Display Typography
 export const DisplayTypography = () => `
-  <div class="typography-container">
-    <div class="typography-section">
+  <div class="docs-container">
+    <div class="docs-section">
       <h2>Display Typography</h2>
-      <p>Display text is used for hero sections, marketing content, and large visual impact. It's designed to grab attention and create visual hierarchy.</p>
+      <p>Display text is used for large, prominent headings and hero sections. These styles are designed to make a strong visual impact.</p>
 
-      <div class="typography-showcase">
-        <div class="typography-sample">
-          <h2 class="sample-text base-typography-display-desktop-s">
-            Small Display
-          </h2>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-display-desktop-s</code>
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="ctt-display-s" style="margin: 0 0 1.5rem 0;">
+            Small Display - The quick brown fox jumps over the lazy dog
+          </div>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-display-s</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>54px</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.display.s} (48px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-display-s</code>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.bold}</span>
+            </div>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-display-s</code>
             </div>
           </div>
         </div>
 
-        <div class="typography-sample">
-          <h1 class="sample-text base-typography-display-desktop-m">
-            Medium Display
-          </h1>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-display-desktop-m</code>
+        <div class="showcase-item">
+          <div class="ctt-display-m" style="margin: 0 0 1.5rem 0;">
+            Medium Display - The quick brown fox jumps over the lazy dog
+          </div>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-display-m</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>68px</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.display.m} (60px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-display-m</code>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.bold}</span>
+            </div>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-display-m</code>
             </div>
           </div>
         </div>
 
-        <div class="typography-sample">
-          <h1 class="sample-text base-typography-display-desktop-l">
-            Large Display
-          </h1>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-display-desktop-l</code>
+        <div class="showcase-item">
+          <div class="ctt-display-l" style="margin: 0 0 1.5rem 0;">
+            Large Display - The quick brown fox jumps over the lazy dog
+          </div>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-display-l</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Font Size:</span>
-              <span>86px</span>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.display.l} (72px)</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-display-l</code>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.bold}</span>
+            </div>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-display-l</code>
             </div>
           </div>
         </div>
@@ -427,56 +334,80 @@ DisplayTypography.storyName = 'Display Typography';
 
 // Label Typography
 export const LabelTypography = () => `
-  <div class="typography-container">
-    <div class="typography-section">
+  <div class="docs-container">
+    <div class="docs-section">
       <h2>Label Typography</h2>
-      <p>Label text is used for form labels, captions, and small UI text elements.</p>
+      <p>Labels are used for form fields, buttons, and other UI elements that need clear, readable text.</p>
 
-      <div class="typography-showcase">
-        <div class="typography-sample">
-          <div class="sample-text base-typography-label-s">
-            Small Label Text
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="ctt-label-s" style="margin: 0 0 1.5rem 0;">
+            Small Label - Form field labels and captions
           </div>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-label-s</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-label-s</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-label-s</code>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.label.s} (12px)</span>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.semibold}</span>
+            </div>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-label-s</code>
             </div>
           </div>
         </div>
 
-        <div class="typography-sample">
-          <div class="sample-text base-typography-label-m">
-            Medium Label Text
+        <div class="showcase-item">
+          <div class="ctt-label-m" style="margin: 0 0 1.5rem 0;">
+            Medium Label - Standard form labels and buttons
           </div>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-label-m</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-label-m</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-label-m</code>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.label.m} (14px)</span>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.semibold}</span>
+            </div>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-label-m</code>
             </div>
           </div>
         </div>
 
-        <div class="typography-sample">
-          <div class="sample-text base-typography-label-l">
-            Large Label Text
+        <div class="showcase-item">
+          <div class="ctt-label-l" style="margin: 0 0 1.5rem 0;">
+            Large Label - Prominent labels and section headers
           </div>
-          <div class="sample-details">
-            <div class="detail-row">
-              <span class="detail-label">Class:</span>
-              <code>.base-typography-label-l</code>
+          <div style="background: var(--ctt-core-color-neutral-200); border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Foundation Class:</span>
+              <code class="class-display">.ctt-label-l</code>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">CSS Token:</span>
-              <code>--ctt-base-font-size-label-l</code>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Size:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${baseTypographySizes.label.l} (16px)</span>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">Font Weight:</span>
+              <span style="color: var(--ctt-core-color-secondary-main);">${typography.fontWeights.semibold}</span>
+            </div>
+            <div style="display: flex; align-items: center; font-family: 'ActoCTT', sans-serif;">
+              <span style="font-weight: 600; color: var(--ctt-core-color-secondary-dark); min-width: 120px; margin-right: 0.5rem;">CSS Token:</span>
+              <code class="token-display">--ctt-base-font-size-label-l</code>
             </div>
           </div>
         </div>
@@ -486,36 +417,3 @@ export const LabelTypography = () => `
 `;
 
 LabelTypography.storyName = 'Label Typography';
-
-// Usage Guidelines
-export const UsageGuidelines = () => `
-  <div class="typography-container">
-    <div class="typography-section">
-      <h2>Usage Guidelines</h2>
-      
-      <div class="usage-guidelines">
-        <div class="guideline-item">
-          <h4>Hierarchy</h4>
-          <p>Use display typography for hero sections and major headings. Title typography creates content structure. Body typography is for readable content.</p>
-        </div>
-        
-        <div class="guideline-item">
-          <h4>Responsive Design</h4>
-          <p>Desktop, tablet, and mobile variants ensure optimal readability across all devices. Choose the appropriate variant based on your target viewport.</p>
-        </div>
-        
-        <div class="guideline-item">
-          <h4>Accessibility</h4>
-          <p>All typography maintains WCAG AA contrast ratios. Line heights are optimized for readability and accommodate users with dyslexia.</p>
-        </div>
-        
-        <div class="guideline-item">
-          <h4>Brand Consistency</h4>
-          <p>ActoCTT font family is used throughout to maintain brand consistency. Fallback fonts ensure graceful degradation.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-`;
-
-UsageGuidelines.storyName = 'Usage Guidelines';

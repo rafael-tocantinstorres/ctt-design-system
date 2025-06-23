@@ -186,7 +186,7 @@
 /* End of ../assets/fonts.css */
 
 /* Import design tokens */
-/* Imported from ./foundations/tokens.css */
+/* Imported from ../tokens/tokens.css */
 /**
  * CTT Design System - Design Tokens
  * CSS Custom Properties for all design tokens
@@ -250,6 +250,17 @@
      CORE TOKENS - Semantic color assignments (System tokens)
      ========================================================================== */
 
+  /* Core Colors - Neutral */
+  --ctt-core-color-neutral-100: #FFFFFF;
+  --ctt-core-color-neutral-200: #F7F7F7;
+  --ctt-core-color-neutral-300: #F2F2F2;
+  --ctt-core-color-neutral-400: #E9E5E5;
+  --ctt-core-color-neutral-500: var(--ctt-brand-secondary-100);
+  --ctt-core-color-neutral-600: var(--ctt-brand-secondary-200);
+  --ctt-core-color-neutral-700: var(--ctt-brand-secondary-300);
+  --ctt-core-color-neutral-800: var(--ctt-brand-secondary-400);
+  --ctt-core-color-neutral-900: var(--ctt-brand-secondary-500);
+
   /* Core Colors - Primary */
   --ctt-core-color-primary-light: var(--ctt-brand-primary-400);
   --ctt-core-color-primary-main: var(--ctt-brand-primary-500);
@@ -259,6 +270,11 @@
   --ctt-core-color-secondary-light: var(--ctt-brand-secondary-300);
   --ctt-core-color-secondary-main: var(--ctt-brand-secondary-400);
   --ctt-core-color-secondary-dark: var(--ctt-brand-secondary-500);
+
+  /* Core Colors - tertiary */
+  --ctt-core-color-tertiary-light: var(--ctt-core-color-neutral-100);
+  --ctt-core-color-tertiary-main: var(--ctt-core-color-primary-dark);
+  --ctt-core-color-tertiary-dark: var(--ctt-brand-secondary-400);
 
   /* Core Colors - New */
   --ctt-core-color-new-light: var(--ctt-brand-purple-200);
@@ -279,17 +295,6 @@
   /* Core Colors - Negative */
   --ctt-core-color-negative-light: var(--ctt-brand-primary-200);
   --ctt-core-color-negative-main: var(--ctt-brand-primary-700);
-
-  /* Core Colors - Neutral */
-  --ctt-core-color-neutral-100: #FFFFFF;
-  --ctt-core-color-neutral-200: #F7F7F7;
-  --ctt-core-color-neutral-300: #F2F2F2;
-  --ctt-core-color-neutral-400: #E9E5E5;
-  --ctt-core-color-neutral-500: var(--ctt-brand-secondary-100);
-  --ctt-core-color-neutral-600: var(--ctt-brand-secondary-200);
-  --ctt-core-color-neutral-700: var(--ctt-brand-secondary-300);
-  --ctt-core-color-neutral-800: var(--ctt-brand-secondary-400);
-  --ctt-core-color-neutral-900: var(--ctt-brand-secondary-500);
 
   /* ==========================================================================
      CORE SIZING & SPACING SYSTEM
@@ -430,7 +435,7 @@
   --ctt-base-border-radius-scale: 1;
   --ctt-base-border-radius-none: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-0));
   --ctt-base-border-radius-xs: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-25));
-  --ctt-base-border-radius-s: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-100));
+  --ctt-base-border-radius-s: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-50));
   --ctt-base-border-radius-m: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-200));
   --ctt-base-border-radius-pill: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-pill));
 
@@ -473,47 +478,115 @@
   --ctt-base-color-selectable-bg-disabled: var(--ctt-core-color-neutral-300);
   --ctt-base-color-selectable-border-default: var(--ctt-core-color-neutral-600);
   --ctt-base-color-selectable-border-disabled: var(--ctt-core-color-neutral-500);
-  --ctt-base-color-selectable-fg-default: var(--ctt-core-color-secondary-main);
-  --ctt-base-color-selectable-fg-disabled: var(--ctt-core-color-neutral-500);
+  --ctt-base-color-selectable-fg-weak: var(--ctt-core-color-neutral-700);
+  --ctt-base-color-selectable-fg-default: var(--ctt-core-color-neutral-800);
 
   /* Base Color - Selectable Primary */
   --ctt-base-color-selectable-primary-unselected-default-bg: var(--ctt-core-color-primary-main);
+  --ctt-base-color-selectable-primary-unselected-default-border: var(--ctt-core-color-primary-main);
   --ctt-base-color-selectable-primary-unselected-default-fg: var(--ctt-core-color-neutral-100);
-  --ctt-base-color-selectable-primary-unselected-hover-bg: var(--ctt-core-color-primary-light);
+  --ctt-base-color-selectable-primary-unselected-hover-bg: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-unselected-hover-border: var(--ctt-core-color-primary-dark);
   --ctt-base-color-selectable-primary-unselected-hover-fg: var(--ctt-core-color-neutral-100);
   --ctt-base-color-selectable-primary-unselected-active-bg: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-unselected-active-border: var(--ctt-core-color-primary-dark);
   --ctt-base-color-selectable-primary-unselected-active-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-primary-selected-default-bg: var(--ctt-core-color-primary-main);
+  --ctt-base-color-selectable-primary-selected-default-border: var(--ctt-core-color-primary-main);
+  --ctt-base-color-selectable-primary-selected-default-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-primary-selected-hover-bg: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-selected-hover-border: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-selected-hover-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-primary-selected-active-bg: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-selected-active-border: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-selected-active-fg: var(--ctt-core-color-neutral-100);
 
-  /* Base Color - Text */
-  --ctt-base-color-text-primary: var(--ctt-core-color-secondary-main);
-  --ctt-base-color-text-secondary: var(--ctt-core-color-secondary-light);
-  --ctt-base-color-text-tertiary: var(--ctt-core-color-neutral-600);
-  --ctt-base-color-text-inverse: var(--ctt-core-color-neutral-100);
+  /* Base Color - Selectable Secondary */
+  --ctt-base-color-selectable-secondary-unselected-default-bg: var(--ctt-core-color-secondary-main);
+  --ctt-base-color-selectable-secondary-unselected-default-border: var(--ctt-core-color-secondary-main);
+  --ctt-base-color-selectable-secondary-unselected-default-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-secondary-unselected-hover-bg: var(--ctt-core-color-secondary-dark);
+  --ctt-base-color-selectable-secondary-unselected-hover-border: var(--ctt-core-color-secondary-dark);
+  --ctt-base-color-selectable-secondary-unselected-hover-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-secondary-unselected-active-bg: var(--ctt-core-color-secondary-main);
+  --ctt-base-color-selectable-secondary-unselected-active-border: var(--ctt-core-color-secondary-dark);
+  --ctt-base-color-selectable-secondary-unselected-active-fg: var(--ctt-core-color-neutral-100);
 
-  /* Base Color - Content */
-  --ctt-base-color-content-fg-brand: var(--ctt-core-color-primary-main);
-  --ctt-base-color-content-fg-default: var(--ctt-core-color-secondary-main);
-
-  /* Base Color - Border */
-  --ctt-base-color-border-primary: var(--ctt-core-color-neutral-400);
-  --ctt-base-color-border-focus: var(--ctt-core-color-primary-main);
-  --ctt-base-color-border-error: var(--ctt-core-color-negative-main);
+    /* Base Color - Selectable Tertiary */
+  --ctt-base-color-selectable-tertiary-unselected-default-bg: var(--ctt-core-color-tertiary-light);
+  --ctt-base-color-selectable-tertiary-unselected-default-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-default-fg: var(--ctt-core-color-tertiary-dark);
+  --ctt-base-color-selectable-tertiary-unselected-hover-bg: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-hover-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-hover-fg: var(--ctt-core-color-tertiary-light);
+  --ctt-base-color-selectable-tertiary-unselected-active-bg: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-active-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-active-fg: var(--ctt-core-color-tertiary-light);
 
   /* Base Color - Feedback */
-  --ctt-base-color-feedback-success-bg-main: var(--ctt-core-color-success-main);
-  --ctt-base-color-feedback-success-bg-light: var(--ctt-core-color-success-light);
+  --ctt-base-color-feedback-fg-default: var(--ctt-core-color-neutral-800);
+  --ctt-base-color-feedback-fg-clear: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-feedback-fg-error: var(--ctt-core-color-negative-main);
+
+  /* Base Color - Feedback Info */
+  --ctt-base-color-feedback-info-bg-main: var(--ctt-core-color-informative-main);
+  --ctt-base-color-feedback-info-bg-light: var(--ctt-core-color-informative-light);
+
+  /* Base Color - Feedback Warning */
   --ctt-base-color-feedback-warning-bg-main: var(--ctt-core-color-warning-main);
   --ctt-base-color-feedback-warning-bg-light: var(--ctt-core-color-warning-light);
+
+  /* Base Color - Feedback Error */
   --ctt-base-color-feedback-error-bg-main: var(--ctt-core-color-negative-main);
   --ctt-base-color-feedback-error-bg-light: var(--ctt-core-color-negative-light);
-  --ctt-base-color-feedback-informative-bg-main: var(--ctt-core-color-informative-main);
-  --ctt-base-color-feedback-informative-bg-light: var(--ctt-core-color-informative-light);
-  --ctt-base-color-feedback-new-bg-main: var(--ctt-core-color-new-main);
-  --ctt-base-color-feedback-new-bg-light: var(--ctt-core-color-new-light);
-  --ctt-base-color-feedback-fg-default: var(--ctt-core-color-secondary-main);
-  --ctt-base-color-feedback-fg-clear: var(--ctt-core-color-neutral-100);
+
+  /* Base Color - Feedback Success */
+  --ctt-base-color-feedback-success-bg-main: var(--ctt-core-color-success-main);
+  --ctt-base-color-feedback-success-bg-light: var(--ctt-core-color-success-light);
+
+  /* Base Color - Content */
+  --ctt-base-color-content-fg-main: var(--ctt-core-color-neutral-800);
+  --ctt-base-color-content-fg-weak: var(--ctt-core-color-neutral-700);
+  --ctt-base-color-content-fg-clear: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-content-fg-strong: var(--ctt-core-color-neutral-900);
+  --ctt-base-color-content-fg-brand: var(--ctt-core-color-primary-main);
+  --ctt-base-color-content-fg-brand-dark: var(--ctt-core-color-primary-dark);
+
+  /* ==========================================================================
+     LEGACY COMPATIBILITY - Aliases for existing components
+     ========================================================================== */
+
+  /* Legacy color aliases for backward compatibility */
+  --ctt-colors-core-primary-500: var(--ctt-core-color-primary-main);
+  --ctt-colors-core-primary-600: var(--ctt-core-color-primary-dark);
+  --ctt-colors-core-primary-700: var(--ctt-core-color-primary-dark);
+  --ctt-colors-core-primary-50: var(--ctt-brand-primary-100);
+  
+  --ctt-colors-core-success-500: var(--ctt-core-color-success-main);
+  --ctt-colors-core-success-600: var(--ctt-brand-green-600);
+  
+  --ctt-colors-core-warning-500: var(--ctt-core-color-warning-main);
+  --ctt-colors-core-warning-600: var(--ctt-brand-yellow-600);
+  
+  --ctt-colors-core-error-500: var(--ctt-core-color-negative-main);
+  --ctt-colors-core-error-600: var(--ctt-brand-primary-600);
+
+  --ctt-colors-base-neutral-white: var(--ctt-core-color-neutral-100);
+  --ctt-colors-base-text-primary: var(--ctt-base-color-content-fg-main);
+  --ctt-colors-base-background-secondary: var(--ctt-core-color-neutral-200);
+  --ctt-colors-base-background-tertiary: var(--ctt-core-color-neutral-300);
+  --ctt-colors-base-border-focus: var(--ctt-core-color-primary-main);
+  --ctt-colors-base-shadow-md: rgba(0, 0, 0, 0.15);
+
+  /* Legacy typography aliases */
+  --ctt-typography-font-families-primary: var(--ctt-core-font-family-brand);
+  --ctt-typography-font-weights-bold: var(--ctt-core-font-weight-700);
+  --ctt-typography-line-heights-none: var(--ctt-core-line-height-xs);
+  --ctt-typography-font-sizes-xs: var(--ctt-core-font-size-scaled-75);
+  --ctt-typography-font-sizes-sm: var(--ctt-core-font-size-scaled-87);
+  --ctt-typography-font-sizes-base: var(--ctt-core-font-size-scaled-100);
 }
-/* End of ./foundations/tokens.css */
+/* End of ../tokens/tokens.css */
 
 /* Import utility classes */
 /* Imported from ./foundations/colors.css */
@@ -1257,17 +1330,28 @@
 :root {
   /* Button Spacing - Using core dimension tokens */
   --ctt-button-padding-small: var(--ctt-core-dimension-50) var(--ctt-core-dimension-100);   /* 8px 16px */
-  --ctt-button-padding-medium: var(--ctt-core-dimension-75) var(--ctt-core-dimension-150);  /* 12px 24px */
-  --ctt-button-padding-large: var(--ctt-core-dimension-100) var(--ctt-core-dimension-200);  /* 16px 32px */
+  --ctt-button-padding-medium: var(--ctt-core-dimension-50) var(--ctt-core-dimension-100);  /* 8px 16px */
+  --ctt-button-padding-large: var(--ctt-core-dimension-50) var(--ctt-core-dimension-150);  /* 16px 24px */
+
+  /* Button Height */
+  --ctt-button-height-small: var(--ctt-core-dimension-200);   /* 32px */
+  --ctt-button-height-medium: var(--ctt-core-dimension-300);  /* 40px */
+  --ctt-button-height-large: var(--ctt-core-dimension-400);  /* 64px */
+
   
-  /* Button Border Radius - Using base border radius tokens */
-  --ctt-button-border-radius: var(--ctt-base-border-radius-pill);
+  /* Button Border Radius Options */
+  --ctt-button-border-radius-pill: var(--ctt-base-border-radius-pill);
+  --ctt-button-border-radius-small: var(--ctt-base-border-radius-s);
+  --ctt-button-border-radius-extra-small: var(--ctt-base-border-radius-xs);
   
   /* Button Transitions */
   --ctt-button-transition: all 0.2s ease-in-out;
   
   /* Button Transform */
   --ctt-button-hover-transform: translateY(-1px);
+  
+  /* Button Icon Spacing */
+  --ctt-button-icon-gap: var(--ctt-core-dimension-50); /* 8px */
 }
 
 /* ==========================================================================
@@ -1275,11 +1359,13 @@
    ========================================================================== */
 
 .ctt-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   border: 0;
-  border-radius: var(--ctt-button-border-radius);
-  font-weight: var(--ctt-base-font-weight-label);
+  border-radius: var(--ctt-button-border-radius-pill);
+  font-weight: var( --ctt-base-font-weight-display);
   line-height: var(--ctt-core-line-height-xs);
   font-family: var(--ctt-base-font-family-label);
   transition: var(--ctt-button-transition);
@@ -1288,6 +1374,7 @@
   outline: none;
   position: relative;
   box-sizing: border-box;
+  gap: var(--ctt-button-icon-gap);
 }
 
 .ctt-button:focus {
@@ -1297,7 +1384,9 @@
 
 .ctt-button:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  background-color: var(--ctt-base-color-selectable-disabled-bg);
+  color: var(--ctt-base-color-selectable-fg-weak);
+  border: var(--ctt-core-border-width-1) solid var(--ctt-base-color-container-border-disabled);
   transform: none !important;
 }
 
@@ -1323,18 +1412,39 @@
 
 /* Secondary Button */
 .ctt-button--secondary {
-  background-color: var(--ctt-base-color-selectable-bg-default);
-  color: var(--ctt-base-color-selectable-fg-default);
+  background-color: var(--ctt-base-color-selectable-secondary-unselected-default-bg);
+  color: var(--ctt-base-color-selectable-secondary-unselected-default-fg);
   border: var(--ctt-base-border-width-selectable-s) solid var(--ctt-base-color-selectable-border-default);
 }
 
 .ctt-button--secondary:hover:not(:disabled) {
-  background-color: var(--ctt-base-color-page-bg-cloudy);
+  background-color: var(--ctt-base-color-selectable-secondary-unselected-hover-bg);
   transform: var(--ctt-button-hover-transform);
 }
 
 .ctt-button--secondary:active:not(:disabled) {
-  background-color: var(--ctt-core-color-neutral-300);
+  background-color: var(--ctt-base-color-selectable-secondary-unselected-hover-bg);
+  transform: translateY(0);
+}
+
+/* Tertiary Button */
+.ctt-button--tertiary {
+  background-color: var(--ctt-base-color-selectable-tertiary-unselected-default-bg);
+  color: var(--ctt-base-color-selectable-tertiary-unselected-default-fg);
+  border: var(--ctt-core-border-width-1) solid var(--ctt-base-color-selectable-tertiary-unselected-default-border);
+}
+
+.ctt-button--tertiary:hover:not(:disabled) {
+  background-color: var(--ctt-base-color-selectable-tertiary-unselected-hover-bg);
+  color: var(--ctt-base-color-selectable-tertiary-unselected-hover-fg);
+  border-color: var(--ctt-base-color-selectable-tertiary-unselected-hover-border);
+  transform: var(--ctt-button-hover-transform);
+}
+
+.ctt-button--tertiary:active:not(:disabled) {
+  background-color: var(--ctt-base-color-selectable-tertiary-unselected-active-bg);
+  color: var(--ctt-base-color-selectable-tertiary-unselected-active-fg);
+  border-color: var(--ctt-base-color-selectable-tertiary-unselected-active-border);
   transform: translateY(0);
 }
 
@@ -1410,16 +1520,71 @@
 .ctt-button--small {
   padding: var(--ctt-button-padding-small);
   font-size: var(--ctt-base-font-size-label-s);
+  height: var(--ctt-button-height-small);
 }
 
 .ctt-button--medium {
   padding: var(--ctt-button-padding-medium);
   font-size: var(--ctt-base-font-size-label-m);
+  height: var(--ctt-button-height-medium);
 }
 
 .ctt-button--large {
   padding: var(--ctt-button-padding-large);
   font-size: var(--ctt-base-font-size-label-l);
+  height: var(--ctt-button-height-large);
+}
+
+/* ==========================================================================
+   BUTTON BORDER RADIUS VARIANTS
+   ========================================================================== */
+
+.ctt-button--pill {
+  border-radius: var(--ctt-button-border-radius-pill);
+}
+
+.ctt-button--small-radius {
+  border-radius: var(--ctt-button-border-radius-small);
+}
+
+.ctt-button--extra-small-radius {
+  border-radius: var(--ctt-button-border-radius-extra-small);
+}
+
+/* ==========================================================================
+   BUTTON ICON STYLES
+   ========================================================================== */
+
+.ctt-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ctt-button__icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+.ctt-button__icon--left {
+  margin-right: 0; /* Gap is handled by parent flexbox */
+}
+
+.ctt-button__icon--right {
+  margin-left: 0; /* Gap is handled by parent flexbox */
+}
+
+.ctt-button__label {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Icon-only buttons */
+.ctt-button:not(:has(.ctt-button__label)) .ctt-button__icon,
+.ctt-button:empty .ctt-button__icon {
+  margin: 0;
 }
 
 /* ==========================================================================

@@ -16,7 +16,7 @@
 @import '../assets/fonts.css';
 
 /* Import design tokens */
-@import './foundations/tokens.css';
+@import '../tokens/tokens.css';
 
 /* Import utility classes */
 @import './foundations/colors.css';

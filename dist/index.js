@@ -4,6 +4,26 @@ var lit = require('lit');
 var styleMap_js = require('lit/directives/style-map.js');
 
 /**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t$1=globalThis,i$1=t$1.trustedTypes,s=i$1?i$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,e$2="$lit$",h=`lit$${Math.random().toFixed(9).slice(2)}$`,o$1="?"+h,n=`<${o$1}>`,r=document,l=()=>r.createComment(""),c=t=>null===t||"object"!=typeof t&&"function"!=typeof t,a=Array.isArray,u=t=>a(t)||"function"==typeof t?.[Symbol.iterator],d="[ \t\n\f\r]",f=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,v=/-->/g,_=/>/g,m=RegExp(`>|${d}(?:([^\\s"'>=/]+)(${d}*=${d}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),p=/'/g,g=/"/g,$=/^(?:script|style|textarea|title)$/i,T=Symbol.for("lit-noChange"),E=Symbol.for("lit-nothing"),A=new WeakMap,C=r.createTreeWalker(r,129);function P(t,i){if(!a(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==s?s.createHTML(i):i}const V=(t,i)=>{const s=t.length-1,o=[];let r,l=2===i?"<svg>":3===i?"<math>":"",c=f;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,y=0;for(;y<s.length&&(c.lastIndex=y,u=c.exec(s),null!==u);)y=c.lastIndex,c===f?"!--"===u[1]?c=v:void 0!==u[1]?c=_:void 0!==u[2]?($.test(u[2])&&(r=RegExp("</"+u[2],"g")),c=m):void 0!==u[3]&&(c=m):c===m?">"===u[0]?(c=r??f,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?m:'"'===u[3]?g:p):c===g||c===p?c=m:c===v||c===_?c=f:(c=m,r=void 0);const x=c===m&&t[i+1].startsWith("/>")?" ":"";l+=c===f?s+n:d>=0?(o.push(a),s.slice(0,d)+e$2+s.slice(d)+h+x):s+h+(-2===d?i:x);}return [P(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),o]};class N{constructor({strings:t,_$litType$:s},n){let r;this.parts=[];let c=0,a=0;const u=t.length-1,d=this.parts,[f,v]=V(t,s);if(this.el=N.createElement(f,n),C.currentNode=this.el.content,2===s||3===s){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=C.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(e$2)){const i=v[a++],s=r.getAttribute(t).split(h),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:c,name:e[2],strings:s,ctor:"."===e[1]?H:"?"===e[1]?I:"@"===e[1]?L:k}),r.removeAttribute(t);}else t.startsWith(h)&&(d.push({type:6,index:c}),r.removeAttribute(t));if($.test(r.tagName)){const t=r.textContent.split(h),s=t.length-1;if(s>0){r.textContent=i$1?i$1.emptyScript:"";for(let i=0;i<s;i++)r.append(t[i],l()),C.nextNode(),d.push({type:2,index:++c});r.append(t[s],l());}}}else if(8===r.nodeType)if(r.data===o$1)d.push({type:2,index:c});else {let t=-1;for(;-1!==(t=r.data.indexOf(h,t+1));)d.push({type:7,index:c}),t+=h.length-1;}c++;}}static createElement(t,i){const s=r.createElement("template");return s.innerHTML=t,s}}function S(t,i,s=t,e){if(i===T)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=c(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=S(t,h._$AS(t,i.values),h,e)),i}class M{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??r).importNode(i,true);C.currentNode=e;let h=C.nextNode(),o=0,n=0,l=s[0];for(;void 0!==l;){if(o===l.index){let i;2===l.type?i=new R(h,h.nextSibling,this,t):1===l.type?i=new l.ctor(h,l.name,l.strings,this,t):6===l.type&&(i=new z(h,this,t)),this._$AV.push(i),l=s[++n];}o!==l?.index&&(h=C.nextNode(),o++);}return C.currentNode=r,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class R{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=E,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=S(this,t,i),c(t)?t===E||null==t||""===t?(this._$AH!==E&&this._$AR(),this._$AH=E):t!==this._$AH&&t!==T&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):u(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==E&&c(this._$AH)?this._$AA.nextSibling.data=t:this.T(r.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=N.createElement(P(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new M(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=A.get(t.strings);return void 0===i&&A.set(t.strings,i=new N(t)),i}k(t){a(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new R(this.O(l()),this.O(l()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,i){for(this._$AP?.(false,true,i);t&&t!==this._$AB;){const i=t.nextSibling;t.remove(),t=i;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class k{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=E,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=E;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=S(this,t,i,0),o=!c(t)||t!==this._$AH&&t!==T,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=S(this,e[s+n],i,n),r===T&&(r=this._$AH[n]),o||=!c(r)||r!==this._$AH[n],r===E?t=E:t!==E&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===E?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class H extends k{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===E?void 0:t;}}class I extends k{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==E);}}class L extends k{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=S(this,t,i,0)??E)===T)return;const s=this._$AH,e=t===E&&s!==E||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==E&&(s===E||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){S(this,t);}}const j=t$1.litHtmlPolyfillSupport;j?.(N,R),(t$1.litHtmlVersions??=[]).push("3.3.0");
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t={CHILD:2},e$1=t=>(...e)=>({_$litDirective$:t,values:e});class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}}
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */class e extends i{constructor(i){if(super(i),this.it=E,i.type!==t.CHILD)throw Error(this.constructor.directiveName+"() can only be used in child bindings")}render(r){if(r===E||null==r)return this._t=void 0,this.it=r;if(r===T)return r;if("string"!=typeof r)throw Error(this.constructor.directiveName+"() called with a non-string value");if(r===this.it)return this._t;this.it=r;const s=[r];return s.raw=s,this._t={_$litType$:this.constructor.resultType,strings:s,values:[]}}}e.directiveName="unsafeHTML",e.resultType=1;const o=e$1(e);
+
+/**
  * Design Tokens - Colors
  * Core and Base color definitions for the CTT Design System
  * These match the CSS custom properties in tokens.css
@@ -328,19 +348,19 @@ const typographyScale = {
   button: {
     large: {
       fontSize: fontSizes.lg,    // 18px - matches --ctt-base-font-size-label-l
-      fontWeight: fontWeights.bold,
+      fontWeight: fontWeights.normal,
       lineHeight: lineHeights.xs,
       fontFamily: fontFamilies.label,
     },
     medium: {
       fontSize: fontSizes.base,  // 16px - matches --ctt-base-font-size-label-m
-      fontWeight: fontWeights.bold,
+      fontWeight: fontWeights.normal,
       lineHeight: lineHeights.xs,
       fontFamily: fontFamilies.label,
     },
     small: {
       fontSize: fontSizes.sm,    // 14px - matches --ctt-base-font-size-label-s
-      fontWeight: fontWeights.bold,
+      fontWeight: fontWeights.normal,
       lineHeight: lineHeights.xs,
       fontFamily: fontFamilies.label,
     },
@@ -520,12 +540,23 @@ const typographyHelpers = {
 };
 
 /** Primary UI component for user interaction */
-const Button = ({ primary, backgroundColor = null, size, label, onClick }) => {
-  const mode = primary ? 'ctt-button--primary' : 'ctt-button--secondary';
+const Button = ({ 
+  variant = 'primary',
+  size = 'medium', 
+  label, 
+  onclick,
+  iconLeft = false,
+  iconLeftElement = '',
+  iconRight = false,
+  iconRightElement = '',
+  borderRadius = 'pill',
+  backgroundColor = null,
+  disabled = false,
+  ariaLabel = null
+}) => {
   
   // Get typography tokens for the size
-  const sizeKey = size || 'medium';
-  const typography = typographyHelpers.getButtonTypography(sizeKey);
+  const typography = typographyHelpers.getButtonTypography(size);
   
   // Create style object with tokens and user overrides
   const buttonStyles = {
@@ -536,14 +567,55 @@ const Button = ({ primary, backgroundColor = null, size, label, onClick }) => {
     ...(backgroundColor && { backgroundColor }),
   };
 
+  // Map borderRadius values to CSS class names
+  const borderRadiusClass = {
+    'pill': 'pill',
+    'small': 'small-radius',
+    'extraSmall': 'extra-small-radius'
+  }[borderRadius] || 'pill';
+
+  // Build CSS classes
+  const classes = [
+    'ctt-button',
+    `ctt-button--${size}`,
+    `ctt-button--${variant}`,
+    `ctt-button--${borderRadiusClass}`
+  ].join(' ');
+
+  // Render button content with icons
+  const renderContent = () => {
+    const parts = [];
+    
+    if (iconLeft && iconLeftElement) {
+      parts.push(lit.html`<span class="ctt-button__icon ctt-button__icon--left">${o(iconLeftElement)}</span>`);
+    }
+    
+    if (label) {
+      parts.push(lit.html`<span class="ctt-button__label">${label}</span>`);
+    }
+    
+    if (iconRight && iconRightElement) {
+      parts.push(lit.html`<span class="ctt-button__icon ctt-button__icon--right">${o(iconRightElement)}</span>`);
+    }
+    
+    return parts;
+  };
+
+  // Determine accessible name - use ariaLabel if provided, otherwise use label
+  // For icon-only buttons, ariaLabel should be provided
+  const accessibleName = ariaLabel || label;
+  const hasVisibleLabel = label && label.trim().length > 0;
+
   return lit.html`
     <button
       type="button"
-      class=${['ctt-button', `ctt-button--${sizeKey}`, mode].join(' ')}
+      class=${classes}
       style=${styleMap_js.styleMap(buttonStyles)}
-      @click=${onClick}
+      ?disabled=${disabled}
+      aria-label=${!hasVisibleLabel && accessibleName ? accessibleName : lit.nothing}
+      @click=${onclick}
     >
-      ${label}
+      ${renderContent()}
     </button>
   `;
 };
@@ -591,16 +663,13 @@ const Header = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
       </div>
       <div>
         ${user
-          ? Button({ size: 'small', onClick: onLogout, label: 'Log out' })
+          ? Button({ size: 'small', label: 'Log out' })
           : lit.html`${Button({
               size: 'small',
-              onClick: onLogin,
               label: 'Log in',
             })}
             ${Button({
-              primary: true,
               size: 'small',
-              onClick: onCreateAccount,
               label: 'Sign up',
             })}`}
       </div>
@@ -673,14 +742,24 @@ const Page = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
  * This allows the component to be used in any framework or vanilla HTML.
  * 
  * Usage:
- * <ctt-button primary size="medium" label="Click me"></ctt-button>
+ * <ctt-button variant="primary" size="medium" label="Click me"></ctt-button>
+ * <ctt-button variant="secondary" size="large" label="Save" icon-left icon-left-element="<svg>...</svg>"></ctt-button>
+ * <ctt-button variant="tertiary" border-radius="small" label="Cancel" disabled></ctt-button>
  */
 class CttButton extends lit.LitElement {
   static properties = {
-    primary: { type: Boolean },
-    backgroundColor: { type: String },
+    variant: { type: String },
     size: { type: String },
-    label: { type: String }
+    label: { type: String },
+    onclick: { type: Function },
+    iconLeft: { type: Boolean, attribute: 'icon-left' },
+    iconLeftElement: { type: String, attribute: 'icon-left-element' },
+    iconRight: { type: Boolean, attribute: 'icon-right' },
+    iconRightElement: { type: String, attribute: 'icon-right-element' },
+    borderRadius: { type: String, attribute: 'border-radius' },
+    backgroundColor: { type: String, attribute: 'background-color' },
+    disabled: { type: Boolean },
+    ariaLabel: { type: String, attribute: 'aria-label' }
   };
 
   static styles = lit.css`
@@ -691,18 +770,32 @@ class CttButton extends lit.LitElement {
 
   constructor() {
     super();
-    this.primary = false;
+    this.variant = 'primary';
     this.size = 'medium';
     this.label = 'Button';
+    this.iconLeft = false;
+    this.iconLeftElement = '';
+    this.iconRight = false;
+    this.iconRightElement = '';
+    this.borderRadius = 'pill';
+    this.disabled = false;
+    this.ariaLabel = null;
   }
 
   render() {
     return Button({
-      primary: this.primary,
-      backgroundColor: this.backgroundColor,
+      variant: this.variant,
       size: this.size,
       label: this.label,
-      onClick: () => this._handleClick()
+      onclick: () => this._handleClick(),
+      iconLeft: this.iconLeft,
+      iconLeftElement: this.iconLeftElement,
+      iconRight: this.iconRight,
+      iconRightElement: this.iconRightElement,
+      borderRadius: this.borderRadius,
+      backgroundColor: this.backgroundColor,
+      disabled: this.disabled,
+      ariaLabel: this.ariaLabel
     });
   }
 
@@ -710,13 +803,20 @@ class CttButton extends lit.LitElement {
    * Handle click events and dispatch custom events
    */
   _handleClick() {
+    // Don't dispatch event if button is disabled
+    if (this.disabled) return;
+    
     this.dispatchEvent(new CustomEvent('ctt-click', {
       bubbles: true,
       composed: true,
       detail: { 
-        primary: this.primary,
+        variant: this.variant,
         size: this.size,
-        label: this.label
+        label: this.label,
+        iconLeft: this.iconLeft,
+        iconRight: this.iconRight,
+        borderRadius: this.borderRadius,
+        disabled: this.disabled
       }
     }));
   }

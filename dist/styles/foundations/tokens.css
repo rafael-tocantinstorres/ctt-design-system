@@ -71,6 +71,11 @@
   --ctt-core-color-secondary-main: var(--ctt-brand-secondary-400);
   --ctt-core-color-secondary-dark: var(--ctt-brand-secondary-500);
 
+  /* Core Colors - tertiary */
+  --ctt-core-color-tertiary-light: var(--ctt-core-color-neutral-100);
+  --ctt-core-color-tertiary-main: var(--ctt-core-color-primary-dark);
+  --ctt-core-color-tertiary-dark: var(--ctt-brand-secondary-400);
+
   /* Core Colors - New */
   --ctt-core-color-new-light: var(--ctt-brand-purple-200);
   --ctt-core-color-new-main: var(--ctt-brand-purple-400);
@@ -290,10 +295,29 @@
   /* Base Color - Selectable Primary */
   --ctt-base-color-selectable-primary-unselected-default-bg: var(--ctt-core-color-primary-main);
   --ctt-base-color-selectable-primary-unselected-default-fg: var(--ctt-core-color-neutral-100);
-  --ctt-base-color-selectable-primary-unselected-hover-bg: var(--ctt-core-color-primary-light);
+  --ctt-base-color-selectable-primary-unselected-hover-bg: var(--ctt-core-color-primary-dark);
   --ctt-base-color-selectable-primary-unselected-hover-fg: var(--ctt-core-color-neutral-100);
   --ctt-base-color-selectable-primary-unselected-active-bg: var(--ctt-core-color-primary-dark);
   --ctt-base-color-selectable-primary-unselected-active-fg: var(--ctt-core-color-neutral-100);
+
+    /* Base Color - Selectable Secondary */
+  --ctt-base-color-selectable-secondary-unselected-default-bg: var(--ctt-core-color-secondary-main);
+  --ctt-base-color-selectable-secondary-unselected-default-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-secondary-unselected-hover-bg: var(--ctt-core-color-secondary-dark);
+  --ctt-base-color-selectable-secondary-unselected-hover-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-secondary-unselected-active-bg: var(--ctt-core-color-secondary-dark);
+  --ctt-base-color-selectable-secondary-unselected-active-fg: var(--ctt-core-color-neutral-100);
+
+    /* Base Color - Selectable Tertiary */
+  --ctt-base-color-selectable-tertiary-unselected-default-bg: var(--ctt-core-color-tertiary-light);
+  --ctt-base-color-selectable-tertiary-unselected-default-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-default-fg: var(--ctt-core-color-tertiary-dark);
+  --ctt-base-color-selectable-tertiary-unselected-hover-bg: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-hover-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-hover-fg: var(--ctt-core-color-tertiary-light);
+  --ctt-base-color-selectable-tertiary-unselected-active-bg: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-active-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-active-fg: var(--ctt-core-color-tertiary-light);
 
   /* Base Color - Text */
   --ctt-base-color-text-primary: var(--ctt-core-color-secondary-main);

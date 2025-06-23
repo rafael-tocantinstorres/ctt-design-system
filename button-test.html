@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTT Button Component Test</title>
+    <link rel="stylesheet" href="./src/styles/index.css">
+    <style>
+        body {
+            padding: 2rem;
+            font-family: 'ActoCTT', sans-serif;
+        }
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .button-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>CTT Button Component Test</h1>
+    
+    <div class="test-section">
+        <h3>Button Variants</h3>
+        <div class="button-row">
+            <ctt-button variant="primary" label="Primary Button"></ctt-button>
+            <ctt-button variant="secondary" label="Secondary Button"></ctt-button>
+            <ctt-button variant="tertiary" label="Tertiary Button"></ctt-button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>Button Sizes</h3>
+        <div class="button-row">
+            <ctt-button variant="primary" size="small" label="Small"></ctt-button>
+            <ctt-button variant="primary" size="medium" label="Medium"></ctt-button>
+            <ctt-button variant="primary" size="large" label="Large"></ctt-button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>Border Radius Options</h3>
+        <div class="button-row">
+            <ctt-button variant="primary" border-radius="pill" label="Pill"></ctt-button>
+            <ctt-button variant="primary" border-radius="small" label="Small Radius"></ctt-button>
+            <ctt-button variant="primary" border-radius="extraSmall" label="Extra Small"></ctt-button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>Buttons with Icons</h3>
+        <div class="button-row">
+            <ctt-button 
+                variant="primary" 
+                label="Save" 
+                icon-left="true"
+                icon-left-element='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>'>
+            </ctt-button>
+            <ctt-button 
+                variant="secondary" 
+                label="Download" 
+                icon-right="true"
+                icon-right-element='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>'>
+            </ctt-button>
+            <ctt-button 
+                variant="tertiary" 
+                icon-left="true"
+                icon-left-element='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>'
+                aria-label="Menu">
+            </ctt-button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>Disabled States</h3>
+        <div class="button-row">
+            <ctt-button variant="primary" size="medium" label="Disabled Primary" disabled></ctt-button>
+            <ctt-button variant="secondary" size="medium" label="Disabled Secondary" disabled></ctt-button>
+            <ctt-button variant="tertiary" size="medium" label="Disabled Tertiary" disabled></ctt-button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>Disabled with Icons</h3>
+        <div class="button-row">
+            <ctt-button 
+                variant="primary" 
+                label="Disabled Save" 
+                icon-left="true"
+                icon-left-element='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>'
+                disabled>
+            </ctt-button>
+        </div>
+    </div>
+
+    <script type="module" src="./src/components/Button/ButtonElement.js"></script>
+    <script>
+        // Add click event listeners to test functionality
+        document.addEventListener('ctt-click', (event) => {
+            console.log('Button clicked:', event.detail);
+            alert(`Button clicked: ${event.detail.label || 'No label'}`);
+        });
+    </script>
+</body>
+</html>
