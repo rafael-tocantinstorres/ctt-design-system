@@ -65,7 +65,7 @@
 
 .ctt-button:disabled {
   cursor: not-allowed;
-  background-color: var(--ctt-base-color-selectable-disabled-bg);
+  background-color: var(--ctt-base-color-selectable-bg-disabled);
   color: var(--ctt-base-color-selectable-fg-weak);
   border: var(--ctt-core-border-width-1) solid var(--ctt-base-color-container-border-disabled);
   transform: none !important;

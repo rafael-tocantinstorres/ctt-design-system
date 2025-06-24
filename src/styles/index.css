@@ -26,6 +26,8 @@
 /* Import component styles */
 @import './components/button.css';
 @import './components/icon-button.css';
+@import './components/input-field.css';
+
 
 /* Base styles using the design system */
 body {
