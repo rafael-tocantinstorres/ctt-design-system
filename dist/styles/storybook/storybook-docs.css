@@ -1,0 +1,304 @@
+/**
+ * General Storybook Documentation Styles - FOR STORYBOOK ONLY
+ * These styles are used only for Storybook documentation and should NOT be imported in production
+ * 
+ * Usage in Storybook stories:
+ * import '../styles/storybook/storybook-docs.css';
+ */
+
+/* ==========================================================================
+   GENERAL DOCUMENTATION LAYOUT
+   ========================================================================== */
+
+.docs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'ActoCTT', sans-serif;
+  color: var(--ctt-core-color-secondary-main);
+}
+
+.docs-section {
+  margin-bottom: 3rem;
+}
+
+.docs-section h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ctt-core-color-secondary-dark);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.docs-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--ctt-core-color-secondary-main);
+  border-bottom: 2px solid var(--ctt-core-color-primary-main);
+  padding-bottom: 0.5rem;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.docs-section h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem 0;
+  color: var(--ctt-core-color-secondary-dark);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.docs-section h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem 0;
+  color: var(--ctt-core-color-secondary-dark);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.docs-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ctt-core-color-secondary-main);
+  margin-bottom: 1rem;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+/* ==========================================================================
+   COMPONENT SHOWCASE LAYOUTS
+   ========================================================================== */
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.showcase-item {
+  background: var(--ctt-core-color-neutral-100);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.showcase-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.showcase-item h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ctt-core-color-secondary-dark);
+  border-bottom: 1px solid var(--ctt-core-color-neutral-400);
+  padding-bottom: 0.5rem;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.showcase-item p {
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  color: var(--ctt-core-color-secondary-main);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.showcase-item p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   CODE AND TOKENS DISPLAY
+   ========================================================================== */
+
+.token-display {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  background: var(--ctt-core-color-neutral-200);
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--ctt-core-color-primary-main);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+  display: inline-block;
+  margin: 0.25rem 0;
+}
+
+.class-display {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  background: var(--ctt-core-color-neutral-200);
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--ctt-core-color-secondary-dark);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+  display: inline-block;
+  margin: 0.25rem 0;
+}
+
+.value-display {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 0.875rem;
+  color: var(--ctt-core-color-secondary-main);
+  font-weight: 600;
+  display: block;
+  margin: 0.5rem 0;
+}
+
+/* ==========================================================================
+   USAGE GUIDELINES AND NOTES
+   ========================================================================== */
+
+.usage-guidelines {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.guideline-item {
+  background: var(--ctt-core-color-neutral-100);
+  border: 1px solid var(--ctt-core-color-neutral-400);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.guideline-item h4 {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ctt-core-color-secondary-dark);
+  margin: 0 0 0.75rem 0;
+  border-bottom: 1px solid var(--ctt-core-color-neutral-400);
+  padding-bottom: 0.5rem;
+}
+
+.guideline-item p {
+  font-family: 'ActoCTT', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ctt-core-color-secondary-main);
+  margin: 0 0 0.75rem 0;
+}
+
+.guideline-item p:last-child {
+  margin-bottom: 0;
+}
+
+.guideline-item ul {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+  color: var(--ctt-core-color-secondary-main);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.guideline-item li {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.guideline-item strong {
+  color: var(--ctt-core-color-secondary-dark);
+  font-weight: 600;
+}
+
+/* Usage Notes */
+.usage-note {
+  background: var(--ctt-core-color-informative-light);
+  border: 1px solid var(--ctt-core-color-informative-main);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.usage-note h4 {
+  color: var(--ctt-core-color-secondary-dark);
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.usage-note p {
+  color: var(--ctt-core-color-secondary-main);
+  margin: 0 0 0.75rem 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.usage-note p:last-child {
+  margin-bottom: 0;
+}
+
+.usage-note ul {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+  color: var(--ctt-core-color-secondary-main);
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.usage-note li {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Warning Notes */
+.warning-note {
+  background: var(--ctt-core-color-warning-light);
+  border: 1px solid var(--ctt-core-color-warning-main);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.warning-note h4 {
+  color: var(--ctt-core-color-secondary-dark);
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.warning-note p {
+  color: var(--ctt-core-color-secondary-main);
+  margin: 0 0 0.75rem 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-family: 'ActoCTT', sans-serif;
+}
+
+.warning-note p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE UTILITIES
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .docs-container {
+    padding: 1rem;
+  }
+  
+  .showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .docs-section h1 {
+    font-size: 2rem;
+  }
+  
+  .docs-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .docs-section h3 {
+    font-size: 1.25rem;
+  }
+}

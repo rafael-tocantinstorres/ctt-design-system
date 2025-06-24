@@ -43,67 +43,8 @@ class TextareaFieldElement extends LitElement {
 
   static styles = css`
     :host {
-      display: flex;
-      flex-direction: column;
-      gap: var(--ctt-core-dimension-25); /* 4px between label, control, error */
+      display: block;
       width: 100%;
-    }
-    
-    /* LABEL */
-    [part="label"] {
-      font-family: var(--ctt-base-font-family-label);
-      font-weight: var(--ctt-base-font-weight-label);
-      font-size: var(--ctt-base-font-size-label-s);
-      line-height: var(--ctt-core-line-height-xs);
-      color: var(--ctt-core-color-neutral-700);
-      margin-bottom: var(--ctt-core-dimension-25);
-    }
-    
-    /* TEXTAREA BASE */
-    [part="control"] {
-      width: 100%;
-      min-height: calc(var(--ctt-core-size-scale) * 4); /* ~4rem */
-      padding: var(--ctt-core-dimension-75) var(--ctt-core-dimension-100); /* 12px 16px */
-      font: inherit;
-      border-radius: var(--ctt-base-border-radius-xs); /* 4px */
-      border: var(--ctt-base-border-width-selectable-s) solid var(--ctt-core-color-neutral-600);
-      background: var(--ctt-core-color-neutral-100);
-      color: var(--ctt-base-color-content-fg-main);
-      resize: vertical;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-    
-    /* HOVER & FOCUS */
-    [part="control"]:hover {
-      border-color: var(--ctt-core-color-neutral-700);
-    }
-    
-    [part="control"]:focus {
-      outline: none;
-      border-color: var(--ctt-core-color-primary-main);
-      box-shadow: 0 0 0 3px rgba(var(--ctt-brand-primary-500), 0.2);
-    }
-    
-    /* ERROR STATE */
-    :host([errorText]) [part="control"] {
-      border-color: var(--ctt-core-color-negative-main);
-    }
-    
-    [part="error"] {
-      font-family: var(--ctt-base-font-family-label);
-      font-weight: var(--ctt-base-font-weight-label);
-      font-size: var(--ctt-base-font-size-label-s);
-      line-height: var(--ctt-core-line-height-xs);
-      color: var(--ctt-core-color-negative-main);
-      margin-top: var(--ctt-core-dimension-25);
-    }
-    
-    /* DISABLED STATE */
-    [part="control"][disabled] {
-      background: var(--ctt-core-color-neutral-300);
-      border-color: var(--ctt-core-color-neutral-500);
-      color: var(--ctt-core-color-neutral-600);
-      cursor: not-allowed;
     }
   `;
 
@@ -123,46 +64,83 @@ class TextareaFieldElement extends LitElement {
   }
 
   render() {
-    return html`
-      ${this.label ? html`
-        <label part="label" for="input">
-          ${this.label}
-        </label>
-      ` : ''}
-      
-      <textarea
-        part="control"
-        id="input"
-        name=${this.name}
-        .value=${this.value}
-        placeholder=${this.placeholder}
-        ?disabled=${this.disabled}
-        ?required=${this.required}
-        rows=${this.rows}
-        cols=${this.cols || undefined}
-        @input=${this._onInput}
-        style="resize: ${this.resize}"
-      ></textarea>
-      
-      <div part="error" ?hidden=${!this.errorText}>
-        <slot name="error">${this.errorText}</slot>
-      </div>
-    `;
+    return TextareaField({
+      label: this.label,
+      value: this.value,
+      name: this.name,
+      placeholder: this.placeholder,
+      errorText: this.errorText,
+      disabled: this.disabled,
+      required: this.required,
+      rows: this.rows,
+      cols: this.cols,
+      resize: this.resize,
+      id: this.id,
+      onInput: this._onInput.bind(this),
+      onChange: this._onChange.bind(this),
+      onFocus: this._onFocus.bind(this),
+      onBlur: this._onBlur.bind(this),
+    });
   }
 
   /**
-   * Handle input events and dispatch custom change events
+   * Handle input events and dispatch custom events
    */
   _onInput(event) {
     this.value = event.target.value;
-    
-    // Dispatch custom change event
-    this.dispatchEvent(new CustomEvent('change', {
+    this.dispatchEvent(new CustomEvent('ctt-input', {
       bubbles: true,
       composed: true,
       detail: { 
+        originalEvent: event,
         value: this.value,
-        originalEvent: event
+        name: this.name
+      }
+    }));
+  }
+
+  /**
+   * Handle change events and dispatch custom events
+   */
+  _onChange(event) {
+    this.value = event.target.value;
+    this.dispatchEvent(new CustomEvent('ctt-change', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+
+  /**
+   * Handle focus events and dispatch custom events
+   */
+  _onFocus(event) {
+    this.dispatchEvent(new CustomEvent('ctt-focus', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+
+  /**
+   * Handle blur events and dispatch custom events
+   */
+  _onBlur(event) {
+    this.dispatchEvent(new CustomEvent('ctt-blur', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
       }
     }));
   }
