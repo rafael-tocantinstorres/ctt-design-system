@@ -1253,7 +1253,7 @@ customElements.define('radio-button', RadioButtonElement);
  * • Events:
  *   – change (fires when user edits)
  */
-class TextareaFieldElement extends LitElement {
+class CttTextareaFieldElement extends LitElement {
   static properties = {
     label: { type: String },
     value: { type: String },
@@ -1375,7 +1375,7 @@ class TextareaFieldElement extends LitElement {
 
 // Register custom element with the specified tag name
 if (!customElements.get('textarea-field')) {
-  customElements.define('textarea-field', TextareaFieldElement);
+  customElements.define('textarea-field', CttTextareaFieldElement);
 }
 
 /**
@@ -1753,5 +1753,5 @@ if (!customElements.get('ctt-page')) {
   customElements.define('ctt-page', CttPage);
 }
 
-export { Button, CttButton, CttHeader, CttInputField, CttPage, RadioButtonElement as CttRadioButton, Header, InputField, Page, RadioButton, TextareaField, TextareaFieldElement, buttonTokens, getCSSVar, tokenStyles, tokens, typographyHelpers };
+export { Button, CttButton, CttHeader, CttInputField, CttPage, RadioButtonElement as CttRadioButton, CttTextareaFieldElement, Header, InputField, Page, RadioButton, TextareaField, buttonTokens, getCSSVar, tokenStyles, tokens, typographyHelpers };
 //# sourceMappingURL=index.esm.js.map

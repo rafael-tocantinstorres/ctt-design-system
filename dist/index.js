@@ -1255,7 +1255,7 @@ customElements.define('radio-button', RadioButtonElement);
  * • Events:
  *   – change (fires when user edits)
  */
-class TextareaFieldElement extends lit.LitElement {
+class CttTextareaFieldElement extends lit.LitElement {
   static properties = {
     label: { type: String },
     value: { type: String },
@@ -1377,7 +1377,7 @@ class TextareaFieldElement extends lit.LitElement {
 
 // Register custom element with the specified tag name
 if (!customElements.get('textarea-field')) {
-  customElements.define('textarea-field', TextareaFieldElement);
+  customElements.define('textarea-field', CttTextareaFieldElement);
 }
 
 /**
@@ -1761,12 +1761,12 @@ exports.CttHeader = CttHeader;
 exports.CttInputField = CttInputField;
 exports.CttPage = CttPage;
 exports.CttRadioButton = RadioButtonElement;
+exports.CttTextareaFieldElement = CttTextareaFieldElement;
 exports.Header = Header;
 exports.InputField = InputField;
 exports.Page = Page;
 exports.RadioButton = RadioButton;
 exports.TextareaField = TextareaField;
-exports.TextareaFieldElement = TextareaFieldElement;
 exports.buttonTokens = buttonTokens;
 exports.getCSSVar = getCSSVar;
 exports.tokenStyles = tokenStyles;

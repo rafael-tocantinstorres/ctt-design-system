@@ -26,7 +26,7 @@ import { TextareaField } from './index.js';
  * • Events:
  *   – change (fires when user edits)
  */
-class TextareaFieldElement extends LitElement {
+class CttTextareaFieldElement extends LitElement {
   static properties = {
     label: { type: String },
     value: { type: String },
@@ -148,7 +148,7 @@ class TextareaFieldElement extends LitElement {
 
 // Register custom element with the specified tag name
 if (!customElements.get('textarea-field')) {
-  customElements.define('textarea-field', TextareaFieldElement);
+  customElements.define('textarea-field', CttTextareaFieldElement);
 }
 
-export { TextareaFieldElement };
+export { CttTextareaFieldElement };
