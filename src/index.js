@@ -1,4 +1,5 @@
 // Export all components
+export { RadioButton } from './components/RadioButton/index.js';
 export { TextareaField } from './components/TextareaField/index.js';
 export { InputField } from './components/InputField/index.js';
 export { Button } from './components/Button/index.js';
@@ -10,6 +11,7 @@ export { tokens } from './tokens/index.js';
 export { buttonTokens, tokenStyles, typographyHelpers, getCSSVar } from './tokens/utils.js';
 
 // Export web component classes
+export { CttRadioButton } from './components/RadioButton/RadioButtonElement.js';
 export { TextareaFieldElement } from './components/TextareaField/TextareaFieldElement.js';
 export { CttInputField } from './components/InputField/InputFieldElement.js';
 export { CttButton } from './components/Button/ButtonElement.js';

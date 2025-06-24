@@ -302,19 +302,19 @@ const typographyScale = {
   // Label styles - matching CSS base tokens
   labelLarge: {
     fontSize: fontSizes.lg,      // 18px - matches --ctt-base-font-size-label-l
-    fontWeight: fontWeights.bold,
+    fontWeight: fontWeights.medium,
     lineHeight: lineHeights.xs,
     fontFamily: fontFamilies.label,
   },
   labelMedium: {
     fontSize: fontSizes.base,    // 16px - matches --ctt-base-font-size-label-m
-    fontWeight: fontWeights.bold,
+    fontWeight: fontWeights.medium,
     lineHeight: lineHeights.xs,
     fontFamily: fontFamilies.label,
   },
   labelSmall: {
     fontSize: fontSizes.sm,      // 14px - matches --ctt-base-font-size-label-s
-    fontWeight: fontWeights.bold,
+    fontWeight: fontWeights.medium,
     lineHeight: lineHeights.xs,
     fontFamily: fontFamilies.label,
   },

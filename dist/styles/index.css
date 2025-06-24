@@ -25,7 +25,10 @@
 
 /* Import component styles */
 @import './components/button.css';
-@import './components/icon-button.css';
+@import './components/input-field.css';
+@import './components/textarea-field.css';
+@import './components/radio-button.css';
+
 
 /* Base styles using the design system */
 body {
