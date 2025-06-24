@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textarea Field Component Demo</title>
+    
+    <!-- Design System Styles -->
+    <link rel="stylesheet" href="./src/tokens/tokens.css">
+    <link rel="stylesheet" href="./src/styles/index.css">
+    <link rel="stylesheet" href="./src/styles/components/textarea-field.css">
+    
+    <style>
+        body {
+            font-family: var(--ctt-base-font-family-body, 'ActoCTT', sans-serif);
+            padding: 2rem;
+            background: var(--ctt-base-color-page-bg-default, #f5f5f5);
+            color: var(--ctt-base-color-content-fg-main, #333);
+        }
+        
+        .demo-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--ctt-base-border-radius-s, 8px);
+            box-shadow: var(--ctt-base-box-shadow-container-s, 0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .demo-section h2 {
+            margin-top: 0;
+            color: var(--ctt-core-color-primary-main, #DF0024);
+            border-bottom: 2px solid var(--ctt-core-color-primary-main, #DF0024);
+            padding-bottom: 0.5rem;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .demo-item {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .demo-code {
+            background: var(--ctt-core-color-neutral-200, #f0f0f0);
+            padding: 1rem;
+            border-radius: var(--ctt-base-border-radius-xs, 4px);
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        
+        .event-log {
+            background: var(--ctt-core-color-neutral-100, #fafafa);
+            border: 1px solid var(--ctt-core-color-neutral-600, #ccc);
+            border-radius: var(--ctt-base-border-radius-xs, 4px);
+            padding: 1rem;
+            min-height: 150px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+        
+        .log-entry {
+            margin-bottom: 0.5rem;
+            padding: 0.25rem;
+            border-left: 3px solid var(--ctt-core-color-informative-main, #00BEB4);
+            background: rgba(var(--ctt-brand-teal-500), 0.1);
+        }
+        
+        button {
+            background: var(--ctt-core-color-primary-main, #DF0024);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--ctt-base-border-radius-xs, 4px);
+            cursor: pointer;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        
+        button:hover {
+            background: var(--ctt-core-color-primary-dark, #B10018);
+        }
+    </style>
+</head>
+<body>
+    <h1>🗒️ Textarea Field Component Demo</h1>
+    <p>This demo showcases the <code>&lt;textarea-field&gt;</code> Web Component with all its features and API.</p>
+
+    <!-- Basic Usage -->
+    <div class="demo-section">
+        <h2>Basic Usage</h2>
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h3>Simple Textarea</h3>
+                <textarea-field 
+                    label="Description"
+                    placeholder="Enter your description here..."
+                ></textarea-field>
+                <div class="demo-code">
+<pre>&lt;textarea-field 
+    label="Description"
+    placeholder="Enter your description here..."
+&gt;&lt;/textarea-field&gt;</pre>
+                </div>
+            </div>
+            
+            <div class="demo-item">
+                <h3>With Initial Value</h3>
+                <textarea-field 
+                    label="Comments"
+                    value="This is some initial text that can be edited."
+                    placeholder="Add your comments..."
+                ></textarea-field>
+                <div class="demo-code">
+<pre>&lt;textarea-field 
+    label="Comments"
+    value="This is some initial text..."
+    placeholder="Add your comments..."
+&gt;&lt;/textarea-field&gt;</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error States -->
+    <div class="demo-section">
+        <h2>Error States</h2>
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h3>With Error Message</h3>
+                <textarea-field 
+                    label="Required Field"
+                    errorText="This field is required"
+                    placeholder="This field has an error..."
+                ></textarea-field>
+                <div class="demo-code">
+<pre>&lt;textarea-field 
+    label="Required Field"
+    errorText="This field is required"
+    placeholder="This field has an error..."
+&gt;&lt;/textarea-field&gt;</pre>
+                </div>
+            </div>
+            
+            <div class="demo-item">
+                <h3>Custom Error Slot</h3>
+                <textarea-field 
+                    label="Custom Error"
+                    errorText="Default error message"
+                    placeholder="Custom error in slot..."
+                >
+                    <span slot="error">🚨 Custom error message with emoji!</span>
+                </textarea-field>
+                <div class="demo-code">
+<pre>&lt;textarea-field 
+    label="Custom Error"
+    errorText="Default error message"
+&gt;
+    &lt;span slot="error"&gt;🚨 Custom error!&lt;/span&gt;
+&lt;/textarea-field&gt;</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Disabled State -->
+    <div class="demo-section">
+        <h2>Disabled State</h2>
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h3>Disabled Textarea</h3>
+                <textarea-field 
+                    label="Disabled Field"
+                    value="This field is disabled and cannot be edited."
+                    disabled
+                ></textarea-field>
+                <div class="demo-code">
+<pre>&lt;textarea-field 
+    label="Disabled Field"
+    value="This field is disabled..."
+    disabled
+&gt;&lt;/textarea-field&gt;</pre>
+                </div>
+            </div>
+            
+            <div class="demo-item">
+                <h3>Disabled with Error</h3>
+                <textarea-field 
+                    label="Disabled with Error"
+                    value="Disabled field with error state."
+                    errorText="This field has an error but is disabled"
+                    disabled
+                ></textarea-field>
+                <div class="demo-code">
+<pre>&lt;textarea-field 
+    label="Disabled with Error"
+    value="Disabled field with error..."
+    errorText="Error message"
+    disabled
+&gt;&lt;/textarea-field&gt;</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Demo -->
+    <div class="demo-section">
+        <h2>Interactive Demo - Change Events</h2>
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h3>Type to see events</h3>
+                <textarea-field 
+                    id="interactive-textarea"
+                    label="Interactive Textarea"
+                    placeholder="Type here to see change events..."
+                ></textarea-field>
+                <button onclick="clearLog()">Clear Event Log</button>
+                <button onclick="toggleError()">Toggle Error State</button>
+                <button onclick="toggleDisabled()">Toggle Disabled</button>
+            </div>
+            
+            <div class="demo-item">
+                <h3>Event Log</h3>
+                <div id="event-log" class="event-log">
+                    <div class="log-entry">Event log will appear here...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="demo-section">
+        <h2>API Reference</h2>
+        <div class="demo-code">
+<pre>
+<strong>Attributes/Props:</strong>
+• label (string) - Label text for the textarea
+• value (string) - Current value of the textarea
+• placeholder (string) - Placeholder text
+• errorText (string) - Error message to display
+• disabled (boolean) - Disable the textarea
+
+<strong>Events:</strong>
+• change - Fires when user edits the textarea
+  - event.detail.value - Current value
+  - event.detail.originalEvent - Original input event
+
+<strong>CSS Parts (for styling):</strong>
+• ::part(label) - The label element
+• ::part(control) - The textarea element  
+• ::part(error) - The error message container
+
+<strong>Slots:</strong>
+• error - Custom error message content
+</pre>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import the Lit function component
+        import { TextareaField } from './src/components/TextareaField/index.js';
+        import { render } from 'lit';
+        
+        // Interactive demo functionality
+        let errorToggle = false;
+        let disabledToggle = false;
+        
+        const interactiveTextarea = document.getElementById('interactive-textarea');
+        const eventLog = document.getElementById('event-log');
+        
+        // Listen for change events
+        interactiveTextarea.addEventListener('change', (event) => {
+            addLogEntry(`Change Event: "${event.detail.value}"`);
+        });
+        
+        // Helper functions for demo
+        window.clearLog = function() {
+            eventLog.innerHTML = '<div class="log-entry">Event log cleared...</div>';
+        };
+        
+        window.toggleError = function() {
+            errorToggle = !errorToggle;
+            if (errorToggle) {
+                interactiveTextarea.setAttribute('errorText', 'This is an error message!');
+            } else {
+                interactiveTextarea.removeAttribute('errorText');
+            }
+            addLogEntry(`Error state: ${errorToggle ? 'ON' : 'OFF'}`);
+        };
+        
+        window.toggleDisabled = function() {
+            disabledToggle = !disabledToggle;
+            interactiveTextarea.disabled = disabledToggle;
+            addLogEntry(`Disabled state: ${disabledToggle ? 'ON' : 'OFF'}`);
+        };
+        
+        function addLogEntry(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.textContent = `[${timestamp}] ${message}`;
+            eventLog.appendChild(entry);
+            eventLog.scrollTop = eventLog.scrollHeight;
+        }
+    </script>
+</body>
+</html>

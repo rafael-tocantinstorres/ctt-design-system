@@ -65,7 +65,7 @@
   border: var(--ctt-base-border-width-container-s) solid var(--ctt-base-color-selectable-border-default); /* 1px solid #CCC equivalent */
   border-radius: var(--ctt-base-border-radius-xs); /* 4px */
   background-color: var(--ctt-base-color-container-bg-default); /* #FFFFFF */
-  color: var(--ctt-base-color-content-fg-strong); /* #000000 */
+  color: var(--ctt-base-color-content-fg-main); /* #333333 equivalent */
   font-size: var(--ctt-base-font-size-body-s); /* 14px */
   font-family: inherit;
   line-height: var(--ctt-core-line-height-m); /* 1.4 equivalent */
@@ -95,7 +95,7 @@
 /* Error State */
 .ctt-input-field__input--error,
 .ctt-input-field__input--error:focus {
-  border: var(--ctt-base-border-width-container-s) solid var(--ctt-base-color-feedback-fg-error); /* 1px solid red */
+  border: var(--ctt-base-border-width-container-m) solid var(--ctt-base-color-feedback-fg-error); /* 1px solid red */
   box-shadow: none;
   padding: var(--ctt-core-dimension-50) var(--ctt-core-dimension-75); /* 8px 12px */
 }
@@ -118,15 +118,6 @@
 .ctt-input-field__input--disabled::placeholder,
 .ctt-input-field__input:disabled::placeholder {
   color: var(--ctt-core-color-neutral-500); /* #CCCCCC equivalent */
-}
-
-/* ==========================================================================
-   CONTAINER STATE MODIFIERS
-   ========================================================================== */
-
-/* Disabled container - affects label color */
-.ctt-input-field--disabled .ctt-input-field__label {
-  color: var(--ctt-base-color-selectable-fg-weak); /* #999999 equivalent */
 }
 
 /* ==========================================================================
