@@ -31,10 +31,14 @@
     "./dist/styles/index.css": "./dist/styles/index.css",
     "./dist/styles.css": "./dist/styles.css"
   },
+  "bin": {
+    "ctt-copy-fonts": "./scripts/copy-fonts.js"
+  },
   "files": [
     "dist",
     "README.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "scripts"
   ],
   "scripts": {
     "build": "npm run build:tokens && npm run build:components && npm run build:css",
