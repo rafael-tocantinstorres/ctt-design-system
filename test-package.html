@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTT Design System Package Test</title>
+</head>
+<body>
+    <h1>Testing CTT Design System v1.1.0 from npm</h1>
+    
+    <div id="test-results">
+        <h2>Package Installation Test</h2>
+        <p>Testing if the package can be used via CDN...</p>
+        
+        <!-- Test using direct web components -->
+        <div class="test-section">
+            <h3>Web Components (from npm CDN)</h3>
+            <ctt-button variant="primary" label="Test Button"></ctt-button>
+            <ctt-input-field label="Test Input" placeholder="Enter text..."></ctt-input-field>
+        </div>
+        
+        <!-- Test React integration -->
+        <div class="test-section" id="react-test">
+            <h3>React Integration Test</h3>
+            <div id="react-root"></div>
+        </div>
+    </div>
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        
+        .test-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        
+        .success {
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        .error {
+            color: #dc2626;
+            font-weight: bold;
+        }
+    </style>
+    
+    <!-- Load from npm CDN -->
+    <script type="module">
+        console.log('🧪 Testing CTT Design System v1.1.0 from npm...');
+        
+        try {
+            // Test 1: Load web components from unpkg (npm CDN)
+            const { Button, InputField } = await import('https://unpkg.com/ctt-design-system@1.1.0/dist/index.esm.js');
+            
+            console.log('✅ Web components loaded successfully from npm!');
+            document.getElementById('test-results').innerHTML += '<p class="success">✅ Web components loaded from npm CDN</p>';
+            
+            // Test 2: Try to load React components
+            try {
+                const ReactComponents = await import('https://unpkg.com/ctt-design-system@1.1.0/dist/react/index.esm.js');
+                console.log('✅ React components loaded successfully from npm!');
+                console.log('Available React components:', Object.keys(ReactComponents));
+                document.getElementById('test-results').innerHTML += '<p class="success">✅ React components available from npm</p>';
+                document.getElementById('test-results').innerHTML += '<p>Available components: ' + Object.keys(ReactComponents).join(', ') + '</p>';
+            } catch (reactError) {
+                console.log('⚠️ React components need React runtime:', reactError.message);
+                document.getElementById('test-results').innerHTML += '<p class="error">⚠️ React components need React runtime (expected)</p>';
+            }
+            
+            // Test 3: Load CSS
+            const cssLink = document.createElement('link');
+            cssLink.rel = 'stylesheet';
+            cssLink.href = 'https://unpkg.com/ctt-design-system@1.1.0/dist/styles.css';
+            cssLink.onload = () => {
+                console.log('✅ CSS loaded successfully from npm!');
+                document.getElementById('test-results').innerHTML += '<p class="success">✅ CSS styles loaded from npm CDN</p>';
+            };
+            document.head.appendChild(cssLink);
+            
+            // Test 4: Check package exports
+            const packageExports = [
+                'https://unpkg.com/ctt-design-system@1.1.0/dist/tokens.json',
+                'https://unpkg.com/ctt-design-system@1.1.0/dist/tokens.css'
+            ];
+            
+            for (const exportUrl of packageExports) {
+                try {
+                    const response = await fetch(exportUrl);
+                    if (response.ok) {
+                        console.log(`✅ Export available: ${exportUrl}`);
+                        document.getElementById('test-results').innerHTML += `<p class="success">✅ Export available: ${exportUrl.split('/').pop()}</p>`;
+                    }
+                } catch (e) {
+                    console.log(`⚠️ Export check failed: ${exportUrl}`);
+                }
+            }
+            
+        } catch (error) {
+            console.error('❌ Failed to load package:', error);
+            document.getElementById('test-results').innerHTML += '<p class="error">❌ Failed to load package: ' + error.message + '</p>';
+        }
+    </script>
+</body>
+</html>
