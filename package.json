@@ -24,6 +24,7 @@
     },
     "./css": "./dist/styles.css",
     "./fonts.css": "./dist/assets/fonts.css",
+    "./fonts-standalone.css": "./dist/assets/fonts-standalone.css",
     "./tokens.json": "./dist/tokens.json",
     "./tokens.css": "./dist/tokens.css",
     "./dist/tokens/tokens.css": "./dist/tokens/tokens.css",
@@ -52,6 +53,7 @@
     "watch": "concurrently \"npm run dev\" \"npm run storybook\"",
     "release": "npm run build && npm publish",
     "generate:component": "node scripts/generate-component.js",
+    "copy-fonts": "node scripts/copy-fonts.js",
     "dev:react": "npm run build && cd examples && python -m http.server 8080"
   },
   "keywords": [

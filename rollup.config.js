@@ -24,6 +24,7 @@ export default [
         targets: [
           { src: 'src/tokens/*.css', dest: 'dist/tokens' },
           { src: 'src/assets/fonts.css', dest: 'dist/assets' },
+          { src: 'src/assets/fonts-standalone.css', dest: 'dist/assets' },
           { src: 'src/assets/fonts/*', dest: 'dist/assets/fonts' },
           { src: 'README.md', dest: 'dist' }
         ]
