@@ -2399,10 +2399,8 @@ body {
 * {
   font-display: swap;
 }
+
 /* End of ./styles/index.css */
- * 
- * This file now imports the new organized structure.
- */
 
 /* Import the new organized styles */
 /* Circular import skipped: ./styles/index.css */
