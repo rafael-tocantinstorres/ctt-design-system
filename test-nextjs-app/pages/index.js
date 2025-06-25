@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react'
-import { Button, InputField, TextareaField, RadioButton } from 'ctt-design-system/react'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
+
+// Dynamic imports to prevent SSR issues
+const Button = dynamic(() => import('ctt-design-system/react').then(mod => ({ default: mod.Button })), { ssr: false })
+const InputField = dynamic(() => import('ctt-design-system/react').then(mod => ({ default: mod.InputField })), { ssr: false })
+const TextareaField = dynamic(() => import('ctt-design-system/react').then(mod => ({ default: mod.TextareaField })), { ssr: false })
+const RadioButton = dynamic(() => import('ctt-design-system/react').then(mod => ({ default: mod.RadioButton })), { ssr: false })
 
 export default function Home() {
   const [formData, setFormData] = useState({

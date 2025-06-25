@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST='{"pages\\\\index.js -> ctt-design-system/react":{"id":1418,"files":["static/chunks/418.6f3f3d17935de01d.js"]}}';
