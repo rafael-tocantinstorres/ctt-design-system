@@ -1,6 +1,6 @@
 {
-  "name": "@ctt/design-system",
-  "version": "1.0.0",
+  "name": "ctt-design-system",
+  "version": "1.0.1",
   "type": "module",
   "description": "CTT Design System - Framework agnostic component library",
   "main": "dist/index.js",
@@ -36,9 +36,10 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepublishOnly": "npm run build",
-    "version:patch": "npm version patch && npm run build && npm publish",
-    "version:minor": "npm version minor && npm run build && npm publish",
-    "version:major": "npm version major && npm run build && npm publish",
+    "version:patch": "node scripts/publish-utils.js publish patch",
+    "version:minor": "node scripts/publish-utils.js publish minor",
+    "version:major": "node scripts/publish-utils.js publish major",
+    "publish:check": "node scripts/publish-utils.js check",
     "watch": "concurrently \"npm run dev\" \"npm run storybook\"",
     "release": "npm run build && npm publish",
     "generate:component": "node scripts/generate-component.js"
@@ -50,7 +51,11 @@
     "tokens",
     "css"
   ],
-  "author": "Your Name",
+  "author": "CTT Team",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "license": "MIT",
   "dependencies": {
     "lit": "^3.3.0"

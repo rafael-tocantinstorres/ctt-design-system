@@ -5,7 +5,7 @@ A framework-agnostic design system built with Web Components and design tokens.
 ## Installation
 
 ```bash
-npm install @ctt/design-system
+npm install ctt-design-system
 ```
 
 ## Usage
@@ -14,13 +14,13 @@ npm install @ctt/design-system
 
 ```html
 <!-- Include CSS -->
-<link rel="stylesheet" href="node_modules/@ctt/design-system/dist/styles.css">
+<link rel="stylesheet" href="node_modules/ctt-design-system/dist/styles.css">
 
 <!-- Use components directly in HTML -->
 <ctt-button primary size="large" label="Click me"></ctt-button>
 
 <script type="module">
-  import '@ctt/design-system';
+  import 'ctt-design-system';
   
   document.querySelector('ctt-button').addEventListener('ctt-click', (e) => {
     console.log('Button clicked!');
@@ -31,8 +31,8 @@ npm install @ctt/design-system
 ### React
 
 ```jsx
-import '@ctt/design-system';
-import '@ctt/design-system/css';
+import 'ctt-design-system';
+import 'ctt-design-system/css';
 
 function App() {
   return (
