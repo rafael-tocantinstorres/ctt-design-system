@@ -25,7 +25,10 @@
     "./css": "./dist/styles.css",
     "./fonts.css": "./dist/assets/fonts.css",
     "./tokens.json": "./dist/tokens.json",
-    "./tokens.css": "./dist/tokens.css"
+    "./tokens.css": "./dist/tokens.css",
+    "./dist/tokens/tokens.css": "./dist/tokens/tokens.css",
+    "./dist/styles/index.css": "./dist/styles/index.css",
+    "./dist/styles.css": "./dist/styles.css"
   },
   "files": [
     "dist",

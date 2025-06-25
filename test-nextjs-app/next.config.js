@@ -2,9 +2,19 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    appDir: false // Using pages router for broader compatibility
-  }
+  webpack: (config) => {
+    // Handle font files
+    config.module.rules.push({
+      test: /\.(woff|woff2|eot|ttf|otf)$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+        },
+      },
+    });
+    return config;
+  },
 }
 
-module.exports = nextConfig
+export default nextConfig

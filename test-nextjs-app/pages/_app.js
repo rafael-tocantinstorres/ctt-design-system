@@ -1,4 +1,4 @@
-import 'ctt-design-system/css'
+import 'ctt-design-system/dist/tokens/tokens.css'
 
 export default function App({ Component, pageProps }) {
   return (
