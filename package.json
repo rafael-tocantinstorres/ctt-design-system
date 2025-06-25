@@ -23,7 +23,8 @@
       "require": "./dist/tokens/index.js"
     },
     "./css": "./dist/styles.css",
-    "./fonts.css": "./dist/assets/fonts.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./fonts-assets.css": "./dist/assets/fonts.css",
     "./fonts-standalone.css": "./dist/assets/fonts-standalone.css",
     "./tokens.json": "./dist/tokens.json",
     "./tokens.css": "./dist/tokens.css",
@@ -38,6 +39,7 @@
     "dist",
     "README.md",
     "CHANGELOG.md",
+    "FONT-USAGE.md",
     "scripts"
   ],
   "scripts": {

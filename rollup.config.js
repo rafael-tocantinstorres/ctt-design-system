@@ -26,6 +26,10 @@ export default [
           { src: 'src/assets/fonts.css', dest: 'dist/assets' },
           { src: 'src/assets/fonts-standalone.css', dest: 'dist/assets' },
           { src: 'src/assets/fonts/*', dest: 'dist/assets/fonts' },
+          // Copy fonts to dist/fonts as well for backward compatibility
+          { src: 'src/assets/fonts/*', dest: 'dist/fonts' },
+          // Copy package-optimized fonts.css to dist root
+          { src: 'src/fonts-package.css', dest: 'dist', rename: 'fonts.css' },
           { src: 'README.md', dest: 'dist' }
         ]
       }),

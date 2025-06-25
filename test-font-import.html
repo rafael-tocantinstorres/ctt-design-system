@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Import Test</title>
+    <style>
+        /* Import fonts from the package */
+        @import url('./dist/fonts.css');
+        
+        body {
+            font-family: 'ActoCTT', system-ui, sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+        }
+        
+        .font-test {
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .thin { font-weight: 250; }
+        .light { font-weight: 300; }
+        .regular { font-weight: 400; }
+        .medium { font-weight: 500; }
+        .bold { font-weight: 700; }
+        .black { font-weight: 900; }
+        .italic { font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>CTT Design System Font Test</h1>
+    <p>This page tests the font imports from the CTT Design System package.</p>
+    
+    <div class="font-test">
+        <h2>Font Weights</h2>
+        <div class="thin">This is ActoCTT Thin (250)</div>
+        <div class="light">This is ActoCTT Light (300)</div>
+        <div class="regular">This is ActoCTT Regular/Book (400)</div>
+        <div class="medium">This is ActoCTT Medium (500)</div>
+        <div class="bold">This is ActoCTT Bold (700)</div>
+        <div class="black">This is ActoCTT Black (900)</div>
+    </div>
+    
+    <div class="font-test">
+        <h2>Italic Styles</h2>
+        <div class="thin italic">This is ActoCTT Thin Italic (250)</div>
+        <div class="light italic">This is ActoCTT Light Italic (300)</div>
+        <div class="regular italic">This is ActoCTT Regular/Book Italic (400)</div>
+        <div class="medium italic">This is ActoCTT Medium Italic (500)</div>
+        <div class="bold italic">This is ActoCTT Bold Italic (700)</div>
+        <div class="black italic">This is ActoCTT Black Italic (900)</div>
+    </div>
+    
+    <div class="font-test">
+        <h2>Testing Instructions</h2>
+        <p>If the fonts are loading correctly, you should see clear visual differences between the font weights above.</p>
+        <p>Open the browser's developer tools and check the Network tab to see if the font files are loading without errors.</p>
+    </div>
+    
+    <script>
+        // Check if fonts are loading
+        document.fonts.ready.then(() => {
+            console.log('All fonts loaded successfully!');
+            
+            // Check if ActoCTT font is available
+            if (document.fonts.check('12px ActoCTT')) {
+                console.log('✅ ActoCTT font is available');
+            } else {
+                console.log('❌ ActoCTT font is NOT available');
+            }
+        });
+        
+        // Log font loading events
+        document.fonts.addEventListener('loading', (event) => {
+            console.log('Font loading:', event.font.family, event.font.weight, event.font.style);
+        });
+        
+        document.fonts.addEventListener('loadingdone', (event) => {
+            console.log('Font loaded:', event.font.family, event.font.weight, event.font.style);
+        });
+        
+        document.fonts.addEventListener('loadingerror', (event) => {
+            console.error('Font loading error:', event.font.family, event.font.weight, event.font.style);
+        });
+    </script>
+</body>
+</html>
