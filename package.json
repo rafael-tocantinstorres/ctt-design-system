@@ -1,6 +1,6 @@
 {
   "name": "ctt-design-system",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "description": "CTT Design System - Framework agnostic component library with React integration",
   "main": "dist/index.js",
