@@ -2,7 +2,7 @@
  * CTT Design System - Main Styles (Legacy Entry Point)
  * 
  * DEPRECATED: This file is kept for backward compatibility.
- * For new projects, use: @import './styles/index.css';
+ * For new projects, import './styles/index.css' directly
  * 
  * This file now imports the new organized structure.
  */
