@@ -51,6 +51,39 @@ export default [
     ].filter(Boolean),
     external: ['lit', 'lit/directives/style-map.js']
   },
+  // React wrappers build
+  {
+    input: 'src/react/index.js',
+    output: [
+      {
+        file: 'dist/react/index.esm.js',
+        format: 'es',
+        sourcemap: true
+      },
+      {
+        file: 'dist/react/index.js',
+        format: 'cjs',
+        sourcemap: true,
+        exports: 'named'
+      }
+    ],
+    plugins: [
+      nodeResolve(),
+      postcss({
+        extract: false,
+        inject: false,
+        minimize: isProduction
+      }),
+      copy({
+        targets: [
+          { src: 'src/react/index.d.ts', dest: 'dist/react' },
+          { src: 'src/jsx.d.ts', dest: 'dist' }
+        ]
+      }),
+      isProduction && terser()
+    ].filter(Boolean),
+    external: ['react', 'react-dom', 'lit', 'lit/directives/style-map.js', 'lit/directives/unsafe-html.js']
+  },
   // Tokens-only build
   {
     input: 'src/tokens/index.js',

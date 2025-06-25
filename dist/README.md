@@ -28,7 +28,38 @@ npm install ctt-design-system
 </script>
 ```
 
-### React
+### React (Recommended)
+
+```jsx
+import React from 'react';
+import { Button, InputField } from 'ctt-design-system/react';
+import 'ctt-design-system/css';
+
+function App() {
+  const handleClick = (event) => {
+    console.log('Button clicked!', event.detail);
+  };
+
+  return (
+    <div>
+      <Button
+        variant="primary"
+        size="large"
+        label="Click me"
+        onClick={handleClick}
+      />
+      
+      <InputField
+        label="Username"
+        placeholder="Enter username"
+        required
+      />
+    </div>
+  );
+}
+```
+
+**React Web Components (Alternative)**
 
 ```jsx
 import 'ctt-design-system';
@@ -37,10 +68,9 @@ import 'ctt-design-system/css';
 function App() {
   return (
     <ctt-button 
-      primary 
+      variant="primary"
       size="large" 
       label="Click me"
-      onCtt-click={() => console.log('Clicked!')}
     />
   );
 }
