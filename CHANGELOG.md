@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0] - 2025-06-25
+
+### Added
+- New features and components
+
+### Changed
+- Updated existing functionality
+
+### Fixed
+- Bug fixes and improvements
+
+
 All notable changes to this project will be documented in this file.
 
 ## [1.1.0] - 2025-06-25
