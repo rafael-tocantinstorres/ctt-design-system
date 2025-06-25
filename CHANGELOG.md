@@ -1,18 +1,31 @@
 # Changelog
 
-## [1.1.0] - 2025-06-25
+All notable changes to this project will be documented in this file.
 
-### Added
-- New features and components
-
-### Changed
-- Updated existing functionality
+## [1.1.7] - 2024-12-19
 
 ### Fixed
-- Bug fixes and improvements
+- **Font Paths**: Fixed double `dist/` path issue in fonts.css (was `./dist/fonts/`, now `./fonts/`)
+- **CSS Resolution**: Corrected font URLs to prevent `dist/dist/fonts/` path errors
 
+## [1.1.6] - 2024-12-19
 
-All notable changes to this project will be documented in this file.
+### Fixed
+- **Font Distribution**: Fixed font loading issues when importing CSS in consumer applications
+- **Font Paths**: Corrected relative paths in fonts.css to work properly from node_modules
+- **Package Exports**: Added proper `fonts.css` export at package root level
+- **Next.js Compatibility**: Fixed "Module not found" errors when importing fonts in Next.js applications
+
+### Added
+- **Comprehensive Font Documentation**: Added FONT-USAGE.md with detailed usage instructions for all frameworks
+- **Package Root Font Export**: Added `ctt-design-system/fonts.css` import option
+- **Backward Compatibility**: Fonts are now available in both `dist/fonts/` and `dist/assets/fonts/`
+- **Test Suite**: Added font loading verification test
+
+### Changed
+- **Font CSS Structure**: Optimized font CSS files for better package consumption
+- **Build Process**: Enhanced rollup configuration to handle font distribution properly
+- **Import Methods**: Simplified font imports - now just use `@import 'ctt-design-system/fonts.css'`
 
 ## [1.1.0] - 2025-06-25
 
