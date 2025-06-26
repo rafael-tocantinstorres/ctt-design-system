@@ -1,8 +1,5 @@
-/**
- * CTT Design System - Main Styles (Legacy Entry Point)
- * 
- * DEPRECATED: This file is kept for backward compatibility.
- * For new projects, use: /* Imported from ./styles/index.css */
+/* Import the new organized styles */
+/* Imported from ./styles/index.css */
 /**
  * CTT Design System - Main Styles Entry Point
  * Import this file to get all design system styles for production use
@@ -2400,9 +2397,3 @@ body {
   font-display: swap;
 }
 /* End of ./styles/index.css */
- * 
- * This file now imports the new organized structure.
- */
-
-/* Import the new organized styles */
-/* Circular import skipped: ./styles/index.css */
