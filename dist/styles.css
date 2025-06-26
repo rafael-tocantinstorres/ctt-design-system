@@ -40,7 +40,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-Thin.eot');
   src: url('./fonts/ActoCTT-Thin.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-Thin.woff2') format('woff2'),
        url('./fonts/ActoCTT-Thin.woff') format('woff');
   font-weight: 250;
   font-style: normal;
@@ -51,7 +50,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-ThinItalic.eot');
   src: url('./fonts/ActoCTT-ThinItalic.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-ThinItalic.woff2') format('woff2'),
        url('./fonts/ActoCTT-ThinItalic.woff') format('woff');
   font-weight: 250;
   font-style: italic;
@@ -63,7 +61,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-Light.eot');
   src: url('./fonts/ActoCTT-Light.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-Light.woff2') format('woff2'),
        url('./fonts/ActoCTT-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
@@ -74,7 +71,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-LightItalic.eot');
   src: url('./fonts/ActoCTT-LightItalic.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-LightItalic.woff2') format('woff2'),
        url('./fonts/ActoCTT-LightItalic.woff') format('woff');
   font-weight: 300;
   font-style: italic;
@@ -86,7 +82,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-Book.eot');
   src: url('./fonts/ActoCTT-Book.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-Book.woff2') format('woff2'),
        url('./fonts/ActoCTT-Book.woff') format('woff');
   font-weight: 400;
   font-style: normal;
@@ -97,7 +92,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-BookItalic.eot');
   src: url('./fonts/ActoCTT-BookItalic.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-BookItalic.woff2') format('woff2'),
        url('./fonts/ActoCTT-BookItalic.woff') format('woff');
   font-weight: 400;
   font-style: italic;
@@ -109,7 +103,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-Medium.eot');
   src: url('./fonts/ActoCTT-Medium.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-Medium.woff2') format('woff2'),
        url('./fonts/ActoCTT-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
@@ -120,7 +113,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-MediumItalic.eot');
   src: url('./fonts/ActoCTT-MediumItalic.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-MediumItalic.woff2') format('woff2'),
        url('./fonts/ActoCTT-MediumItalic.woff') format('woff');
   font-weight: 500;
   font-style: italic;
@@ -132,7 +124,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-Bold.eot');
   src: url('./fonts/ActoCTT-Bold.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-Bold.woff2') format('woff2'),
        url('./fonts/ActoCTT-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
@@ -143,7 +134,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-BoldItalic.eot');
   src: url('./fonts/ActoCTT-BoldItalic.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-BoldItalic.woff2') format('woff2'),
        url('./fonts/ActoCTT-BoldItalic.woff') format('woff');
   font-weight: 700;
   font-style: italic;
@@ -155,7 +145,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-Black.eot');
   src: url('./fonts/ActoCTT-Black.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-Black.woff2') format('woff2'),
        url('./fonts/ActoCTT-Black.woff') format('woff');
   font-weight: 900;
   font-style: normal;
@@ -166,7 +155,6 @@
   font-family: 'ActoCTT';
   src: url('./fonts/ActoCTT-BlackItalic.eot');
   src: url('./fonts/ActoCTT-BlackItalic.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/ActoCTT-BlackItalic.woff2') format('woff2'),
        url('./fonts/ActoCTT-BlackItalic.woff') format('woff');
   font-weight: 900;
   font-style: italic;
