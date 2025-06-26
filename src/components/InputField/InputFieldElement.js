@@ -134,7 +134,7 @@ class CttInputField extends LitElement {
 }
 
 // Register custom element
-if (!customElements.get('ctt-input-field')) {
+if (typeof customElements !== 'undefined' && !customElements.get('ctt-input-field')) {
   customElements.define('ctt-input-field', CttInputField);
 }
 

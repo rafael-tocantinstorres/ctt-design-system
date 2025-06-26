@@ -1,9 +1,216 @@
-'use strict';
+import { nothing, html, LitElement, css } from 'lit';
+import { styleMap } from 'lit/directives/style-map.js';
 
-var React = require('react');
-var lit = require('lit');
-var styleMap_js = require('lit/directives/style-map.js');
-var unsafeHtml_js = require('lit/directives/unsafe-html.js');
+/**
+ * SSR Helpers for CTT Design System
+ * 
+ * This module provides utilities for server-side rendering of CTT components
+ * with full Shadow DOM support using @lit-labs/ssr.
+ * 
+ * Usage in Next.js or Node.js:
+ * ```js
+ * import { renderCttComponent, renderCttButton } from 'ctt-design-system/ssr';
+ * 
+ * // Generic component rendering
+ * const html = await renderCttComponent('ctt-button', { variant: 'primary', label: 'Click me' });
+ * 
+ * // Specific component helpers
+ * const buttonHtml = await renderCttButton({ variant: 'secondary', size: 'large', label: 'Save' });
+ * ```
+ */
+
+// SSR-specific imports - components without auto-registration
+// We'll register them manually when needed
+
+// Component registration helper
+async function ensureComponentRegistered(tagName) {
+  if (typeof customElements !== 'undefined' && !customElements.get(tagName)) {
+    // Dynamically import the component when needed
+    switch (tagName) {
+      case 'ctt-button':
+        await Promise.resolve().then(function () { return ButtonElement; });
+        break;
+      case 'ctt-input-field':
+        await Promise.resolve().then(function () { return InputFieldElement; });
+        break;
+      case 'ctt-textarea-field':
+        await Promise.resolve().then(function () { return TextareaFieldElement; });
+        break;
+      case 'ctt-radio-button':
+        await Promise.resolve().then(function () { return RadioButtonElement$1; });
+        break;
+      case 'ctt-header':
+        await Promise.resolve().then(function () { return HeaderElement; });
+        break;
+      case 'ctt-page':
+        await Promise.resolve().then(function () { return PageElement; });
+        break;
+    }
+  }
+}
+
+/**
+ * Generic component renderer
+ * @param {string} tagName - The component tag name (e.g., 'ctt-button')
+ * @param {Object} props - Component properties
+ * @param {Object} options - Rendering options
+ * @returns {Promise<string>} Rendered HTML with styles
+ */
+async function renderCttComponent(tagName, props = {}, options = {}) {
+  try {
+    // Ensure component is registered
+    await ensureComponentRegistered(tagName);
+    
+    // Dynamic import to avoid bundling SSR code in browser builds
+    const { render } = await import('@lit-labs/ssr');
+    const { collectResult } = await import('@lit-labs/ssr/lib/render-result.js');
+    
+    // Convert props to attributes
+    const attributes = Object.entries(props)
+      .map(([key, value]) => {
+        if (typeof value === 'boolean') {
+          return value ? key : '';
+        }
+        return `${key}="${String(value).replace(/"/g, '&quot;')}"`;
+      })
+      .filter(Boolean)
+      .join(' ');
+    
+    const template = `<${tagName} ${attributes}></${tagName}>`;
+    const ssrResult = render(template);
+    const result = await collectResult(ssrResult);
+    
+    return result;
+  } catch (error) {
+    console.warn('SSR rendering failed, falling back to template:', error.message);
+    // Fallback to basic template
+    const attributes = Object.entries(props)
+      .map(([key, value]) => {
+        if (typeof value === 'boolean') {
+          return value ? key : '';
+        }
+        return `${key}="${String(value).replace(/"/g, '&quot;')}"`;
+      })
+      .filter(Boolean)
+      .join(' ');
+    
+    return `<${tagName} ${attributes}></${tagName}>`;
+  }
+}
+
+/**
+ * Render a CTT Button component
+ * @param {Object} props - Button properties
+ * @returns {Promise<string>} Rendered HTML
+ */
+async function renderCttButton(props = {}) {
+  return renderCttComponent('ctt-button', props);
+}
+
+/**
+ * Render a CTT Input Field component
+ * @param {Object} props - Input field properties
+ * @returns {Promise<string>} Rendered HTML
+ */
+async function renderCttInputField(props = {}) {
+  return renderCttComponent('ctt-input-field', props);
+}
+
+/**
+ * Render a CTT Textarea Field component
+ * @param {Object} props - Textarea field properties
+ * @returns {Promise<string>} Rendered HTML
+ */
+async function renderCttTextareaField(props = {}) {
+  return renderCttComponent('ctt-textarea-field', props);
+}
+
+/**
+ * Render a CTT Radio Button component
+ * @param {Object} props - Radio button properties
+ * @returns {Promise<string>} Rendered HTML
+ */
+async function renderCttRadioButton(props = {}) {
+  return renderCttComponent('ctt-radio-button', props);
+}
+
+/**
+ * Render a CTT Header component
+ * @param {Object} props - Header properties
+ * @returns {Promise<string>} Rendered HTML
+ */
+async function renderCttHeader(props = {}) {
+  return renderCttComponent('ctt-header', props);
+}
+
+/**
+ * Render a CTT Page component
+ * @param {Object} props - Page properties
+ * @returns {Promise<string>} Rendered HTML
+ */
+async function renderCttPage(props = {}) {
+  return renderCttComponent('ctt-page', props);
+}
+
+/**
+ * Get critical CSS for preloading
+ * @returns {string} CSS to inline in document head
+ */
+function getCriticalCSS() {
+  // Return the essential CSS that should be inlined
+  return `
+    /* CTT Design System Critical CSS */
+    ctt-button:not(:defined), 
+    ctt-input-field:not(:defined), 
+    ctt-textarea-field:not(:defined),
+    ctt-radio-button:not(:defined),
+    ctt-header:not(:defined),
+    ctt-page:not(:defined) {
+      display: none;
+    }
+    
+    ctt-button:defined,
+    ctt-input-field:defined,
+    ctt-textarea-field:defined,
+    ctt-radio-button:defined,
+    ctt-header:defined,
+    ctt-page:defined {
+      display: initial;
+    }
+  `;
+}
+
+/**
+ * Generate preload links for fonts
+ * @returns {string[]} Array of preload link HTML strings
+ */
+function getFontPreloadLinks() {
+  return [
+    '<link rel="preload" href="./fonts/ActoCTT-Book.woff2" as="font" type="font/woff2" crossorigin>',
+    '<link rel="preload" href="./fonts/ActoCTT-Bold.woff2" as="font" type="font/woff2" crossorigin>',
+    '<link rel="preload" href="./fonts/ActoCTT-Medium.woff2" as="font" type="font/woff2" crossorigin>'
+  ];
+}
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t$1=globalThis,i$1=t$1.trustedTypes,s=i$1?i$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,e$3="$lit$",h=`lit$${Math.random().toFixed(9).slice(2)}$`,o$2="?"+h,n=`<${o$2}>`,r=document,l$1=()=>r.createComment(""),c=t=>null===t||"object"!=typeof t&&"function"!=typeof t,a=Array.isArray,u$1=t=>a(t)||"function"==typeof t?.[Symbol.iterator],d="[ \t\n\f\r]",f$1=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,v=/-->/g,_=/>/g,m$1=RegExp(`>|${d}(?:([^\\s"'>=/]+)(${d}*=${d}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),p=/'/g,g=/"/g,$=/^(?:script|style|textarea|title)$/i,T=Symbol.for("lit-noChange"),E=Symbol.for("lit-nothing"),A=new WeakMap,C=r.createTreeWalker(r,129);function P(t,i){if(!a(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==s?s.createHTML(i):i}const V=(t,i)=>{const s=t.length-1,o=[];let r,l=2===i?"<svg>":3===i?"<math>":"",c=f$1;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,y=0;for(;y<s.length&&(c.lastIndex=y,u=c.exec(s),null!==u);)y=c.lastIndex,c===f$1?"!--"===u[1]?c=v:void 0!==u[1]?c=_:void 0!==u[2]?($.test(u[2])&&(r=RegExp("</"+u[2],"g")),c=m$1):void 0!==u[3]&&(c=m$1):c===m$1?">"===u[0]?(c=r??f$1,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?m$1:'"'===u[3]?g:p):c===g||c===p?c=m$1:c===v||c===_?c=f$1:(c=m$1,r=void 0);const x=c===m$1&&t[i+1].startsWith("/>")?" ":"";l+=c===f$1?s+n:d>=0?(o.push(a),s.slice(0,d)+e$3+s.slice(d)+h+x):s+h+(-2===d?i:x);}return [P(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),o]};class N{constructor({strings:t,_$litType$:s},n){let r;this.parts=[];let c=0,a=0;const u=t.length-1,d=this.parts,[f,v]=V(t,s);if(this.el=N.createElement(f,n),C.currentNode=this.el.content,2===s||3===s){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=C.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(e$3)){const i=v[a++],s=r.getAttribute(t).split(h),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:c,name:e[2],strings:s,ctor:"."===e[1]?H:"?"===e[1]?I:"@"===e[1]?L:k}),r.removeAttribute(t);}else t.startsWith(h)&&(d.push({type:6,index:c}),r.removeAttribute(t));if($.test(r.tagName)){const t=r.textContent.split(h),s=t.length-1;if(s>0){r.textContent=i$1?i$1.emptyScript:"";for(let i=0;i<s;i++)r.append(t[i],l$1()),C.nextNode(),d.push({type:2,index:++c});r.append(t[s],l$1());}}}else if(8===r.nodeType)if(r.data===o$2)d.push({type:2,index:c});else {let t=-1;for(;-1!==(t=r.data.indexOf(h,t+1));)d.push({type:7,index:c}),t+=h.length-1;}c++;}}static createElement(t,i){const s=r.createElement("template");return s.innerHTML=t,s}}function S(t,i,s=t,e){if(i===T)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=c(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=S(t,h._$AS(t,i.values),h,e)),i}class M{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??r).importNode(i,true);C.currentNode=e;let h=C.nextNode(),o=0,n=0,l=s[0];for(;void 0!==l;){if(o===l.index){let i;2===l.type?i=new R(h,h.nextSibling,this,t):1===l.type?i=new l.ctor(h,l.name,l.strings,this,t):6===l.type&&(i=new z(h,this,t)),this._$AV.push(i),l=s[++n];}o!==l?.index&&(h=C.nextNode(),o++);}return C.currentNode=r,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class R{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=E,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=S(this,t,i),c(t)?t===E||null==t||""===t?(this._$AH!==E&&this._$AR(),this._$AH=E):t!==this._$AH&&t!==T&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):u$1(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==E&&c(this._$AH)?this._$AA.nextSibling.data=t:this.T(r.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=N.createElement(P(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new M(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=A.get(t.strings);return void 0===i&&A.set(t.strings,i=new N(t)),i}k(t){a(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new R(this.O(l$1()),this.O(l$1()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,i){for(this._$AP?.(false,true,i);t&&t!==this._$AB;){const i=t.nextSibling;t.remove(),t=i;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class k{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=E,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=E;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=S(this,t,i,0),o=!c(t)||t!==this._$AH&&t!==T,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=S(this,e[s+n],i,n),r===T&&(r=this._$AH[n]),o||=!c(r)||r!==this._$AH[n],r===E?t=E:t!==E&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===E?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class H extends k{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===E?void 0:t;}}class I extends k{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==E);}}class L extends k{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=S(this,t,i,0)??E)===T)return;const s=this._$AH,e=t===E&&s!==E||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==E&&(s===E||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){S(this,t);}}const j=t$1.litHtmlPolyfillSupport;j?.(N,R),(t$1.litHtmlVersions??=[]).push("3.3.0");
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t={ATTRIBUTE:1,CHILD:2,PROPERTY:3,BOOLEAN_ATTRIBUTE:4},e$2=t=>(...e)=>({_$litDirective$:t,values:e});class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}}
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */let e$1 = class e extends i{constructor(i){if(super(i),this.it=E,i.type!==t.CHILD)throw Error(this.constructor.directiveName+"() can only be used in child bindings")}render(r){if(r===E||null==r)return this._t=void 0,this.it=r;if(r===T)return r;if("string"!=typeof r)throw Error(this.constructor.directiveName+"() called with a non-string value");if(r===this.it)return this._t;this.it=r;const s=[r];return s.raw=s,this._t={_$litType$:this.constructor.resultType,strings:s,values:[]}}};e$1.directiveName="unsafeHTML",e$1.resultType=1;const o$1=e$2(e$1);
 
 /**
  * Design Tokens - Colors
@@ -492,7 +699,7 @@ const typographyHelpers = {
 };
 
 /** Primary UI component for user interaction */
-const Button$1 = ({ 
+const Button = ({ 
   variant = 'primary',
   size = 'medium', 
   label, 
@@ -539,15 +746,15 @@ const Button$1 = ({
     const parts = [];
     
     if (iconLeft && iconLeftElement) {
-      parts.push(lit.html`<span class="ctt-button__icon ctt-button__icon--left">${unsafeHtml_js.unsafeHTML(iconLeftElement)}</span>`);
+      parts.push(html`<span class="ctt-button__icon ctt-button__icon--left">${o$1(iconLeftElement)}</span>`);
     }
     
     if (label) {
-      parts.push(lit.html`<span class="ctt-button__label">${label}</span>`);
+      parts.push(html`<span class="ctt-button__label">${label}</span>`);
     }
     
     if (iconRight && iconRightElement) {
-      parts.push(lit.html`<span class="ctt-button__icon ctt-button__icon--right">${unsafeHtml_js.unsafeHTML(iconRightElement)}</span>`);
+      parts.push(html`<span class="ctt-button__icon ctt-button__icon--right">${o$1(iconRightElement)}</span>`);
     }
     
     return parts;
@@ -558,13 +765,13 @@ const Button$1 = ({
   const accessibleName = ariaLabel || label;
   const hasVisibleLabel = label && label.trim().length > 0;
 
-  return lit.html`
+  return html`
     <button
       type="button"
       class=${classes}
-      style=${styleMap_js.styleMap(buttonStyles)}
+      style=${styleMap(buttonStyles)}
       ?disabled=${disabled}
-      aria-label=${!hasVisibleLabel && accessibleName ? accessibleName : lit.nothing}
+      aria-label=${!hasVisibleLabel && accessibleName ? accessibleName : nothing}
       @click=${onclick}
     >
       ${renderContent()}
@@ -583,7 +790,7 @@ const Button$1 = ({
  * <ctt-button variant="secondary" size="large" label="Save" icon-left icon-left-element="<svg>...</svg>"></ctt-button>
  * <ctt-button variant="tertiary" border-radius="small" label="Cancel" disabled></ctt-button>
  */
-class CttButton extends lit.LitElement {
+class CttButton extends LitElement {
   static properties = {
     variant: { type: String },
     size: { type: String },
@@ -599,7 +806,7 @@ class CttButton extends lit.LitElement {
     ariaLabel: { type: String, attribute: 'aria-label' }
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: inline-block;
     }
@@ -620,7 +827,7 @@ class CttButton extends lit.LitElement {
   }
 
   render() {
-    return Button$1({
+    return Button({
       variant: this.variant,
       size: this.size,
       label: this.label,
@@ -664,25 +871,16 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-button')) 
   customElements.define('ctt-button', CttButton);
 }
 
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-const t$1=globalThis,i$1=t$1.trustedTypes,s=i$1?i$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,e$2="$lit$",h=`lit$${Math.random().toFixed(9).slice(2)}$`,o$1="?"+h,n=`<${o$1}>`,r=document,l$1=()=>r.createComment(""),c=t=>null===t||"object"!=typeof t&&"function"!=typeof t,a=Array.isArray,u$1=t=>a(t)||"function"==typeof t?.[Symbol.iterator],d="[ \t\n\f\r]",f$1=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,v=/-->/g,_=/>/g,m$1=RegExp(`>|${d}(?:([^\\s"'>=/]+)(${d}*=${d}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),p=/'/g,g=/"/g,$=/^(?:script|style|textarea|title)$/i,T=Symbol.for("lit-noChange"),E=Symbol.for("lit-nothing"),A=new WeakMap,C=r.createTreeWalker(r,129);function P(t,i){if(!a(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==s?s.createHTML(i):i}const V=(t,i)=>{const s=t.length-1,o=[];let r,l=2===i?"<svg>":3===i?"<math>":"",c=f$1;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,y=0;for(;y<s.length&&(c.lastIndex=y,u=c.exec(s),null!==u);)y=c.lastIndex,c===f$1?"!--"===u[1]?c=v:void 0!==u[1]?c=_:void 0!==u[2]?($.test(u[2])&&(r=RegExp("</"+u[2],"g")),c=m$1):void 0!==u[3]&&(c=m$1):c===m$1?">"===u[0]?(c=r??f$1,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?m$1:'"'===u[3]?g:p):c===g||c===p?c=m$1:c===v||c===_?c=f$1:(c=m$1,r=void 0);const x=c===m$1&&t[i+1].startsWith("/>")?" ":"";l+=c===f$1?s+n:d>=0?(o.push(a),s.slice(0,d)+e$2+s.slice(d)+h+x):s+h+(-2===d?i:x);}return [P(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),o]};class N{constructor({strings:t,_$litType$:s},n){let r;this.parts=[];let c=0,a=0;const u=t.length-1,d=this.parts,[f,v]=V(t,s);if(this.el=N.createElement(f,n),C.currentNode=this.el.content,2===s||3===s){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=C.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(e$2)){const i=v[a++],s=r.getAttribute(t).split(h),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:c,name:e[2],strings:s,ctor:"."===e[1]?H:"?"===e[1]?I:"@"===e[1]?L:k}),r.removeAttribute(t);}else t.startsWith(h)&&(d.push({type:6,index:c}),r.removeAttribute(t));if($.test(r.tagName)){const t=r.textContent.split(h),s=t.length-1;if(s>0){r.textContent=i$1?i$1.emptyScript:"";for(let i=0;i<s;i++)r.append(t[i],l$1()),C.nextNode(),d.push({type:2,index:++c});r.append(t[s],l$1());}}}else if(8===r.nodeType)if(r.data===o$1)d.push({type:2,index:c});else {let t=-1;for(;-1!==(t=r.data.indexOf(h,t+1));)d.push({type:7,index:c}),t+=h.length-1;}c++;}}static createElement(t,i){const s=r.createElement("template");return s.innerHTML=t,s}}function S(t,i,s=t,e){if(i===T)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=c(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=S(t,h._$AS(t,i.values),h,e)),i}class M{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??r).importNode(i,true);C.currentNode=e;let h=C.nextNode(),o=0,n=0,l=s[0];for(;void 0!==l;){if(o===l.index){let i;2===l.type?i=new R(h,h.nextSibling,this,t):1===l.type?i=new l.ctor(h,l.name,l.strings,this,t):6===l.type&&(i=new z(h,this,t)),this._$AV.push(i),l=s[++n];}o!==l?.index&&(h=C.nextNode(),o++);}return C.currentNode=r,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class R{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=E,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=S(this,t,i),c(t)?t===E||null==t||""===t?(this._$AH!==E&&this._$AR(),this._$AH=E):t!==this._$AH&&t!==T&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):u$1(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==E&&c(this._$AH)?this._$AA.nextSibling.data=t:this.T(r.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=N.createElement(P(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new M(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=A.get(t.strings);return void 0===i&&A.set(t.strings,i=new N(t)),i}k(t){a(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new R(this.O(l$1()),this.O(l$1()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,i){for(this._$AP?.(false,true,i);t&&t!==this._$AB;){const i=t.nextSibling;t.remove(),t=i;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class k{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=E,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=E;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=S(this,t,i,0),o=!c(t)||t!==this._$AH&&t!==T,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=S(this,e[s+n],i,n),r===T&&(r=this._$AH[n]),o||=!c(r)||r!==this._$AH[n],r===E?t=E:t!==E&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===E?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class H extends k{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===E?void 0:t;}}class I extends k{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==E);}}class L extends k{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=S(this,t,i,0)??E)===T)return;const s=this._$AH,e=t===E&&s!==E||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==E&&(s===E||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){S(this,t);}}const j=t$1.litHtmlPolyfillSupport;j?.(N,R),(t$1.litHtmlVersions??=[]).push("3.3.0");
-
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-const t={ATTRIBUTE:1,PROPERTY:3,BOOLEAN_ATTRIBUTE:4},e$1=t=>(...e)=>({_$litDirective$:t,values:e});class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}}
+var ButtonElement = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  CttButton: CttButton
+});
 
 /**
  * @license
  * Copyright 2018 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const e=e$1(class extends i{constructor(t$1){if(super(t$1),t$1.type!==t.ATTRIBUTE||"class"!==t$1.name||t$1.strings?.length>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return " "+Object.keys(t).filter((s=>t[s])).join(" ")+" "}update(s,[i]){if(void 0===this.st){this.st=new Set,void 0!==s.strings&&(this.nt=new Set(s.strings.join(" ").split(/\s/).filter((t=>""!==t))));for(const t in i)i[t]&&!this.nt?.has(t)&&this.st.add(t);return this.render(i)}const r=s.element.classList;for(const t of this.st)t in i||(r.remove(t),this.st.delete(t));for(const t in i){const s=!!i[t];s===this.st.has(t)||this.nt?.has(t)||(s?(r.add(t),this.st.add(t)):(r.remove(t),this.st.delete(t)));}return T}});
+ */const e=e$2(class extends i{constructor(t$1){if(super(t$1),t$1.type!==t.ATTRIBUTE||"class"!==t$1.name||t$1.strings?.length>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return " "+Object.keys(t).filter((s=>t[s])).join(" ")+" "}update(s,[i]){if(void 0===this.st){this.st=new Set,void 0!==s.strings&&(this.nt=new Set(s.strings.join(" ").split(/\s/).filter((t=>""!==t))));for(const t in i)i[t]&&!this.nt?.has(t)&&this.st.add(t);return this.render(i)}const r=s.element.classList;for(const t of this.st)t in i||(r.remove(t),this.st.delete(t));for(const t in i){const s=!!i[t];s===this.st.has(t)||this.nt?.has(t)||(s?(r.add(t),this.st.add(t)):(r.remove(t),this.st.delete(t)));}return T}});
 
 /**
  * @license
@@ -694,10 +892,10 @@ const t={ATTRIBUTE:1,PROPERTY:3,BOOLEAN_ATTRIBUTE:4},e$1=t=>(...e)=>({_$litDirec
  * @license
  * Copyright 2020 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const l=e$1(class extends i{constructor(r){if(super(r),r.type!==t.PROPERTY&&r.type!==t.ATTRIBUTE&&r.type!==t.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!f(r))throw Error("`live` bindings can only contain a single expression")}render(r){return r}update(i,[t$1]){if(t$1===T||t$1===E)return t$1;const o=i.element,l=i.name;if(i.type===t.PROPERTY){if(t$1===o[l])return T}else if(i.type===t.BOOLEAN_ATTRIBUTE){if(!!t$1===o.hasAttribute(l))return T}else if(i.type===t.ATTRIBUTE&&o.getAttribute(l)===t$1+"")return T;return m(i),t$1}});
+ */const l=e$2(class extends i{constructor(r){if(super(r),r.type!==t.PROPERTY&&r.type!==t.ATTRIBUTE&&r.type!==t.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!f(r))throw Error("`live` bindings can only contain a single expression")}render(r){return r}update(i,[t$1]){if(t$1===T||t$1===E)return t$1;const o=i.element,l=i.name;if(i.type===t.PROPERTY){if(t$1===o[l])return T}else if(i.type===t.BOOLEAN_ATTRIBUTE){if(!!t$1===o.hasAttribute(l))return T}else if(i.type===t.ATTRIBUTE&&o.getAttribute(l)===t$1+"")return T;return m(i),t$1}});
 
 /** InputField component with label, error states, and accessibility features */
-const InputField$1 = ({ 
+const InputField = ({ 
   label = '',
   value = '',
   name = '',
@@ -773,44 +971,44 @@ const InputField$1 = ({
   const ariaDescribedByValue = [
     ariaDescribedBy,
     errorId
-  ].filter(Boolean).join(' ') || lit.nothing;
+  ].filter(Boolean).join(' ') || nothing;
 
   // Error icon SVG
-  const errorIcon = lit.html`
+  const errorIcon = html`
     <svg class="ctt-input-field__error-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.25H7.25V9.75H8.75V11.25ZM8.75 8.25H7.25V4.75H8.75V8.25Z" fill="currentColor"/>
     </svg>
   `;
 
-  return lit.html`
+  return html`
     <div 
       class=${e(containerClasses)}
-      style=${styleMap_js.styleMap(containerStyles)}
+      style=${styleMap(containerStyles)}
     >
-      ${label ? lit.html`
+      ${label ? html`
         <label 
           id=${labelId}
           for=${inputId}
           class="ctt-input-field__label"
-          style=${styleMap_js.styleMap(labelStyles)}
+          style=${styleMap(labelStyles)}
         >
-          ${label}${required ? lit.html`<span class="ctt-input-field__required" aria-label="required">*</span>` : lit.nothing}
+          ${label}${required ? html`<span class="ctt-input-field__required" aria-label="required">*</span>` : nothing}
         </label>
-      ` : lit.nothing}
+      ` : nothing}
       
       <input
         id=${inputId}
         name=${name}
         type=${type}
         class=${e(inputClasses)}
-        style=${styleMap_js.styleMap(inputStyles)}
+        style=${styleMap(inputStyles)}
         .value=${l(value)}
-        placeholder=${placeholder || lit.nothing}
+        placeholder=${placeholder || nothing}
         ?disabled=${isDisabled}
         ?required=${required}
         aria-invalid=${hasError ? 'true' : 'false'}
         aria-describedby=${ariaDescribedByValue}
-        aria-labelledby=${label ? labelId : lit.nothing}
+        aria-labelledby=${label ? labelId : nothing}
         @input=${onInput}
         @change=${onChange}
         @focus=${onFocus}
@@ -818,18 +1016,18 @@ const InputField$1 = ({
         ...=${props}
       />
       
-      ${hasError ? lit.html`
+      ${hasError ? html`
         <div 
           id=${errorId}
           class="ctt-input-field__error"
-          style=${styleMap_js.styleMap(errorStyles)}
+          style=${styleMap(errorStyles)}
           role="alert"
           aria-live="polite"
         >
           ${errorIcon}
           <span class="ctt-input-field__error-text">${error}</span>
         </div>
-      ` : lit.nothing}
+      ` : nothing}
     </div>
   `;
 };
@@ -850,7 +1048,7 @@ const InputField$1 = ({
  *   disabled
  * ></ctt-input-field>
  */
-class CttInputField extends lit.LitElement {
+class CttInputField extends LitElement {
   static properties = {
     label: { type: String },
     value: { type: String },
@@ -864,7 +1062,7 @@ class CttInputField extends lit.LitElement {
     id: { type: String },
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: block;
     }
@@ -885,7 +1083,7 @@ class CttInputField extends lit.LitElement {
   }
 
   render() {
-    return InputField$1({
+    return InputField({
       label: this.label,
       value: this.value,
       name: this.name,
@@ -971,8 +1169,13 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-input-fiel
   customElements.define('ctt-input-field', CttInputField);
 }
 
+var InputFieldElement = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  CttInputField: CttInputField
+});
+
 /** TextareaField component with label, error states, and accessibility features */
-const TextareaField$1 = ({ 
+const TextareaField = ({ 
   label = '',
   value = '',
   name = '',
@@ -1049,45 +1252,45 @@ const TextareaField$1 = ({
   const ariaDescribedByValue = [
     ariaDescribedBy,
     errorId
-  ].filter(Boolean).join(' ') || lit.nothing;
+  ].filter(Boolean).join(' ') || nothing;
 
   // Error icon SVG
-  const errorIcon = lit.html`
+  const errorIcon = html`
     <svg class="ctt-textarea-field__error-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.25H7.25V9.75H8.75V11.25ZM8.75 8.25H7.25V4.75H8.75V8.25Z" fill="currentColor"/>
     </svg>
   `;
 
-  return lit.html`
+  return html`
     <div 
       class=${e(containerClasses)}
-      style=${styleMap_js.styleMap(containerStyles)}
+      style=${styleMap(containerStyles)}
     >
-      ${label ? lit.html`
+      ${label ? html`
         <label 
           id=${labelId}
           for=${textareaId}
           class="ctt-textarea-field__label"
-          style=${styleMap_js.styleMap(labelStyles)}
+          style=${styleMap(labelStyles)}
         >
-          ${label}${required ? lit.html`<span class="ctt-textarea-field__required" aria-label="required">*</span>` : lit.nothing}
+          ${label}${required ? html`<span class="ctt-textarea-field__required" aria-label="required">*</span>` : nothing}
         </label>
-      ` : lit.nothing}
+      ` : nothing}
       
       <textarea
         id=${textareaId}
         name=${name}
         class=${e(textareaClasses)}
-        style=${styleMap_js.styleMap(textareaStyles)}
+        style=${styleMap(textareaStyles)}
         .value=${l(value)}
-        placeholder=${placeholder || lit.nothing}
+        placeholder=${placeholder || nothing}
         ?disabled=${isDisabled}
         ?required=${required}
         rows=${rows}
-        cols=${cols || lit.nothing}
+        cols=${cols || nothing}
         aria-invalid=${hasError ? 'true' : 'false'}
         aria-describedby=${ariaDescribedByValue}
-        aria-labelledby=${label ? labelId : lit.nothing}
+        aria-labelledby=${label ? labelId : nothing}
         @input=${onInput}
         @change=${onChange}
         @focus=${onFocus}
@@ -1095,18 +1298,18 @@ const TextareaField$1 = ({
         ...=${props}
       ></textarea>
       
-      ${hasError ? lit.html`
+      ${hasError ? html`
         <div 
           id=${errorId}
           class="ctt-textarea-field__error"
-          style=${styleMap_js.styleMap(errorStyles)}
+          style=${styleMap(errorStyles)}
           role="alert"
           aria-live="polite"
         >
           ${errorIcon}
           <span class="ctt-textarea-field__error-text">${errorText}</span>
         </div>
-      ` : lit.nothing}
+      ` : nothing}
     </div>
   `;
 };
@@ -1136,7 +1339,7 @@ const TextareaField$1 = ({
  * • Events:
  *   – change (fires when user edits)
  */
-class CttTextareaFieldElement extends lit.LitElement {
+class CttTextareaFieldElement extends LitElement {
   static properties = {
     label: { type: String },
     value: { type: String },
@@ -1151,7 +1354,7 @@ class CttTextareaFieldElement extends lit.LitElement {
     id: { type: String },
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: block;
       width: 100%;
@@ -1174,7 +1377,7 @@ class CttTextareaFieldElement extends lit.LitElement {
   }
 
   render() {
-    return TextareaField$1({
+    return TextareaField({
       label: this.label,
       value: this.value,
       name: this.name,
@@ -1261,6 +1464,11 @@ if (typeof customElements !== 'undefined' && !customElements.get('textarea-field
   customElements.define('textarea-field', CttTextareaFieldElement);
 }
 
+var TextareaFieldElement = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  CttTextareaFieldElement: CttTextareaFieldElement
+});
+
 /**
  * @license
  * Copyright 2018 Google LLC
@@ -1284,7 +1492,7 @@ if (typeof customElements !== 'undefined' && !customElements.get('textarea-field
  * @param {string} props.className - Additional CSS classes
  * @returns {TemplateResult} Lit HTML template
  */
-const RadioButton$1 = ({
+const RadioButton = ({
   label = '',
   name = '',
   value = '',
@@ -1319,13 +1527,13 @@ const RadioButton$1 = ({
   const errorId = errorText ? `${id || name || 'radio'}-error` : undefined;
 
   // Error icon SVG
-  const errorIcon = lit.html`
+  const errorIcon = html`
     <svg class="ctt-radio-button__error-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.25H7.25V9.75H8.75V11.25ZM8.75 8.25H7.25V4.75H8.75V8.25Z" fill="currentColor"/>
     </svg>
   `;
 
-  return lit.html`
+  return html`
     <div class=${classes} id=${o(id)} ...=${props}>
       <label class="ctt-radio-button__root">
         <input
@@ -1341,7 +1549,7 @@ const RadioButton$1 = ({
         />
         <span class="ctt-radio-button__label">${label}</span>
       </label>
-      ${errorText ? lit.html`
+      ${errorText ? html`
         <div 
           class="ctt-radio-button__error" 
           id=${errorId}
@@ -1380,7 +1588,7 @@ const RadioButton$1 = ({
  * 
  * @slot error - Custom error message content
  */
-class RadioButtonElement extends lit.LitElement {
+class RadioButtonElement extends LitElement {
   static get properties() {
     return {
       label: { type: String },
@@ -1393,7 +1601,7 @@ class RadioButtonElement extends lit.LitElement {
   }
 
   static get styles() {
-    return lit.css`
+    return css`
       :host {
         display: block;
       }
@@ -1411,7 +1619,7 @@ class RadioButtonElement extends lit.LitElement {
   }
 
   render() {
-    return RadioButton$1({
+    return RadioButton({
       label: this.label,
       name: this.name,
       value: this.value,
@@ -1481,7 +1689,13 @@ if (typeof customElements !== 'undefined') {
   customElements.define('radio-button', RadioButtonElement);
 }
 
-const Header$1 = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
+var RadioButtonElement$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  CttRadioButton: RadioButtonElement,
+  RadioButtonElement: RadioButtonElement
+});
+
+const Header = ({ user, onLogin, onLogout, onCreateAccount }) => html`
   <header>
     <div class="storybook-header">
       <div>
@@ -1505,12 +1719,12 @@ const Header$1 = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
       </div>
       <div>
         ${user
-          ? Button$1({ size: 'small', label: 'Log out' })
-          : lit.html`${Button$1({
+          ? Button({ size: 'small', label: 'Log out' })
+          : html`${Button({
               size: 'small',
               label: 'Log in',
             })}
-            ${Button$1({
+            ${Button({
               size: 'small',
               label: 'Sign up',
             })}`}
@@ -1528,12 +1742,12 @@ const Header$1 = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
  * Usage:
  * <ctt-header user="John Doe"></ctt-header>
  */
-class CttHeader extends lit.LitElement {
+class CttHeader extends LitElement {
   static properties = {
     user: { type: String },
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: block;
     }
@@ -1545,7 +1759,7 @@ class CttHeader extends lit.LitElement {
   }
 
   render() {
-    return Header$1({
+    return Header({
       user: this.user,
       onLogin: () => this._handleLogin(),
       onLogout: () => this._handleLogout(),
@@ -1592,9 +1806,14 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-header')) 
   customElements.define('ctt-header', CttHeader);
 }
 
-const Page$1 = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
+var HeaderElement = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  CttHeader: CttHeader
+});
+
+const Page = ({ user, onLogin, onLogout, onCreateAccount }) => html`
   <article>
-    ${Header$1({
+    ${Header({
       user,
       onLogin,
       onLogout,
@@ -1659,12 +1878,12 @@ const Page$1 = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
  * Usage:
  * <ctt-page user="John Doe"></ctt-page>
  */
-class CttPage extends lit.LitElement {
+class CttPage extends LitElement {
   static properties = {
     user: { type: String },
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: block;
     }
@@ -1676,7 +1895,7 @@ class CttPage extends lit.LitElement {
   }
 
   render() {
-    return Page$1({
+    return Page({
       user: this.user,
       onLogin: () => this._handleLogin(),
       onLogout: () => this._handleLogout(),
@@ -1723,219 +1942,10 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-page')) {
   customElements.define('ctt-page', CttPage);
 }
 
-/**
- * Hook for easier interaction with CTT web components
- * Provides utilities for common patterns like form handling
- */
-const useCttComponent = (componentRef) => {
-  const getValue = React.useCallback(() => {
-    if (!componentRef.current) return undefined;
-    return componentRef.current.value;
-  }, [componentRef]);
-
-  const setValue = React.useCallback((value) => {
-    if (!componentRef.current) return;
-    componentRef.current.value = value;
-  }, [componentRef]);
-
-  const focus = React.useCallback(() => {
-    if (!componentRef.current) return;
-    if (typeof componentRef.current.focus === 'function') {
-      componentRef.current.focus();
-    }
-  }, [componentRef]);
-
-  const blur = React.useCallback(() => {
-    if (!componentRef.current) return;
-    if (typeof componentRef.current.blur === 'function') {
-      componentRef.current.blur();
-    }
-  }, [componentRef]);
-
-  return {
-    getValue,
-    setValue,
-    focus,
-    blur
-  };
-};
-
-/**
- * Hook for handling form data with CTT components
- */
-const useCttForm = (initialValues = {}) => {
-  const formData = React.useRef(initialValues);
-  const listeners = React.useRef(new Map());
-
-  const updateField = React.useCallback((fieldName, value) => {
-    formData.current = {
-      ...formData.current,
-      [fieldName]: value
-    };
-    
-    // Notify listeners
-    const fieldListeners = listeners.current.get(fieldName) || [];
-    fieldListeners.forEach(callback => callback(value));
-  }, []);
-
-  const handleFieldChange = React.useCallback((fieldName) => (event) => {
-    const value = event.detail?.value || event.target?.value;
-    updateField(fieldName, value);
-  }, [updateField]);
-
-  const getFieldValue = React.useCallback((fieldName) => {
-    return formData.current[fieldName];
-  }, []);
-
-  const getAllValues = React.useCallback(() => {
-    return { ...formData.current };
-  }, []);
-
-  const reset = React.useCallback((newValues = initialValues) => {
-    formData.current = { ...newValues };
-  }, [initialValues]);
-
-  const subscribe = React.useCallback((fieldName, callback) => {
-    if (!listeners.current.has(fieldName)) {
-      listeners.current.set(fieldName, []);
-    }
-    listeners.current.get(fieldName).push(callback);
-
-    // Return unsubscribe function
-    return () => {
-      const fieldListeners = listeners.current.get(fieldName);
-      if (fieldListeners) {
-        const index = fieldListeners.indexOf(callback);
-        if (index > -1) {
-          fieldListeners.splice(index, 1);
-        }
-      }
-    };
-  }, []);
-
-  return {
-    handleFieldChange,
-    getFieldValue,
-    getAllValues,
-    updateField,
-    reset,
-    subscribe
-  };
-};
-
-// React wrappers for CTT Design System Web Components
-
-/**
- * Generic wrapper for web components that handles React-specific concerns
- */
-const createWebComponentWrapper = (tagName, propMap = {}) => {
-  return React.forwardRef((props, ref) => {
-    const elementRef = React.useRef();
-    const { children, ...webComponentProps } = props;
-
-    // Combine forwarded ref with internal ref
-    const combinedRef = (element) => {
-      elementRef.current = element;
-      if (ref) {
-        if (typeof ref === 'function') {
-          ref(element);
-        } else {
-          ref.current = element;
-        }
-      }
-    };
-
-    // Handle event listeners
-    React.useEffect(() => {
-      const element = elementRef.current;
-      if (!element) return;
-
-      const eventListeners = {};
-
-      // Set up event listeners for React event handlers
-      Object.entries(webComponentProps).forEach(([key, value]) => {
-        if (key.startsWith('on') && typeof value === 'function') {
-          const eventName = key.slice(2).toLowerCase();
-          const customEventName = `ctt-${eventName}`;
-          
-          const handler = (event) => {
-            // Call the React event handler with the custom event
-            value(event);
-          };
-
-          element.addEventListener(customEventName, handler);
-          eventListeners[customEventName] = handler;
-        }
-      });
-
-      // Cleanup function
-      return () => {
-        Object.entries(eventListeners).forEach(([eventName, handler]) => {
-          element.removeEventListener(eventName, handler);
-        });
-      };
-    }, [webComponentProps]);
-
-    // Convert React props to web component attributes
-    const webComponentAttributes = {};
-    Object.entries(webComponentProps).forEach(([key, value]) => {
-      // Skip React event handlers - they're handled above
-      if (key.startsWith('on') && typeof value === 'function') {
-        return;
-      }
-
-      // Map React prop names to web component attribute names
-      const mappedKey = propMap[key] || key;
-      
-      // Convert camelCase to kebab-case for attributes
-      const attributeName = mappedKey.replace(/([A-Z])/g, '-$1').toLowerCase();
-      
-      // Handle boolean attributes
-      if (typeof value === 'boolean') {
-        if (value) {
-          webComponentAttributes[attributeName] = '';
-        }
-      } else if (value !== undefined && value !== null) {
-        webComponentAttributes[attributeName] = value;
-      }
-    });
-
-    return React.createElement(tagName, {
-      ...webComponentAttributes,
-      ref: combinedRef
-    }, children);
-  });
-};
-
-// Create React wrappers for all components
-const Button = createWebComponentWrapper('ctt-button', {
-  onClick: 'click'
+var PageElement = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  CttPage: CttPage
 });
 
-const InputField = createWebComponentWrapper('ctt-input-field', {
-  onChange: 'change',
-  onInput: 'input'
-});
-
-const TextareaField = createWebComponentWrapper('ctt-textarea-field', {
-  onChange: 'change',
-  onInput: 'input'
-});
-
-const RadioButton = createWebComponentWrapper('ctt-radio-button', {
-  onChange: 'change'
-});
-
-const Header = createWebComponentWrapper('ctt-header');
-
-const Page = createWebComponentWrapper('ctt-page');
-
-exports.Button = Button;
-exports.Header = Header;
-exports.InputField = InputField;
-exports.Page = Page;
-exports.RadioButton = RadioButton;
-exports.TextareaField = TextareaField;
-exports.useCttComponent = useCttComponent;
-exports.useCttForm = useCttForm;
+export { getCriticalCSS, getFontPreloadLinks, renderCttButton, renderCttComponent, renderCttHeader, renderCttInputField, renderCttPage, renderCttRadioButton, renderCttTextareaField };
 //# sourceMappingURL=index.js.map

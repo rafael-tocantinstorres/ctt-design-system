@@ -147,7 +147,7 @@ class CttTextareaFieldElement extends LitElement {
 }
 
 // Register custom element with the specified tag name
-if (!customElements.get('textarea-field')) {
+if (typeof customElements !== 'undefined' && !customElements.get('textarea-field')) {
   customElements.define('textarea-field', CttTextareaFieldElement);
 }
 

@@ -9,6 +9,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "node": "./dist/index.node.js",
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
     },
@@ -21,6 +22,14 @@
     "./tokens": {
       "import": "./dist/tokens/index.esm.js",
       "require": "./dist/tokens/index.js"
+    },
+    "./ssr": {
+      "types": "./dist/ssr/index.d.ts",
+      "import": "./dist/ssr/index.js"
+    },
+    "./button": {
+      "node": "./dist/button.node.js",
+      "default": "./dist/button.js"
     },
     "./css": "./dist/styles.css",
     "./fonts.css": "./dist/fonts.css",
@@ -82,7 +91,8 @@
   },
   "peerDependencies": {
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "@lit-labs/ssr": "^3.0.0"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -90,10 +100,14 @@
     },
     "react-dom": {
       "optional": true
+    },
+    "@lit-labs/ssr": {
+      "optional": true
     }
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.0",
+    "@lit-labs/ssr": "^3.0.0",
     "@playwright/test": "^1.53.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",

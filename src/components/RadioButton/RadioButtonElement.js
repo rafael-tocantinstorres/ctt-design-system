@@ -122,7 +122,9 @@ export class RadioButtonElement extends LitElement {
 }
 
 // Register the custom element
-customElements.define('radio-button', RadioButtonElement);
+if (typeof customElements !== 'undefined') {
+  customElements.define('radio-button', RadioButtonElement);
+}
 
 // Export for use in other modules
 export { RadioButtonElement as CttRadioButton };

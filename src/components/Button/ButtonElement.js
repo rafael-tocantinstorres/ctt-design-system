@@ -88,8 +88,8 @@ class CttButton extends LitElement {
   }
 }
 
-// Register custom element
-if (!customElements.get('ctt-button')) {
+// Register custom element (browser only)
+if (typeof customElements !== 'undefined' && !customElements.get('ctt-button')) {
   customElements.define('ctt-button', CttButton);
 }
 

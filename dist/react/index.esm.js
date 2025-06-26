@@ -657,8 +657,8 @@ class CttButton extends LitElement {
   }
 }
 
-// Register custom element
-if (!customElements.get('ctt-button')) {
+// Register custom element (browser only)
+if (typeof customElements !== 'undefined' && !customElements.get('ctt-button')) {
   customElements.define('ctt-button', CttButton);
 }
 
@@ -965,7 +965,7 @@ class CttInputField extends LitElement {
 }
 
 // Register custom element
-if (!customElements.get('ctt-input-field')) {
+if (typeof customElements !== 'undefined' && !customElements.get('ctt-input-field')) {
   customElements.define('ctt-input-field', CttInputField);
 }
 
@@ -1255,7 +1255,7 @@ class CttTextareaFieldElement extends LitElement {
 }
 
 // Register custom element with the specified tag name
-if (!customElements.get('textarea-field')) {
+if (typeof customElements !== 'undefined' && !customElements.get('textarea-field')) {
   customElements.define('textarea-field', CttTextareaFieldElement);
 }
 
@@ -1475,7 +1475,9 @@ class RadioButtonElement extends LitElement {
 }
 
 // Register the custom element
-customElements.define('radio-button', RadioButtonElement);
+if (typeof customElements !== 'undefined') {
+  customElements.define('radio-button', RadioButtonElement);
+}
 
 const Header$1 = ({ user, onLogin, onLogout, onCreateAccount }) => html`
   <header>
@@ -1584,7 +1586,7 @@ class CttHeader extends LitElement {
 }
 
 // Register custom element
-if (!customElements.get('ctt-header')) {
+if (typeof customElements !== 'undefined' && !customElements.get('ctt-header')) {
   customElements.define('ctt-header', CttHeader);
 }
 
@@ -1715,7 +1717,7 @@ class CttPage extends LitElement {
 }
 
 // Register custom element
-if (!customElements.get('ctt-page')) {
+if (typeof customElements !== 'undefined' && !customElements.get('ctt-page')) {
   customElements.define('ctt-page', CttPage);
 }
 

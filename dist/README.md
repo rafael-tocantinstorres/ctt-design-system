@@ -184,6 +184,68 @@ const buttonStyles = {
 import tokens from '@ctt/design-system/tokens.json';
 ```
 
+### Server-Side Rendering (SSR)
+
+Full SSR support with deep Shadow DOM rendering for Next.js, Node.js, and other server environments.
+
+**Installation:**
+```bash
+npm install ctt-design-system @lit-labs/ssr
+```
+
+**Next.js Example:**
+```javascript
+// pages/index.js
+import { renderCttButton, renderCttInputField, getCriticalCSS } from 'ctt-design-system/ssr';
+
+export async function getServerSideProps() {
+  const buttonHtml = await renderCttButton({
+    variant: 'primary',
+    size: 'medium',
+    label: 'Server Rendered Button'
+  });
+  
+  const inputHtml = await renderCttInputField({
+    placeholder: 'Enter your name',
+    type: 'text'
+  });
+  
+  return {
+    props: { buttonHtml, inputHtml, criticalCSS: getCriticalCSS() }
+  };
+}
+
+export default function HomePage({ buttonHtml, inputHtml, criticalCSS }) {
+  return (
+    <>
+      <Head>
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <link rel="stylesheet" href="/node_modules/ctt-design-system/dist/styles.css" />
+      </Head>
+      
+      <div dangerouslySetInnerHTML={{ __html: buttonHtml }} />
+      <div dangerouslySetInnerHTML={{ __html: inputHtml }} />
+      
+      {/* Client-side hydration */}
+      <script type="module" src="/node_modules/ctt-design-system/dist/index.esm.js" />
+    </>
+  );
+}
+```
+
+**Available SSR Functions:**
+- `renderCttButton(props)` - Render button component
+- `renderCttInputField(props)` - Render input field component  
+- `renderCttTextareaField(props)` - Render textarea component
+- `renderCttRadioButton(props)` - Render radio button component
+- `renderCttHeader(props)` - Render header component
+- `renderCttPage(props)` - Render page component
+- `renderCttComponent(tagName, props)` - Generic component renderer
+- `getCriticalCSS()` - Get critical CSS for inline styles
+- `getFontPreloadLinks()` - Get font preload link tags
+
+📚 **See [SSR-NEXTJS-GUIDE.md](./SSR-NEXTJS-GUIDE.md) for complete documentation and examples.**
+
 ## Available Components
 
 - `<ctt-button>` - Button component with various sizes and styles

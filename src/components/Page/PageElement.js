@@ -70,7 +70,7 @@ class CttPage extends LitElement {
 }
 
 // Register custom element
-if (!customElements.get('ctt-page')) {
+if (typeof customElements !== 'undefined' && !customElements.get('ctt-page')) {
   customElements.define('ctt-page', CttPage);
 }
 

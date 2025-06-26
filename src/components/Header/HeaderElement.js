@@ -70,7 +70,7 @@ class CttHeader extends LitElement {
 }
 
 // Register custom element
-if (!customElements.get('ctt-header')) {
+if (typeof customElements !== 'undefined' && !customElements.get('ctt-header')) {
   customElements.define('ctt-header', CttHeader);
 }
 

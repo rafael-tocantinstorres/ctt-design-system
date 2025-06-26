@@ -1,7 +1,5 @@
-'use strict';
-
-var lit = require('lit');
-var styleMap_js = require('lit/directives/style-map.js');
+import { html, LitElement, css, nothing } from 'lit';
+import { styleMap } from 'lit/directives/style-map.js';
 
 /**
  * @license
@@ -81,13 +79,13 @@ const RadioButton = ({
   const errorId = errorText ? `${id || name || 'radio'}-error` : undefined;
 
   // Error icon SVG
-  const errorIcon = lit.html`
+  const errorIcon = html`
     <svg class="ctt-radio-button__error-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.25H7.25V9.75H8.75V11.25ZM8.75 8.25H7.25V4.75H8.75V8.25Z" fill="currentColor"/>
     </svg>
   `;
 
-  return lit.html`
+  return html`
     <div class=${classes} id=${o$1(id)} ...=${props}>
       <label class="ctt-radio-button__root">
         <input
@@ -103,7 +101,7 @@ const RadioButton = ({
         />
         <span class="ctt-radio-button__label">${label}</span>
       </label>
-      ${errorText ? lit.html`
+      ${errorText ? html`
         <div 
           class="ctt-radio-button__error" 
           id=${errorId}
@@ -117,6 +115,131 @@ const RadioButton = ({
     </div>
   `;
 };
+
+/**
+ * RadioButton Web Component
+ * 
+ * A reusable radio button component with proper accessibility,
+ * error states, and design system integration.
+ * 
+ * @element radio-button
+ * 
+ * @attr {string} label - Label text for the radio button
+ * @attr {string} name - Name attribute for form grouping
+ * @attr {string} value - Value of the radio button
+ * @attr {boolean} checked - Whether the radio button is checked
+ * @attr {boolean} disabled - Whether the radio button is disabled
+ * @attr {string} errorText - Error message to display
+ * 
+ * @fires change - Fired when the radio button state changes
+ * 
+ * @csspart root - The root label element
+ * @csspart control - The radio input element
+ * @csspart label - The label text element
+ * @csspart error - The error message container
+ * 
+ * @slot error - Custom error message content
+ */
+class RadioButtonElement extends LitElement {
+  static get properties() {
+    return {
+      label: { type: String },
+      name: { type: String },
+      value: { type: String },
+      checked: { type: Boolean, reflect: true },
+      disabled: { type: Boolean, reflect: true },
+      errorText: { type: String, attribute: 'error-text' },
+    };
+  }
+
+  static get styles() {
+    return css`
+      :host {
+        display: block;
+      }
+    `;
+  }
+
+  constructor() {
+    super();
+    this.label = '';
+    this.name = '';
+    this.value = '';
+    this.checked = false;
+    this.disabled = false;
+    this.errorText = '';
+  }
+
+  render() {
+    return RadioButton({
+      label: this.label,
+      name: this.name,
+      value: this.value,
+      checked: this.checked,
+      disabled: this.disabled,
+      errorText: this.errorText,
+      onChange: this._handleChange.bind(this),
+      id: this.id || `radio-${this.name}-${this.value}`,
+    });
+  }
+
+  /**
+   * Handle radio button change event
+   * @param {Event} event - The change event
+   * @private
+   */
+  _handleChange(event) {
+    if (this.disabled) {
+      event.preventDefault();
+      return;
+    }
+
+    this.checked = event.detail.checked;
+    
+    // Dispatch custom change event with details
+    this.dispatchEvent(new CustomEvent('ctt-change', {
+      detail: {
+        name: this.name,
+        value: this.value,
+        checked: this.checked,
+        originalEvent: event.detail.originalEvent
+      },
+      bubbles: true,
+      composed: true
+    }));
+  }
+
+  /**
+   * Focus the radio button input
+   */
+  focus() {
+    const input = this.shadowRoot.querySelector('.ctt-radio-button__control');
+    if (input) {
+      input.focus();
+    }
+  }
+
+  /**
+   * Get the form value for this radio button
+   * @returns {string|null} The value if checked, null otherwise
+   */
+  get formValue() {
+    return this.checked ? this.value : null;
+  }
+
+  /**
+   * Check if this radio button is valid
+   * @returns {boolean} True if valid, false otherwise
+   */
+  get validity() {
+    return !this.errorText;
+  }
+}
+
+// Register the custom element
+if (typeof customElements !== 'undefined') {
+  customElements.define('radio-button', RadioButtonElement);
+}
 
 /**
  * @license
@@ -724,45 +847,45 @@ const TextareaField = ({
   const ariaDescribedByValue = [
     ariaDescribedBy,
     errorId
-  ].filter(Boolean).join(' ') || lit.nothing;
+  ].filter(Boolean).join(' ') || nothing;
 
   // Error icon SVG
-  const errorIcon = lit.html`
+  const errorIcon = html`
     <svg class="ctt-textarea-field__error-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.25H7.25V9.75H8.75V11.25ZM8.75 8.25H7.25V4.75H8.75V8.25Z" fill="currentColor"/>
     </svg>
   `;
 
-  return lit.html`
+  return html`
     <div 
       class=${e$1(containerClasses)}
-      style=${styleMap_js.styleMap(containerStyles)}
+      style=${styleMap(containerStyles)}
     >
-      ${label ? lit.html`
+      ${label ? html`
         <label 
           id=${labelId}
           for=${textareaId}
           class="ctt-textarea-field__label"
-          style=${styleMap_js.styleMap(labelStyles)}
+          style=${styleMap(labelStyles)}
         >
-          ${label}${required ? lit.html`<span class="ctt-textarea-field__required" aria-label="required">*</span>` : lit.nothing}
+          ${label}${required ? html`<span class="ctt-textarea-field__required" aria-label="required">*</span>` : nothing}
         </label>
-      ` : lit.nothing}
+      ` : nothing}
       
       <textarea
         id=${textareaId}
         name=${name}
         class=${e$1(textareaClasses)}
-        style=${styleMap_js.styleMap(textareaStyles)}
+        style=${styleMap(textareaStyles)}
         .value=${l(value)}
-        placeholder=${placeholder || lit.nothing}
+        placeholder=${placeholder || nothing}
         ?disabled=${isDisabled}
         ?required=${required}
         rows=${rows}
-        cols=${cols || lit.nothing}
+        cols=${cols || nothing}
         aria-invalid=${hasError ? 'true' : 'false'}
         aria-describedby=${ariaDescribedByValue}
-        aria-labelledby=${label ? labelId : lit.nothing}
+        aria-labelledby=${label ? labelId : nothing}
         @input=${onInput}
         @change=${onChange}
         @focus=${onFocus}
@@ -770,467 +893,21 @@ const TextareaField = ({
         ...=${props}
       ></textarea>
       
-      ${hasError ? lit.html`
+      ${hasError ? html`
         <div 
           id=${errorId}
           class="ctt-textarea-field__error"
-          style=${styleMap_js.styleMap(errorStyles)}
+          style=${styleMap(errorStyles)}
           role="alert"
           aria-live="polite"
         >
           ${errorIcon}
           <span class="ctt-textarea-field__error-text">${errorText}</span>
         </div>
-      ` : lit.nothing}
+      ` : nothing}
     </div>
   `;
 };
-
-/** InputField component with label, error states, and accessibility features */
-const InputField = ({ 
-  label = '',
-  value = '',
-  name = '',
-  type = 'text',
-  placeholder = '',
-  error = null,
-  disabled = false,
-  required = false,
-  size = 'medium',
-  id = null,
-  onInput = null,
-  onChange = null,
-  onFocus = null,
-  onBlur = null,
-  ariaDescribedBy = null,
-  ...props 
-}) => {
-  // Generate unique IDs for accessibility
-  const inputId = id || `ctt-input-${Math.random().toString(36).substr(2, 9)}`;
-  const errorId = error ? `${inputId}-error` : null;
-  const labelId = `${inputId}-label`;
-  
-  // Determine the current state for styling
-  const hasError = Boolean(error);
-  const isDisabled = Boolean(disabled);
-  
-  // Get typography tokens for the size
-  const typography = typographyHelpers.getTypographyScale('bodyMedium');
-  const labelTypography = typographyHelpers.getTypographyScale('labelMedium');
-  
-  // Create style objects with tokens
-  const containerStyles = {
-    fontFamily: typography.fontFamily || tokens.typography.fontFamilies.body,
-  };
-  
-  const labelStyles = {
-    fontFamily: labelTypography.fontFamily || tokens.typography.fontFamilies.label,
-    fontSize: labelTypography.fontSize,
-    fontWeight: labelTypography.fontWeight,
-    lineHeight: labelTypography.lineHeight,
-  };
-  
-  const inputStyles = {
-    fontFamily: typography.fontFamily || tokens.typography.fontFamilies.body,
-    fontSize: typography.fontSize,
-    fontWeight: typography.fontWeight,
-    lineHeight: typography.lineHeight,
-  };
-  
-  const errorStyles = {
-    fontFamily: tokens.typography.fontFamilies.body,
-    fontSize: tokens.typography.fontSizes.s, // 12px
-    fontWeight: tokens.typography.fontWeights.normal,
-    lineHeight: tokens.typography.lineHeights.s,
-  };
-
-  // Build CSS classes for container
-  const containerClasses = {
-    'ctt-input-field': true,
-    [`ctt-input-field--${size}`]: true,
-    'ctt-input-field--error': hasError,
-    'ctt-input-field--disabled': isDisabled,
-  };
-
-  // Build CSS classes for input
-  const inputClasses = {
-    'ctt-input-field__input': true,
-    'ctt-input-field__input--error': hasError,
-    'ctt-input-field__input--disabled': isDisabled,
-  };
-
-  // Build aria-describedby attribute
-  const ariaDescribedByValue = [
-    ariaDescribedBy,
-    errorId
-  ].filter(Boolean).join(' ') || lit.nothing;
-
-  // Error icon SVG
-  const errorIcon = lit.html`
-    <svg class="ctt-input-field__error-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.25H7.25V9.75H8.75V11.25ZM8.75 8.25H7.25V4.75H8.75V8.25Z" fill="currentColor"/>
-    </svg>
-  `;
-
-  return lit.html`
-    <div 
-      class=${e$1(containerClasses)}
-      style=${styleMap_js.styleMap(containerStyles)}
-    >
-      ${label ? lit.html`
-        <label 
-          id=${labelId}
-          for=${inputId}
-          class="ctt-input-field__label"
-          style=${styleMap_js.styleMap(labelStyles)}
-        >
-          ${label}${required ? lit.html`<span class="ctt-input-field__required" aria-label="required">*</span>` : lit.nothing}
-        </label>
-      ` : lit.nothing}
-      
-      <input
-        id=${inputId}
-        name=${name}
-        type=${type}
-        class=${e$1(inputClasses)}
-        style=${styleMap_js.styleMap(inputStyles)}
-        .value=${l(value)}
-        placeholder=${placeholder || lit.nothing}
-        ?disabled=${isDisabled}
-        ?required=${required}
-        aria-invalid=${hasError ? 'true' : 'false'}
-        aria-describedby=${ariaDescribedByValue}
-        aria-labelledby=${label ? labelId : lit.nothing}
-        @input=${onInput}
-        @change=${onChange}
-        @focus=${onFocus}
-        @blur=${onBlur}
-        ...=${props}
-      />
-      
-      ${hasError ? lit.html`
-        <div 
-          id=${errorId}
-          class="ctt-input-field__error"
-          style=${styleMap_js.styleMap(errorStyles)}
-          role="alert"
-          aria-live="polite"
-        >
-          ${errorIcon}
-          <span class="ctt-input-field__error-text">${error}</span>
-        </div>
-      ` : lit.nothing}
-    </div>
-  `;
-};
-
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */class e extends i{constructor(i){if(super(i),this.it=E,i.type!==t.CHILD)throw Error(this.constructor.directiveName+"() can only be used in child bindings")}render(r){if(r===E||null==r)return this._t=void 0,this.it=r;if(r===T)return r;if("string"!=typeof r)throw Error(this.constructor.directiveName+"() called with a non-string value");if(r===this.it)return this._t;this.it=r;const s=[r];return s.raw=s,this._t={_$litType$:this.constructor.resultType,strings:s,values:[]}}}e.directiveName="unsafeHTML",e.resultType=1;const o=e$2(e);
-
-/** Primary UI component for user interaction */
-const Button = ({ 
-  variant = 'primary',
-  size = 'medium', 
-  label, 
-  onclick,
-  iconLeft = false,
-  iconLeftElement = '',
-  iconRight = false,
-  iconRightElement = '',
-  borderRadius = 'pill',
-  backgroundColor = null,
-  disabled = false,
-  ariaLabel = null
-}) => {
-  
-  // Get typography tokens for the size
-  const typography = typographyHelpers.getButtonTypography(size);
-  
-  // Create style object with tokens and user overrides
-  const buttonStyles = {
-    fontFamily: typography.fontFamily || tokens.typography.fontFamilies.label,
-    fontSize: typography.fontSize,
-    fontWeight: typography.fontWeight,
-    lineHeight: typography.lineHeight,
-    ...(backgroundColor && { backgroundColor }),
-  };
-
-  // Map borderRadius values to CSS class names
-  const borderRadiusClass = {
-    'pill': 'pill',
-    'small': 'small-radius',
-    'extraSmall': 'extra-small-radius'
-  }[borderRadius] || 'pill';
-
-  // Build CSS classes
-  const classes = [
-    'ctt-button',
-    `ctt-button--${size}`,
-    `ctt-button--${variant}`,
-    `ctt-button--${borderRadiusClass}`
-  ].join(' ');
-
-  // Render button content with icons
-  const renderContent = () => {
-    const parts = [];
-    
-    if (iconLeft && iconLeftElement) {
-      parts.push(lit.html`<span class="ctt-button__icon ctt-button__icon--left">${o(iconLeftElement)}</span>`);
-    }
-    
-    if (label) {
-      parts.push(lit.html`<span class="ctt-button__label">${label}</span>`);
-    }
-    
-    if (iconRight && iconRightElement) {
-      parts.push(lit.html`<span class="ctt-button__icon ctt-button__icon--right">${o(iconRightElement)}</span>`);
-    }
-    
-    return parts;
-  };
-
-  // Determine accessible name - use ariaLabel if provided, otherwise use label
-  // For icon-only buttons, ariaLabel should be provided
-  const accessibleName = ariaLabel || label;
-  const hasVisibleLabel = label && label.trim().length > 0;
-
-  return lit.html`
-    <button
-      type="button"
-      class=${classes}
-      style=${styleMap_js.styleMap(buttonStyles)}
-      ?disabled=${disabled}
-      aria-label=${!hasVisibleLabel && accessibleName ? accessibleName : lit.nothing}
-      @click=${onclick}
-    >
-      ${renderContent()}
-    </button>
-  `;
-};
-
-const Header = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
-  <header>
-    <div class="storybook-header">
-      <div>
-        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none" fillRule="evenodd">
-            <path
-              d="M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z"
-              fill="#FFF"
-            />
-            <path
-              d="M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z"
-              fill="#555AB9"
-            />
-            <path
-              d="M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z"
-              fill="#91BAF8"
-            />
-          </g>
-        </svg>
-        <h1>Acme</h1>
-      </div>
-      <div>
-        ${user
-          ? Button({ size: 'small', label: 'Log out' })
-          : lit.html`${Button({
-              size: 'small',
-              label: 'Log in',
-            })}
-            ${Button({
-              size: 'small',
-              label: 'Sign up',
-            })}`}
-      </div>
-    </div>
-  </header>
-`;
-
-const Page = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
-  <article>
-    ${Header({
-      user,
-      onLogin,
-      onLogout,
-      onCreateAccount,
-    })}
-
-    <section class="storybook-page">
-      <h2>Pages in Storybook</h2>
-      <p>
-        We recommend building UIs with a
-        <a href="https://componentdriven.org" target="_blank" rel="noopener noreferrer">
-          <strong>component-driven</strong> </a
-        >process starting with atomic components and ending with pages.
-      </p>
-      <p>
-        Render pages with mock data. This makes it easy to build and review page states without
-        needing to navigate to them in your app. Here are some handy patterns for managing page data
-        in Storybook:
-      </p>
-      <ul>
-        <li>
-          Use a higher-level connected component. Storybook helps you compose such data from the
-          "args" of child component stories
-        </li>
-        <li>
-          Assemble data in the page component from your services. You can mock these services out
-          using Storybook.
-        </li>
-      </ul>
-      <p>
-        Get a guided tutorial on component-driven development at
-        <a href="https://storybook.js.org/tutorials/" target="_blank" rel="noopener noreferrer">
-          Storybook tutorials
-        </a>
-        . Read more in the
-        <a href="https://storybook.js.org/docs" target="_blank" rel="noopener noreferrer"> docs </a>
-        .
-      </p>
-      <div class="tip-wrapper">
-        <span class="tip">Tip</span> Adjust the width of the canvas with the
-        <svg width="10" height="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none" fillRule="evenodd">
-            <path
-              d="M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z"
-              id="a"
-              fill="#999"
-            />
-          </g>
-        </svg>
-        Viewports addon in the toolbar
-      </div>
-    </section>
-  </article>
-`;
-
-/**
- * RadioButton Web Component
- * 
- * A reusable radio button component with proper accessibility,
- * error states, and design system integration.
- * 
- * @element radio-button
- * 
- * @attr {string} label - Label text for the radio button
- * @attr {string} name - Name attribute for form grouping
- * @attr {string} value - Value of the radio button
- * @attr {boolean} checked - Whether the radio button is checked
- * @attr {boolean} disabled - Whether the radio button is disabled
- * @attr {string} errorText - Error message to display
- * 
- * @fires change - Fired when the radio button state changes
- * 
- * @csspart root - The root label element
- * @csspart control - The radio input element
- * @csspart label - The label text element
- * @csspart error - The error message container
- * 
- * @slot error - Custom error message content
- */
-class RadioButtonElement extends lit.LitElement {
-  static get properties() {
-    return {
-      label: { type: String },
-      name: { type: String },
-      value: { type: String },
-      checked: { type: Boolean, reflect: true },
-      disabled: { type: Boolean, reflect: true },
-      errorText: { type: String, attribute: 'error-text' },
-    };
-  }
-
-  static get styles() {
-    return lit.css`
-      :host {
-        display: block;
-      }
-    `;
-  }
-
-  constructor() {
-    super();
-    this.label = '';
-    this.name = '';
-    this.value = '';
-    this.checked = false;
-    this.disabled = false;
-    this.errorText = '';
-  }
-
-  render() {
-    return RadioButton({
-      label: this.label,
-      name: this.name,
-      value: this.value,
-      checked: this.checked,
-      disabled: this.disabled,
-      errorText: this.errorText,
-      onChange: this._handleChange.bind(this),
-      id: this.id || `radio-${this.name}-${this.value}`,
-    });
-  }
-
-  /**
-   * Handle radio button change event
-   * @param {Event} event - The change event
-   * @private
-   */
-  _handleChange(event) {
-    if (this.disabled) {
-      event.preventDefault();
-      return;
-    }
-
-    this.checked = event.detail.checked;
-    
-    // Dispatch custom change event with details
-    this.dispatchEvent(new CustomEvent('ctt-change', {
-      detail: {
-        name: this.name,
-        value: this.value,
-        checked: this.checked,
-        originalEvent: event.detail.originalEvent
-      },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
-  /**
-   * Focus the radio button input
-   */
-  focus() {
-    const input = this.shadowRoot.querySelector('.ctt-radio-button__control');
-    if (input) {
-      input.focus();
-    }
-  }
-
-  /**
-   * Get the form value for this radio button
-   * @returns {string|null} The value if checked, null otherwise
-   */
-  get formValue() {
-    return this.checked ? this.value : null;
-  }
-
-  /**
-   * Check if this radio button is valid
-   * @returns {boolean} True if valid, false otherwise
-   */
-  get validity() {
-    return !this.errorText;
-  }
-}
-
-// Register the custom element
-if (typeof customElements !== 'undefined') {
-  customElements.define('radio-button', RadioButtonElement);
-}
 
 /**
  * TextareaField Web Component
@@ -1257,7 +934,7 @@ if (typeof customElements !== 'undefined') {
  * • Events:
  *   – change (fires when user edits)
  */
-class CttTextareaFieldElement extends lit.LitElement {
+class CttTextareaFieldElement extends LitElement {
   static properties = {
     label: { type: String },
     value: { type: String },
@@ -1272,7 +949,7 @@ class CttTextareaFieldElement extends lit.LitElement {
     id: { type: String },
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: block;
       width: 100%;
@@ -1382,6 +1059,144 @@ if (typeof customElements !== 'undefined' && !customElements.get('textarea-field
   customElements.define('textarea-field', CttTextareaFieldElement);
 }
 
+/** InputField component with label, error states, and accessibility features */
+const InputField = ({ 
+  label = '',
+  value = '',
+  name = '',
+  type = 'text',
+  placeholder = '',
+  error = null,
+  disabled = false,
+  required = false,
+  size = 'medium',
+  id = null,
+  onInput = null,
+  onChange = null,
+  onFocus = null,
+  onBlur = null,
+  ariaDescribedBy = null,
+  ...props 
+}) => {
+  // Generate unique IDs for accessibility
+  const inputId = id || `ctt-input-${Math.random().toString(36).substr(2, 9)}`;
+  const errorId = error ? `${inputId}-error` : null;
+  const labelId = `${inputId}-label`;
+  
+  // Determine the current state for styling
+  const hasError = Boolean(error);
+  const isDisabled = Boolean(disabled);
+  
+  // Get typography tokens for the size
+  const typography = typographyHelpers.getTypographyScale('bodyMedium');
+  const labelTypography = typographyHelpers.getTypographyScale('labelMedium');
+  
+  // Create style objects with tokens
+  const containerStyles = {
+    fontFamily: typography.fontFamily || tokens.typography.fontFamilies.body,
+  };
+  
+  const labelStyles = {
+    fontFamily: labelTypography.fontFamily || tokens.typography.fontFamilies.label,
+    fontSize: labelTypography.fontSize,
+    fontWeight: labelTypography.fontWeight,
+    lineHeight: labelTypography.lineHeight,
+  };
+  
+  const inputStyles = {
+    fontFamily: typography.fontFamily || tokens.typography.fontFamilies.body,
+    fontSize: typography.fontSize,
+    fontWeight: typography.fontWeight,
+    lineHeight: typography.lineHeight,
+  };
+  
+  const errorStyles = {
+    fontFamily: tokens.typography.fontFamilies.body,
+    fontSize: tokens.typography.fontSizes.s, // 12px
+    fontWeight: tokens.typography.fontWeights.normal,
+    lineHeight: tokens.typography.lineHeights.s,
+  };
+
+  // Build CSS classes for container
+  const containerClasses = {
+    'ctt-input-field': true,
+    [`ctt-input-field--${size}`]: true,
+    'ctt-input-field--error': hasError,
+    'ctt-input-field--disabled': isDisabled,
+  };
+
+  // Build CSS classes for input
+  const inputClasses = {
+    'ctt-input-field__input': true,
+    'ctt-input-field__input--error': hasError,
+    'ctt-input-field__input--disabled': isDisabled,
+  };
+
+  // Build aria-describedby attribute
+  const ariaDescribedByValue = [
+    ariaDescribedBy,
+    errorId
+  ].filter(Boolean).join(' ') || nothing;
+
+  // Error icon SVG
+  const errorIcon = html`
+    <svg class="ctt-input-field__error-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.25H7.25V9.75H8.75V11.25ZM8.75 8.25H7.25V4.75H8.75V8.25Z" fill="currentColor"/>
+    </svg>
+  `;
+
+  return html`
+    <div 
+      class=${e$1(containerClasses)}
+      style=${styleMap(containerStyles)}
+    >
+      ${label ? html`
+        <label 
+          id=${labelId}
+          for=${inputId}
+          class="ctt-input-field__label"
+          style=${styleMap(labelStyles)}
+        >
+          ${label}${required ? html`<span class="ctt-input-field__required" aria-label="required">*</span>` : nothing}
+        </label>
+      ` : nothing}
+      
+      <input
+        id=${inputId}
+        name=${name}
+        type=${type}
+        class=${e$1(inputClasses)}
+        style=${styleMap(inputStyles)}
+        .value=${l(value)}
+        placeholder=${placeholder || nothing}
+        ?disabled=${isDisabled}
+        ?required=${required}
+        aria-invalid=${hasError ? 'true' : 'false'}
+        aria-describedby=${ariaDescribedByValue}
+        aria-labelledby=${label ? labelId : nothing}
+        @input=${onInput}
+        @change=${onChange}
+        @focus=${onFocus}
+        @blur=${onBlur}
+        ...=${props}
+      />
+      
+      ${hasError ? html`
+        <div 
+          id=${errorId}
+          class="ctt-input-field__error"
+          style=${styleMap(errorStyles)}
+          role="alert"
+          aria-live="polite"
+        >
+          ${errorIcon}
+          <span class="ctt-input-field__error-text">${error}</span>
+        </div>
+      ` : nothing}
+    </div>
+  `;
+};
+
 /**
  * InputField Web Component
  * 
@@ -1398,7 +1213,7 @@ if (typeof customElements !== 'undefined' && !customElements.get('textarea-field
  *   disabled
  * ></ctt-input-field>
  */
-class CttInputField extends lit.LitElement {
+class CttInputField extends LitElement {
   static properties = {
     label: { type: String },
     value: { type: String },
@@ -1412,7 +1227,7 @@ class CttInputField extends lit.LitElement {
     id: { type: String },
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: block;
     }
@@ -1520,6 +1335,93 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-input-fiel
 }
 
 /**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */class e extends i{constructor(i){if(super(i),this.it=E,i.type!==t.CHILD)throw Error(this.constructor.directiveName+"() can only be used in child bindings")}render(r){if(r===E||null==r)return this._t=void 0,this.it=r;if(r===T)return r;if("string"!=typeof r)throw Error(this.constructor.directiveName+"() called with a non-string value");if(r===this.it)return this._t;this.it=r;const s=[r];return s.raw=s,this._t={_$litType$:this.constructor.resultType,strings:s,values:[]}}}e.directiveName="unsafeHTML",e.resultType=1;const o=e$2(e);
+
+/** Primary UI component for user interaction */
+const Button = ({ 
+  variant = 'primary',
+  size = 'medium', 
+  label, 
+  onclick,
+  iconLeft = false,
+  iconLeftElement = '',
+  iconRight = false,
+  iconRightElement = '',
+  borderRadius = 'pill',
+  backgroundColor = null,
+  disabled = false,
+  ariaLabel = null
+}) => {
+  
+  // Get typography tokens for the size
+  const typography = typographyHelpers.getButtonTypography(size);
+  
+  // Create style object with tokens and user overrides
+  const buttonStyles = {
+    fontFamily: typography.fontFamily || tokens.typography.fontFamilies.label,
+    fontSize: typography.fontSize,
+    fontWeight: typography.fontWeight,
+    lineHeight: typography.lineHeight,
+    ...(backgroundColor && { backgroundColor }),
+  };
+
+  // Map borderRadius values to CSS class names
+  const borderRadiusClass = {
+    'pill': 'pill',
+    'small': 'small-radius',
+    'extraSmall': 'extra-small-radius'
+  }[borderRadius] || 'pill';
+
+  // Build CSS classes
+  const classes = [
+    'ctt-button',
+    `ctt-button--${size}`,
+    `ctt-button--${variant}`,
+    `ctt-button--${borderRadiusClass}`
+  ].join(' ');
+
+  // Render button content with icons
+  const renderContent = () => {
+    const parts = [];
+    
+    if (iconLeft && iconLeftElement) {
+      parts.push(html`<span class="ctt-button__icon ctt-button__icon--left">${o(iconLeftElement)}</span>`);
+    }
+    
+    if (label) {
+      parts.push(html`<span class="ctt-button__label">${label}</span>`);
+    }
+    
+    if (iconRight && iconRightElement) {
+      parts.push(html`<span class="ctt-button__icon ctt-button__icon--right">${o(iconRightElement)}</span>`);
+    }
+    
+    return parts;
+  };
+
+  // Determine accessible name - use ariaLabel if provided, otherwise use label
+  // For icon-only buttons, ariaLabel should be provided
+  const accessibleName = ariaLabel || label;
+  const hasVisibleLabel = label && label.trim().length > 0;
+
+  return html`
+    <button
+      type="button"
+      class=${classes}
+      style=${styleMap(buttonStyles)}
+      ?disabled=${disabled}
+      aria-label=${!hasVisibleLabel && accessibleName ? accessibleName : nothing}
+      @click=${onclick}
+    >
+      ${renderContent()}
+    </button>
+  `;
+};
+
+/**
  * Button Web Component
  * 
  * A web component wrapper for the Button component.
@@ -1530,7 +1432,7 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-input-fiel
  * <ctt-button variant="secondary" size="large" label="Save" icon-left icon-left-element="<svg>...</svg>"></ctt-button>
  * <ctt-button variant="tertiary" border-radius="small" label="Cancel" disabled></ctt-button>
  */
-class CttButton extends lit.LitElement {
+class CttButton extends LitElement {
   static properties = {
     variant: { type: String },
     size: { type: String },
@@ -1546,7 +1448,7 @@ class CttButton extends lit.LitElement {
     ariaLabel: { type: String, attribute: 'aria-label' }
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: inline-block;
     }
@@ -1611,6 +1513,44 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-button')) 
   customElements.define('ctt-button', CttButton);
 }
 
+const Header = ({ user, onLogin, onLogout, onCreateAccount }) => html`
+  <header>
+    <div class="storybook-header">
+      <div>
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fillRule="evenodd">
+            <path
+              d="M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z"
+              fill="#FFF"
+            />
+            <path
+              d="M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z"
+              fill="#555AB9"
+            />
+            <path
+              d="M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z"
+              fill="#91BAF8"
+            />
+          </g>
+        </svg>
+        <h1>Acme</h1>
+      </div>
+      <div>
+        ${user
+          ? Button({ size: 'small', label: 'Log out' })
+          : html`${Button({
+              size: 'small',
+              label: 'Log in',
+            })}
+            ${Button({
+              size: 'small',
+              label: 'Sign up',
+            })}`}
+      </div>
+    </div>
+  </header>
+`;
+
 /**
  * Header Web Component
  * 
@@ -1620,12 +1560,12 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-button')) 
  * Usage:
  * <ctt-header user="John Doe"></ctt-header>
  */
-class CttHeader extends lit.LitElement {
+class CttHeader extends LitElement {
   static properties = {
     user: { type: String },
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: block;
     }
@@ -1684,6 +1624,64 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-header')) 
   customElements.define('ctt-header', CttHeader);
 }
 
+const Page = ({ user, onLogin, onLogout, onCreateAccount }) => html`
+  <article>
+    ${Header({
+      user,
+      onLogin,
+      onLogout,
+      onCreateAccount,
+    })}
+
+    <section class="storybook-page">
+      <h2>Pages in Storybook</h2>
+      <p>
+        We recommend building UIs with a
+        <a href="https://componentdriven.org" target="_blank" rel="noopener noreferrer">
+          <strong>component-driven</strong> </a
+        >process starting with atomic components and ending with pages.
+      </p>
+      <p>
+        Render pages with mock data. This makes it easy to build and review page states without
+        needing to navigate to them in your app. Here are some handy patterns for managing page data
+        in Storybook:
+      </p>
+      <ul>
+        <li>
+          Use a higher-level connected component. Storybook helps you compose such data from the
+          "args" of child component stories
+        </li>
+        <li>
+          Assemble data in the page component from your services. You can mock these services out
+          using Storybook.
+        </li>
+      </ul>
+      <p>
+        Get a guided tutorial on component-driven development at
+        <a href="https://storybook.js.org/tutorials/" target="_blank" rel="noopener noreferrer">
+          Storybook tutorials
+        </a>
+        . Read more in the
+        <a href="https://storybook.js.org/docs" target="_blank" rel="noopener noreferrer"> docs </a>
+        .
+      </p>
+      <div class="tip-wrapper">
+        <span class="tip">Tip</span> Adjust the width of the canvas with the
+        <svg width="10" height="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fillRule="evenodd">
+            <path
+              d="M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z"
+              id="a"
+              fill="#999"
+            />
+          </g>
+        </svg>
+        Viewports addon in the toolbar
+      </div>
+    </section>
+  </article>
+`;
+
 /**
  * Page Web Component
  * 
@@ -1693,12 +1691,12 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-header')) 
  * Usage:
  * <ctt-page user="John Doe"></ctt-page>
  */
-class CttPage extends lit.LitElement {
+class CttPage extends LitElement {
   static properties = {
     user: { type: String },
   };
 
-  static styles = lit.css`
+  static styles = css`
     :host {
       display: block;
     }
@@ -1757,21 +1755,5 @@ if (typeof customElements !== 'undefined' && !customElements.get('ctt-page')) {
   customElements.define('ctt-page', CttPage);
 }
 
-exports.Button = Button;
-exports.CttButton = CttButton;
-exports.CttHeader = CttHeader;
-exports.CttInputField = CttInputField;
-exports.CttPage = CttPage;
-exports.CttRadioButton = RadioButtonElement;
-exports.CttTextareaFieldElement = CttTextareaFieldElement;
-exports.Header = Header;
-exports.InputField = InputField;
-exports.Page = Page;
-exports.RadioButton = RadioButton;
-exports.TextareaField = TextareaField;
-exports.buttonTokens = buttonTokens;
-exports.getCSSVar = getCSSVar;
-exports.tokenStyles = tokenStyles;
-exports.tokens = tokens;
-exports.typographyHelpers = typographyHelpers;
-//# sourceMappingURL=index.js.map
+export { Button, CttButton, CttHeader, CttInputField, CttPage, RadioButtonElement as CttRadioButton, CttTextareaFieldElement, Header, InputField, Page, RadioButton, TextareaField, buttonTokens, getCSSVar, tokenStyles, tokens, typographyHelpers };
+//# sourceMappingURL=index.node.js.map
