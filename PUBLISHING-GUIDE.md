@@ -42,7 +42,7 @@ git push origin main --tags
 ```
 
 ## Package Information
-- **Name**: `ctt-design-system`
+- **Name**: `ctt-ds`
 - **Current Version**: `1.0.0` ✅ **PUBLISHED**
 - **Registry**: https://registry.npmjs.org/
 - **Package Size**: ~1.5 MB
@@ -52,20 +52,20 @@ git push origin main --tags
 ✅ **Package is now live!** Users can install your package with:
 
 ```bash
-npm install ctt-design-system
+npm install ctt-ds
 ```
 
 ## Usage Examples
 ```javascript
 // Import components
-import { Button, InputField } from 'ctt-design-system';
+import { Button, InputField } from 'ctt-ds';
 
 // Import tokens only
-import { colors, typography } from 'ctt-design-system/tokens';
+import { colors, typography } from 'ctt-ds/tokens';
 
 // Import CSS
-import 'ctt-design-system/css';
-import 'ctt-design-system/fonts.css';
+import 'ctt-ds/css';
+import 'ctt-ds/fonts.css';
 ```
 
 ## Next Steps
