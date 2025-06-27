@@ -1,6 +1,6 @@
 {
   "name": "ctt-ds",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "type": "module",
   "description": "CTT Design System - Framework agnostic component library",
   "main": "dist/cjs/index.js",
