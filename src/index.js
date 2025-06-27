@@ -1,37 +1,41 @@
 // src/index.js
 
-// 1. Re-export everything so consumers get your classes & tokens as before
-export * from './components/Button/index.js';
-export * from './components/RadioButton/index.js';
-export * from './components/InputField/index.js';
-export * from './components/TextareaField/index.js';
-export * from './components/Header/index.js';
-export * from './components/Page/index.js';
+// 1) Import your classes
+import { CttButton }         from './components/Button/index.js';
+import { CttRadioButton }    from './components/RadioButton/index.js';
+import { CttInputField }     from './components/InputField/index.js';
+import { CttTextareaField }  from './components/TextareaField/index.js';
+import { CttHeader }         from './components/Header/index.js';
+import { CttPage }           from './components/Page/index.js';
 
-export * from './tokens/index.js';
-export * from './tokens/colors.js';
-export * from './tokens/typography.js';
-// …and any other tokens
+// 2) Re-export for framework consumers (SSR-safe)
+export { 
+  CttButton,
+  CttRadioButton,
+  CttInputField,
+  CttTextareaField,
+  CttHeader,
+  CttPage
+};
 
-// 2. Client-only registration & styling
+// 3) Client-only registration & CSS injection
 if (typeof window !== 'undefined' && window.customElements) {
-  // load your bundled CSS
+  // Dynamically load your CSS bundle
   import('./styles.css').catch(() => {
-    console.warn('ctt-ds: could not load styles.css');
+    console.warn('ctt-ds: failed to load styles.css');
   });
 
-  // map tag names → constructors
+  // List of [tagName, Constructor]
   const components = [
-    ['ctt-button',        CttButton],
-    ['ctt-radio-button',  CttRadioButton],
-    ['ctt-input-field',   CttInputField],
-    ['ctt-textarea-field',CttTextareaField],
-    ['ctt-header',        CttHeader],
-    ['ctt-page',          CttPage],
-    // …and any others you have
+    ['ctt-button',         CttButton],
+    ['ctt-radio-button',   CttRadioButton],
+    ['ctt-input-field',    CttInputField],
+    ['ctt-textarea-field', CttTextareaField],
+    ['ctt-header',         CttHeader],
+    ['ctt-page',           CttPage],
   ];
 
-  // define them exactly once
+  // Define each one exactly once
   components.forEach(([tag, ctor]) => {
     if (!customElements.get(tag)) {
       customElements.define(tag, ctor);
