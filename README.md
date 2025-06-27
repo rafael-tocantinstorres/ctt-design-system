@@ -395,20 +395,30 @@ npm run build
 npm test
 ```
 
+### 📚 Documentation
+
+- **[COMPONENT-ASSEMBLY.md](./COMPONENT-ASSEMBLY.md)** - Complete guide to creating and assembling components
+- **[COMPONENT-STRUCTURE.md](./COMPONENT-STRUCTURE.md)** - Component architecture and organization
+- **[DEVELOPMENT-WORKFLOW.md](./DEVELOPMENT-WORKFLOW.md)** - Development processes and workflows
+- **[src/tokens/README.md](./src/tokens/README.md)** - Design tokens documentation
+- **[src/styles/README.md](./src/styles/README.md)** - Styling system documentation
+
 ### Generating New Components
 
-Use the built-in component generator to quickly scaffold new components:
+Use the built-in component generator to quickly scaffold new components with full TypeScript support:
 
 ```bash
 npm run generate:component MyComponent
 ```
 
 This command will create:
-- `src/components/MyComponent.js` - Main component file
-- `src/components/MyComponentElement.js` - Web Component wrapper
-- `src/tokens/my-component-tokens.css` - Component-specific CSS tokens
-- `src/stories/MyComponent.stories.js` - Storybook story
+- `src/components/MyComponent/index.js` - Main component file
+- `src/components/MyComponent/MyComponentElement.js` - Web Component wrapper
+- `src/styles/components/my-component.css` - Component styles with design tokens
+- `src/stories/MyComponent.stories.js` - Comprehensive Storybook documentation
 - Updates `src/index.js` with exports
+- Updates `src/styles/index.css` with style imports
+- **Updates `src/index.d.ts` with TypeScript definitions**
 
 #### Example Usage
 
@@ -422,6 +432,8 @@ npm run generate:component Navigation
 # Generate an InputField component
 npm run generate:component InputField
 ```
+
+📖 **For detailed component assembly instructions, see [COMPONENT-ASSEMBLY.md](./COMPONENT-ASSEMBLY.md)**
 
 ### Development Workflow
 

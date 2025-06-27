@@ -12,6 +12,102 @@ const pascalCase = componentName.charAt(0).toUpperCase() + componentName.slice(1
 const kebabCase = componentName.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
 const camelCase = componentName.charAt(0).toLowerCase() + componentName.slice(1);
 
+async function updateTypeDefinitions(pascalCase, kebabCase) {
+  const typeDefinitionsPath = 'src/index.d.ts';
+  const typeDefinitionsContent = await fs.readFile(typeDefinitionsPath, 'utf8');
+  
+  // Generate component props interface
+  const componentPropsInterface = `export interface ${pascalCase}Props {
+  variant?: 'default' | 'primary' | 'secondary';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+  className?: string;
+  id?: string;
+  // Add component-specific props here
+}`;
+
+  // Generate component function declaration
+  const componentFunctionDeclaration = `export declare function ${pascalCase}(props: ${pascalCase}Props): TemplateResult;`;
+
+  // Generate web component class declaration
+  const webComponentClassDeclaration = `export declare class Ctt${pascalCase} extends LitElement {
+  variant: 'default' | 'primary' | 'secondary';
+  size: 'small' | 'medium' | 'large';
+  disabled: boolean;
+}`;
+
+  // Generate JSX interface for web component
+  const jsxInterface = `      'ctt-${kebabCase}': {
+        variant?: 'default' | 'primary' | 'secondary';
+        size?: 'small' | 'medium' | 'large';
+        disabled?: boolean;
+        'onCtt-click'?: (event: CustomEvent) => void;
+        // Add component-specific event handlers here
+      };`;
+
+  // Generate HTML element interface
+  const htmlElementInterface = `    'ctt-${kebabCase}': Ctt${pascalCase};`;
+
+  // Insert component props interface before existing component interfaces
+  const componentPropsInsertPoint = typeDefinitionsContent.indexOf('export interface ButtonProps');
+  if (componentPropsInsertPoint !== -1) {
+    const beforeProps = typeDefinitionsContent.substring(0, componentPropsInsertPoint);
+    const afterProps = typeDefinitionsContent.substring(componentPropsInsertPoint);
+    const updatedContent = beforeProps + componentPropsInterface + '\n\n' + afterProps;
+    await fs.writeFile(typeDefinitionsPath, updatedContent);
+  }
+
+  // Re-read the file to get the updated content
+  const updatedTypeDefinitionsContent = await fs.readFile(typeDefinitionsPath, 'utf8');
+
+  // Insert component function declaration after component props interfaces
+  const functionDeclarationInsertPoint = updatedTypeDefinitionsContent.indexOf('export declare function Button');
+  if (functionDeclarationInsertPoint !== -1) {
+    const beforeFunction = updatedTypeDefinitionsContent.substring(0, functionDeclarationInsertPoint);
+    const afterFunction = updatedTypeDefinitionsContent.substring(functionDeclarationInsertPoint);
+    const updatedContent = beforeFunction + componentFunctionDeclaration + '\n\n' + afterFunction;
+    await fs.writeFile(typeDefinitionsPath, updatedContent);
+  }
+
+  // Re-read the file again
+  const updatedContent2 = await fs.readFile(typeDefinitionsPath, 'utf8');
+
+  // Insert web component class declaration after existing classes
+  const classDeclarationInsertPoint = updatedContent2.indexOf('export declare class CttButton');
+  if (classDeclarationInsertPoint !== -1) {
+    const beforeClass = updatedContent2.substring(0, classDeclarationInsertPoint);
+    const afterClass = updatedContent2.substring(classDeclarationInsertPoint);
+    const updatedContent = beforeClass + webComponentClassDeclaration + '\n\n' + afterClass;
+    await fs.writeFile(typeDefinitionsPath, updatedContent);
+  }
+
+  // Re-read the file again
+  const updatedContent3 = await fs.readFile(typeDefinitionsPath, 'utf8');
+
+  // Insert JSX interface element
+  const jsxInsertPoint = updatedContent3.indexOf('      \'ctt-button\': {');
+  if (jsxInsertPoint !== -1) {
+    const beforeJsx = updatedContent3.substring(0, jsxInsertPoint);
+    const afterJsx = updatedContent3.substring(jsxInsertPoint);
+    const updatedContent = beforeJsx + jsxInterface + '\n      ' + afterJsx;
+    await fs.writeFile(typeDefinitionsPath, updatedContent);
+  }
+
+  // Re-read the file one more time
+  const updatedContent4 = await fs.readFile(typeDefinitionsPath, 'utf8');
+
+  // Insert HTML element interface
+  const htmlElementInsertPoint = updatedContent4.indexOf('    \'ctt-button\': CttButton;');
+  if (htmlElementInsertPoint !== -1) {
+    const beforeHtml = updatedContent4.substring(0, htmlElementInsertPoint);
+    const afterHtml = updatedContent4.substring(htmlElementInsertPoint);
+    const updatedContent = beforeHtml + htmlElementInterface + '\n    ' + afterHtml;
+    await fs.writeFile(typeDefinitionsPath, updatedContent);
+  }
+
+  console.log(`  🔧 Updated src/index.d.ts (TypeScript definitions)`);
+}
+
 async function generateComponent() {
   console.log(`Generating component: ${pascalCase}`);
   
@@ -374,6 +470,9 @@ export const AllVariants = {
     
     await fs.writeFile(indexPath, finalIndex);
     
+    // Update index.d.ts with TypeScript definitions
+    await updateTypeDefinitions(pascalCase, kebabCase);
+    
     console.log(`✅ ${pascalCase} component generated successfully!`);
     console.log(`\nFiles created:`);
     console.log(`  📁 src/components/${pascalCase}/`);
@@ -383,6 +482,7 @@ export const AllVariants = {
     console.log(`  📖 src/stories/${pascalCase}.stories.js (Storybook documentation)`);
     console.log(`  🔧 Updated src/index.js (exports)`);
     console.log(`  🎨 Updated src/styles/index.css (styles import)`);
+    console.log(`  📝 Updated src/index.d.ts (TypeScript definitions)`);
     
     console.log(`\n📂 Component Structure:`);
     console.log(`src/components/${pascalCase}/`);
