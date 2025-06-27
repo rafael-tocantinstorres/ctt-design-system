@@ -94,9 +94,7 @@ class CttButton extends LitElement {
   }
 }
 
-// Register custom element
-if (!customElements.get('ctt-button')) {
-  customElements.define('ctt-button', CttButton);
-}
+// Component registration is handled by the main index.js file
+// to ensure SSR compatibility with Next.js
 
 export { CttButton };

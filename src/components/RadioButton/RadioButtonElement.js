@@ -127,8 +127,8 @@ export class RadioButtonElement extends LitElement {
   }
 }
 
-// Register the custom element
-customElements.define('radio-button', RadioButtonElement);
+// Component registration is handled by the main index.js file
+// to ensure SSR compatibility with Next.js
 
 // Export for use in other modules
 export { RadioButtonElement as CttRadioButton };

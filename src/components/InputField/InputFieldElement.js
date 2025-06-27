@@ -139,9 +139,7 @@ class CttInputField extends LitElement {
   }
 }
 
-// Register custom element
-if (!customElements.get('ctt-input-field')) {
-  customElements.define('ctt-input-field', CttInputField);
-}
+// Component registration is handled by the main index.js file
+// to ensure SSR compatibility with Next.js
 
 export { CttInputField };

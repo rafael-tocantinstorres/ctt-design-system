@@ -12,7 +12,8 @@ export default [
     output: {
       file: 'dist/index.esm.js',
       format: 'es',
-      sourcemap: true
+      sourcemap: true,
+      inlineDynamicImports: true
     },
     plugins: [
       nodeResolve(),
@@ -39,7 +40,8 @@ export default [
       file: 'dist/index.js',
       format: 'cjs',
       sourcemap: true,
-      exports: 'named'
+      exports: 'named',
+      inlineDynamicImports: true
     },
     plugins: [
       nodeResolve(),

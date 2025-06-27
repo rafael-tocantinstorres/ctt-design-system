@@ -1,3 +1,5 @@
+/* Import the new organized styles */
+@import './styles/index.css';
 .storybook-header {
   display: flex;
   justify-content: space-between;

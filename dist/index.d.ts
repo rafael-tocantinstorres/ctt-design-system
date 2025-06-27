@@ -91,8 +91,8 @@ export interface PageProps {
 
 export declare function Page(props: PageProps): TemplateResult;
 
-// Custom element classes
-export declare class CttButton extends LitElement {
+// Custom element classes (SSR-safe - may be undefined on server)
+interface CttButtonClass extends LitElement {
   variant: 'primary' | 'secondary' | 'tertiary';
   size: 'small' | 'medium' | 'large';
   label: string;
@@ -107,7 +107,7 @@ export declare class CttButton extends LitElement {
   ariaLabel?: string | null;
 }
 
-export declare class CttRadioButton extends LitElement {
+interface CttRadioButtonClass extends LitElement {
   label: string;
   name: string;
   value: string;
@@ -116,7 +116,7 @@ export declare class CttRadioButton extends LitElement {
   errorText: string;
 }
 
-export declare class CttInputField extends LitElement {
+interface CttInputFieldClass extends LitElement {
   label: string;
   value: string;
   name: string;
@@ -128,7 +128,7 @@ export declare class CttInputField extends LitElement {
   size: 'small' | 'medium' | 'large';
 }
 
-export declare class CttTextareaFieldElement extends LitElement {
+interface CttTextareaFieldElementClass extends LitElement {
   label: string;
   value: string;
   name: string;
@@ -141,13 +141,21 @@ export declare class CttTextareaFieldElement extends LitElement {
   resize: 'none' | 'vertical' | 'horizontal' | 'both';
 }
 
-export declare class CttHeader extends LitElement {
+interface CttHeaderClass extends LitElement {
   user: any;
 }
 
-export declare class CttPage extends LitElement {
+interface CttPageClass extends LitElement {
   user: any;
 }
+
+// Export web component classes (undefined on server, available on client)
+export declare const CttButton: (new () => CttButtonClass) | undefined;
+export declare const CttRadioButton: (new () => CttRadioButtonClass) | undefined;
+export declare const CttInputField: (new () => CttInputFieldClass) | undefined;
+export declare const CttTextareaFieldElement: (new () => CttTextareaFieldElementClass) | undefined;
+export declare const CttHeader: (new () => CttHeaderClass) | undefined;
+export declare const CttPage: (new () => CttPageClass) | undefined;
 
 // Design tokens interface
 export interface DesignTokens {
@@ -248,11 +256,11 @@ declare global {
 // HTML element interfaces
 declare global {
   interface HTMLElementTagNameMap {
-    'ctt-button': CttButton;
-    'ctt-radio-button': CttRadioButton;
-    'ctt-input-field': CttInputField;
-    'ctt-textarea-field': CttTextareaFieldElement;
-    'ctt-header': CttHeader;
-    'ctt-page': CttPage;
+    'ctt-button': CttButtonClass;
+    'ctt-radio-button': CttRadioButtonClass;
+    'ctt-input-field': CttInputFieldClass;
+    'ctt-textarea-field': CttTextareaFieldElementClass;
+    'ctt-header': CttHeaderClass;
+    'ctt-page': CttPageClass;
   }
 }

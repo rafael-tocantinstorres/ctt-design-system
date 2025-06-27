@@ -75,9 +75,7 @@ class CttPage extends LitElement {
   }
 }
 
-// Register custom element
-if (!customElements.get('ctt-page')) {
-  customElements.define('ctt-page', CttPage);
-}
+// Component registration is handled by the main index.js file
+// to ensure SSR compatibility with Next.js
 
 export { CttPage };

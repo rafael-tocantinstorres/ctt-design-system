@@ -75,9 +75,7 @@ class CttHeader extends LitElement {
   }
 }
 
-// Register custom element
-if (!customElements.get('ctt-header')) {
-  customElements.define('ctt-header', CttHeader);
-}
+// Component registration is handled by the main index.js file
+// to ensure SSR compatibility with Next.js
 
 export { CttHeader };

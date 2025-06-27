@@ -152,9 +152,7 @@ class CttTextareaFieldElement extends LitElement {
   }
 }
 
-// Register custom element with the specified tag name
-if (!customElements.get('textarea-field')) {
-  customElements.define('textarea-field', CttTextareaFieldElement);
-}
+// Component registration is handled by the main index.js file
+// to ensure SSR compatibility with Next.js
 
 export { CttTextareaFieldElement };

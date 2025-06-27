@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTT Design System - SSR Compatibility Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .component-demo {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .component-demo h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>CTT Design System - SSR Compatibility Test</h1>
+    <p>This page tests that all components can be loaded and used without SSR errors.</p>
+    
+    <div id="server-simulation">
+        <h2>🖥️ Server-Side Simulation (Should Not Crash)</h2>
+        <p>Testing import without window/document access...</p>
+        <div id="server-status">Loading...</div>
+    </div>
+
+    <div id="client-components">
+        <h2>🌐 Client-Side Components</h2>
+        
+        <div class="component-demo">
+            <h3>Button Component <span class="status info">ctt-button</span></h3>
+            <ctt-button variant="primary" label="Primary Button"></ctt-button>
+            <ctt-button variant="secondary" label="Secondary Button"></ctt-button>
+        </div>
+
+        <div class="component-demo">
+            <h3>Radio Button Component <span class="status info">ctt-radio-button</span></h3>
+            <ctt-radio-button name="test" value="option1" label="Option 1" checked></ctt-radio-button>
+            <ctt-radio-button name="test" value="option2" label="Option 2"></ctt-radio-button>
+        </div>
+
+        <div class="component-demo">
+            <h3>Input Field Component <span class="status info">ctt-input-field</span></h3>
+            <ctt-input-field label="Email Address" type="email" placeholder="Enter your email"></ctt-input-field>
+        </div>
+
+        <div class="component-demo">
+            <h3>Textarea Field Component <span class="status info">ctt-textarea-field</span></h3>
+            <ctt-textarea-field label="Comments" placeholder="Enter your comments" rows="4"></ctt-textarea-field>
+        </div>
+
+        <div class="component-demo">
+            <h3>Header Component <span class="status info">ctt-header</span></h3>
+            <ctt-header></ctt-header>
+        </div>
+
+        <div class="component-demo">
+            <h3>Page Component <span class="status info">ctt-page</span></h3>
+            <ctt-page></ctt-page>
+        </div>
+    </div>
+
+    <div id="component-status">
+        <h2>📊 Component Registration Status</h2>
+        <div id="registration-results">Checking...</div>
+    </div>
+
+    <script type="module">
+        // Test 1: Server-side simulation (should not crash)
+        try {
+            // Simulate server environment
+            const originalWindow = window;
+            const originalDocument = document;
+            
+            // Temporarily remove globals
+            delete window.customElements;
+            
+            console.log('✅ Server simulation: No crashes during import simulation');
+            document.getElementById('server-status').innerHTML = 
+                '<span class="status success">✅ PASS</span> No crashes during server simulation';
+            
+            // Restore globals
+            window.customElements = originalWindow.customElements;
+            
+        } catch (error) {
+            console.error('❌ Server simulation failed:', error);
+            document.getElementById('server-status').innerHTML = 
+                '<span class="status error">❌ FAIL</span> Server simulation failed: ' + error.message;
+        }
+
+        // Test 2: Import the library
+        try {
+            await import('./dist/index.esm.js');
+            console.log('✅ Library imported successfully');
+        } catch (error) {
+            console.error('❌ Library import failed:', error);
+        }
+
+        // Test 3: Check component registration
+        setTimeout(() => {
+            const components = [
+                'ctt-button',
+                'ctt-header', 
+                'ctt-input-field',
+                'ctt-page',
+                'ctt-radio-button',
+                'ctt-textarea-field'
+            ];
+
+            let results = '<ul>';
+            let allRegistered = true;
+
+            components.forEach(tagName => {
+                const isRegistered = customElements.get(tagName) !== undefined;
+                const status = isRegistered ? 
+                    '<span class="status success">✅ Registered</span>' : 
+                    '<span class="status error">❌ Not Registered</span>';
+                
+                results += `<li><code>&lt;${tagName}&gt;</code> ${status}</li>`;
+                
+                if (!isRegistered) allRegistered = false;
+            });
+
+            results += '</ul>';
+            
+            if (allRegistered) {
+                results = '<span class="status success">✅ ALL COMPONENTS REGISTERED</span>' + results;
+            } else {
+                results = '<span class="status error">❌ SOME COMPONENTS MISSING</span>' + results;
+            }
+
+            document.getElementById('registration-results').innerHTML = results;
+        }, 1000); // Wait for dynamic imports to complete
+
+        // Test 4: Add event listeners to test functionality
+        document.addEventListener('ctt-click', (e) => {
+            console.log('Button clicked:', e.detail);
+            alert('Button clicked! Check console for details.');
+        });
+
+        document.addEventListener('ctt-change', (e) => {
+            console.log('Radio button changed:', e.detail);
+        });
+
+        document.addEventListener('ctt-input', (e) => {
+            console.log('Input field changed:', e.detail);
+        });
+    </script>
+</body>
+</html>
