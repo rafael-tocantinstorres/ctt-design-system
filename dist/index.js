@@ -1151,6 +1151,12 @@ class RadioButtonElement extends lit.LitElement {
     `;
   }
 
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
   constructor() {
     super();
     this.label = '';
@@ -1276,6 +1282,12 @@ class CttTextareaFieldElement extends lit.LitElement {
       width: 100%;
     }
   `;
+
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
 
   constructor() {
     super();
@@ -1416,6 +1428,12 @@ class CttInputField extends lit.LitElement {
     }
   `;
 
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
   constructor() {
     super();
     this.label = '';
@@ -1550,6 +1568,12 @@ class CttButton extends lit.LitElement {
     }
   `;
 
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
   constructor() {
     super();
     this.variant = 'primary';
@@ -1629,6 +1653,12 @@ class CttHeader extends lit.LitElement {
     }
   `;
 
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
   constructor() {
     super();
     this.user = null;
@@ -1701,6 +1731,12 @@ class CttPage extends lit.LitElement {
       display: block;
     }
   `;
+
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
 
   constructor() {
     super();

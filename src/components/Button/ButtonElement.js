@@ -34,6 +34,12 @@ class CttButton extends LitElement {
     }
   `;
 
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
   constructor() {
     super();
     this.variant = 'primary';
