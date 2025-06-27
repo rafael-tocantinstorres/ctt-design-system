@@ -15,29 +15,26 @@ export * from './tokens/typography.js';
 
 // 2. Client-only registration & styling
 if (typeof window !== 'undefined' && window.customElements) {
-  // Dynamically inject your compiled CSS bundle
+  // load your bundled CSS
   import('./styles.css').catch(() => {
-    /* you might log or swallow errors if CSS fails to load */
+    console.warn('ctt-ds: could not load styles.css');
   });
 
-  // Function to register components asynchronously
-  (async () => {
-    // Map tag names to their class exports
-    const registry = {
-      'ctt-button':       (await import('./components/Button/index.js')).CttButton,
-      'ctt-radio-button': (await import('./components/RadioButton/index.js')).CttRadioButton,
-      'ctt-input-field':  (await import('./components/InputField/index.js')).CttInputField,
-      'ctt-textarea-field': (await import('./components/TextareaField/index.js')).CttTextareaField,
-      'ctt-header':       (await import('./components/Header/index.js')).CttHeader,
-      'ctt-page':         (await import('./components/Page/index.js')).CttPage,
-      // …add all your other components here
-    };
+  // map tag names → constructors
+  const components = [
+    ['ctt-button',        CttButton],
+    ['ctt-radio-button',  CttRadioButton],
+    ['ctt-input-field',   CttInputField],
+    ['ctt-textarea-field',CttTextareaField],
+    ['ctt-header',        CttHeader],
+    ['ctt-page',          CttPage],
+    // …and any others you have
+  ];
 
-    // Define each custom element exactly once
-    Object.entries(registry).forEach(([tag, Component]) => {
-      if (!customElements.get(tag)) {
-        customElements.define(tag, Component);
-      }
-    });
-  })();
+  // define them exactly once
+  components.forEach(([tag, ctor]) => {
+    if (!customElements.get(tag)) {
+      customElements.define(tag, ctor);
+    }
+  });
 }

@@ -615,11 +615,6 @@ const Button = ({
   `;
 };
 
-var index$5 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  Button: Button
-});
-
 /**
  * @license
  * Copyright 2018 Google LLC
@@ -720,11 +715,6 @@ const RadioButton = ({
     </div>
   `;
 };
-
-var index$4 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  RadioButton: RadioButton
-});
 
 /**
  * @license
@@ -876,11 +866,6 @@ const InputField = ({
   `;
 };
 
-var index$3 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  InputField: InputField
-});
-
 /** TextareaField component with label, error states, and accessibility features */
 const TextareaField = ({ 
   label = '',
@@ -1021,11 +1006,6 @@ const TextareaField = ({
   `;
 };
 
-var index$2 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  TextareaField: TextareaField
-});
-
 const Header = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
   <header>
     <div class="storybook-header">
@@ -1063,11 +1043,6 @@ const Header = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
     </div>
   </header>
 `;
-
-var index$1 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  Header: Header
-});
 
 const Page = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
   <article>
@@ -1127,42 +1102,34 @@ const Page = ({ user, onLogin, onLogout, onCreateAccount }) => lit.html`
   </article>
 `;
 
-var index = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  Page: Page
-});
-
 // src/index.js
 
 // …and any other tokens
 
 // 2. Client-only registration & styling
 if (typeof window !== 'undefined' && window.customElements) {
-  // Dynamically inject your compiled CSS bundle
+  // load your bundled CSS
   Promise.resolve().then(function () { return require('./styles-C_9Z1H2o.js'); }).catch(() => {
-    /* you might log or swallow errors if CSS fails to load */
+    console.warn('ctt-ds: could not load styles.css');
   });
 
-  // Function to register components asynchronously
-  (async () => {
-    // Map tag names to their class exports
-    const registry = {
-      'ctt-button':       (await Promise.resolve().then(function () { return index$5; })).CttButton,
-      'ctt-radio-button': (await Promise.resolve().then(function () { return index$4; })).CttRadioButton,
-      'ctt-input-field':  (await Promise.resolve().then(function () { return index$3; })).CttInputField,
-      'ctt-textarea-field': (await Promise.resolve().then(function () { return index$2; })).CttTextareaField,
-      'ctt-header':       (await Promise.resolve().then(function () { return index$1; })).CttHeader,
-      'ctt-page':         (await Promise.resolve().then(function () { return index; })).CttPage,
-      // …add all your other components here
-    };
+  // map tag names → constructors
+  const components = [
+    ['ctt-button',        CttButton],
+    ['ctt-radio-button',  CttRadioButton],
+    ['ctt-input-field',   CttInputField],
+    ['ctt-textarea-field',CttTextareaField],
+    ['ctt-header',        CttHeader],
+    ['ctt-page',          CttPage],
+    // …and any others you have
+  ];
 
-    // Define each custom element exactly once
-    Object.entries(registry).forEach(([tag, Component]) => {
-      if (!customElements.get(tag)) {
-        customElements.define(tag, Component);
-      }
-    });
-  })();
+  // define them exactly once
+  components.forEach(([tag, ctor]) => {
+    if (!customElements.get(tag)) {
+      customElements.define(tag, ctor);
+    }
+  });
 }
 
 exports.Button = Button;
