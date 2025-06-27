@@ -20,21 +20,24 @@ if (typeof window !== 'undefined' && window.customElements) {
     /* you might log or swallow errors if CSS fails to load */
   });
 
-  // Map tag names to their class exports
-  const registry = {
-    'ctt-button':       (await import('./components/Button/index.js')).CttButton,
-    'ctt-radio-button': (await import('./components/RadioButton/index.js')).CttRadioButton,
-    'ctt-input-field':  (await import('./components/InputField/index.js')).CttInputField,
-    'ctt-textarea-field': (await import('./components/TextareaField/index.js')).CttTextareaField,
-    'ctt-header':       (await import('./components/Header/index.js')).CttHeader,
-    'ctt-page':         (await import('./components/Page/index.js')).CttPage,
-    // …add all your other components here
-  };
+  // Function to register components asynchronously
+  (async () => {
+    // Map tag names to their class exports
+    const registry = {
+      'ctt-button':       (await import('./components/Button/index.js')).CttButton,
+      'ctt-radio-button': (await import('./components/RadioButton/index.js')).CttRadioButton,
+      'ctt-input-field':  (await import('./components/InputField/index.js')).CttInputField,
+      'ctt-textarea-field': (await import('./components/TextareaField/index.js')).CttTextareaField,
+      'ctt-header':       (await import('./components/Header/index.js')).CttHeader,
+      'ctt-page':         (await import('./components/Page/index.js')).CttPage,
+      // …add all your other components here
+    };
 
-  // Define each custom element exactly once
-  Object.entries(registry).forEach(([tag, Component]) => {
-    if (!customElements.get(tag)) {
-      customElements.define(tag, Component);
-    }
-  });
+    // Define each custom element exactly once
+    Object.entries(registry).forEach(([tag, Component]) => {
+      if (!customElements.get(tag)) {
+        customElements.define(tag, Component);
+      }
+    });
+  })();
 }

@@ -10,9 +10,11 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'dist/index.esm.js',
+      dir: 'dist/esm',
       format: 'es',
-      sourcemap: true
+      sourcemap: true,
+      entryFileNames: 'index.js',
+      chunkFileNames: '[name]-[hash].js'
     },
     plugins: [
       nodeResolve(),
@@ -36,10 +38,12 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'dist/index.js',
+      dir: 'dist/cjs',
       format: 'cjs',
       sourcemap: true,
-      exports: 'named'
+      exports: 'named',
+      entryFileNames: 'index.js',
+      chunkFileNames: '[name]-[hash].js'
     },
     plugins: [
       nodeResolve(),
