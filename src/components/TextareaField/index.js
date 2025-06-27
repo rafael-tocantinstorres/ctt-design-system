@@ -144,3 +144,6 @@ export const TextareaField = ({
     </div>
   `;
 };
+
+// Export the web component class
+export { CttTextareaFieldElement as CttTextareaField } from './TextareaFieldElement.js';

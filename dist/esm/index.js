@@ -1,4 +1,4 @@
-import { nothing, html } from 'lit';
+import { LitElement, css, nothing, html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 
 /**
@@ -218,31 +218,6 @@ const fontSizes = {
   '6xl': '3rem',     // 48px - matches --ctt-core-font-size-scaled-300
   '7xl': '4rem',     // 64px - matches --ctt-core-font-size-scaled-400
   '8xl': '4.25rem',  // 68px - matches --ctt-core-font-size-scaled-425
-};
-
-// Base Typography Sizes - Semantic assignments
-const baseTypographySizes = {
-  body: {
-    s: '0.875rem',   // 14px - --ctt-base-font-size-body-s
-    m: '1rem',       // 16px - --ctt-base-font-size-body-m
-    l: '1.125rem',   // 18px - --ctt-base-font-size-body-l
-  },
-  title: {
-    s: '1.25rem',    // 20px - --ctt-base-font-size-title-s
-    m: '1.625rem',   // 26px - --ctt-base-font-size-title-m
-    l: '2.0625rem',  // 33px - --ctt-base-font-size-title-l
-    xl: '2.625rem',  // 42px - --ctt-base-font-size-title-xl
-  },
-  display: {
-    s: '2.25rem',    // 36px - --ctt-base-font-size-display-s
-    m: '3rem',       // 48px - --ctt-base-font-size-display-m
-    l: '4.25rem',    // 68px - --ctt-base-font-size-display-l
-  },
-  label: {
-    s: '0.875rem',   // 14px - --ctt-base-font-size-label-s
-    m: '1rem',       // 16px - --ctt-base-font-size-label-m
-    l: '1.125rem',   // 18px - --ctt-base-font-size-label-l
-  },
 };
 
 // Font Weights - Aligned with CSS core tokens
@@ -532,6 +507,104 @@ const typographyHelpers = {
   getButtonTypography: (size = 'medium') => tokens.typography.scale.button[size] || tokens.typography.scale.button.medium,
 };
 
+/**
+ * Button Web Component
+ * 
+ * A web component wrapper for the Button component.
+ * This allows the component to be used in any framework or vanilla HTML.
+ * 
+ * Usage:
+ * <ctt-button variant="primary" size="medium" label="Click me"></ctt-button>
+ * <ctt-button variant="secondary" size="large" label="Save" icon-left icon-left-element="<svg>...</svg>"></ctt-button>
+ * <ctt-button variant="tertiary" border-radius="small" label="Cancel" disabled></ctt-button>
+ */
+class CttButton extends LitElement {
+  static properties = {
+    variant: { type: String },
+    size: { type: String },
+    label: { type: String },
+    onclick: { type: Function },
+    iconLeft: { type: Boolean, attribute: 'icon-left' },
+    iconLeftElement: { type: String, attribute: 'icon-left-element' },
+    iconRight: { type: Boolean, attribute: 'icon-right' },
+    iconRightElement: { type: String, attribute: 'icon-right-element' },
+    borderRadius: { type: String, attribute: 'border-radius' },
+    backgroundColor: { type: String, attribute: 'background-color' },
+    disabled: { type: Boolean },
+    ariaLabel: { type: String, attribute: 'aria-label' }
+  };
+
+  static styles = css`
+    :host {
+      display: inline-block;
+    }
+  `;
+
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
+  constructor() {
+    super();
+    this.variant = 'primary';
+    this.size = 'medium';
+    this.label = 'Button';
+    this.iconLeft = false;
+    this.iconLeftElement = '';
+    this.iconRight = false;
+    this.iconRightElement = '';
+    this.borderRadius = 'pill';
+    this.disabled = false;
+    this.ariaLabel = null;
+  }
+
+  render() {
+    return Button({
+      variant: this.variant,
+      size: this.size,
+      label: this.label,
+      onclick: () => this._handleClick(),
+      iconLeft: this.iconLeft,
+      iconLeftElement: this.iconLeftElement,
+      iconRight: this.iconRight,
+      iconRightElement: this.iconRightElement,
+      borderRadius: this.borderRadius,
+      backgroundColor: this.backgroundColor,
+      disabled: this.disabled,
+      ariaLabel: this.ariaLabel
+    });
+  }
+
+  /**
+   * Handle click events and dispatch custom events
+   */
+  _handleClick() {
+    // Don't dispatch event if button is disabled
+    if (this.disabled) return;
+    
+    this.dispatchEvent(new CustomEvent('ctt-click', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        variant: this.variant,
+        size: this.size,
+        label: this.label,
+        iconLeft: this.iconLeft,
+        iconRight: this.iconRight,
+        borderRadius: this.borderRadius,
+        disabled: this.disabled
+      }
+    }));
+  }
+}
+
+// Register custom element
+if (!customElements.get('ctt-button')) {
+  customElements.define('ctt-button', CttButton);
+}
+
 /** Primary UI component for user interaction */
 const Button = ({ 
   variant = 'primary',
@@ -624,6 +697,135 @@ const Button = ({
  * Copyright 2018 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */const o=o=>o??E;
+
+/**
+ * RadioButton Web Component
+ * 
+ * A reusable radio button component with proper accessibility,
+ * error states, and design system integration.
+ * 
+ * @element radio-button
+ * 
+ * @attr {string} label - Label text for the radio button
+ * @attr {string} name - Name attribute for form grouping
+ * @attr {string} value - Value of the radio button
+ * @attr {boolean} checked - Whether the radio button is checked
+ * @attr {boolean} disabled - Whether the radio button is disabled
+ * @attr {string} errorText - Error message to display
+ * 
+ * @fires change - Fired when the radio button state changes
+ * 
+ * @csspart root - The root label element
+ * @csspart control - The radio input element
+ * @csspart label - The label text element
+ * @csspart error - The error message container
+ * 
+ * @slot error - Custom error message content
+ */
+class RadioButtonElement extends LitElement {
+  static get properties() {
+    return {
+      label: { type: String },
+      name: { type: String },
+      value: { type: String },
+      checked: { type: Boolean, reflect: true },
+      disabled: { type: Boolean, reflect: true },
+      errorText: { type: String, attribute: 'error-text' },
+    };
+  }
+
+  static get styles() {
+    return css`
+      :host {
+        display: block;
+      }
+    `;
+  }
+
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
+  constructor() {
+    super();
+    this.label = '';
+    this.name = '';
+    this.value = '';
+    this.checked = false;
+    this.disabled = false;
+    this.errorText = '';
+  }
+
+  render() {
+    return RadioButton({
+      label: this.label,
+      name: this.name,
+      value: this.value,
+      checked: this.checked,
+      disabled: this.disabled,
+      errorText: this.errorText,
+      onChange: this._handleChange.bind(this),
+      id: this.id || `radio-${this.name}-${this.value}`,
+    });
+  }
+
+  /**
+   * Handle radio button change event
+   * @param {Event} event - The change event
+   * @private
+   */
+  _handleChange(event) {
+    if (this.disabled) {
+      event.preventDefault();
+      return;
+    }
+
+    this.checked = event.detail.checked;
+    
+    // Dispatch custom change event with details
+    this.dispatchEvent(new CustomEvent('ctt-change', {
+      detail: {
+        name: this.name,
+        value: this.value,
+        checked: this.checked,
+        originalEvent: event.detail.originalEvent
+      },
+      bubbles: true,
+      composed: true
+    }));
+  }
+
+  /**
+   * Focus the radio button input
+   */
+  focus() {
+    const input = this.shadowRoot.querySelector('.ctt-radio-button__control');
+    if (input) {
+      input.focus();
+    }
+  }
+
+  /**
+   * Get the form value for this radio button
+   * @returns {string|null} The value if checked, null otherwise
+   */
+  get formValue() {
+    return this.checked ? this.value : null;
+  }
+
+  /**
+   * Check if this radio button is valid
+   * @returns {boolean} True if valid, false otherwise
+   */
+  get validity() {
+    return !this.errorText;
+  }
+}
+
+// Register the custom element
+customElements.define('radio-button', RadioButtonElement);
 
 /**
  * RadioButton Lit Function Component
@@ -725,6 +927,149 @@ const RadioButton = ({
  * Copyright 2020 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */const l=e$2(class extends i{constructor(r){if(super(r),r.type!==t.PROPERTY&&r.type!==t.ATTRIBUTE&&r.type!==t.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!f(r))throw Error("`live` bindings can only contain a single expression")}render(r){return r}update(i,[t$1]){if(t$1===T||t$1===E)return t$1;const o=i.element,l=i.name;if(i.type===t.PROPERTY){if(t$1===o[l])return T}else if(i.type===t.BOOLEAN_ATTRIBUTE){if(!!t$1===o.hasAttribute(l))return T}else if(i.type===t.ATTRIBUTE&&o.getAttribute(l)===t$1+"")return T;return m(i),t$1}});
+
+/**
+ * InputField Web Component
+ * 
+ * A web component wrapper for the InputField component.
+ * This allows the component to be used in any framework or vanilla HTML.
+ * 
+ * Usage:
+ * <ctt-input-field 
+ *   label="Email" 
+ *   name="email" 
+ *   type="email" 
+ *   size="medium"
+ *   error="Please enter a valid email"
+ *   disabled
+ * ></ctt-input-field>
+ */
+class CttInputField extends LitElement {
+  static properties = {
+    label: { type: String },
+    value: { type: String },
+    name: { type: String },
+    type: { type: String },
+    placeholder: { type: String },
+    error: { type: String },
+    disabled: { type: Boolean },
+    required: { type: Boolean },
+    size: { type: String },
+    id: { type: String },
+  };
+
+  static styles = css`
+    :host {
+      display: block;
+    }
+  `;
+
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
+  constructor() {
+    super();
+    this.label = '';
+    this.value = '';
+    this.name = '';
+    this.type = 'text';
+    this.placeholder = '';
+    this.error = null;
+    this.disabled = false;
+    this.required = false;
+    this.size = 'medium';
+    this.id = null;
+  }
+
+  render() {
+    return InputField({
+      label: this.label,
+      value: this.value,
+      name: this.name,
+      type: this.type,
+      placeholder: this.placeholder,
+      error: this.error,
+      disabled: this.disabled,
+      required: this.required,
+      size: this.size,
+      id: this.id,
+      onInput: this._handleInput.bind(this),
+      onChange: this._handleChange.bind(this),
+      onFocus: this._handleFocus.bind(this),
+      onBlur: this._handleBlur.bind(this),
+    });
+  }
+
+  /**
+   * Handle input events and dispatch custom events
+   */
+  _handleInput(event) {
+    this.value = event.target.value;
+    this.dispatchEvent(new CustomEvent('ctt-input', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+
+  /**
+   * Handle change events and dispatch custom events
+   */
+  _handleChange(event) {
+    this.value = event.target.value;
+    this.dispatchEvent(new CustomEvent('ctt-change', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+
+  /**
+   * Handle focus events and dispatch custom events
+   */
+  _handleFocus(event) {
+    this.dispatchEvent(new CustomEvent('ctt-focus', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+
+  /**
+   * Handle blur events and dispatch custom events
+   */
+  _handleBlur(event) {
+    this.dispatchEvent(new CustomEvent('ctt-blur', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+}
+
+// Register custom element
+if (!customElements.get('ctt-input-field')) {
+  customElements.define('ctt-input-field', CttInputField);
+}
 
 /** InputField component with label, error states, and accessibility features */
 const InputField = ({ 
@@ -863,6 +1208,162 @@ const InputField = ({
     </div>
   `;
 };
+
+/**
+ * TextareaField Web Component
+ * 
+ * A reusable Web Component for textarea input with label, error states, and accessibility features.
+ * This allows the component to be used in any framework or vanilla HTML.
+ * 
+ * Usage:
+ * <textarea-field 
+ *   label="Description" 
+ *   value="Initial text"
+ *   placeholder="Enter your description..."
+ *   errorText="This field is required"
+ *   disabled
+ * ></textarea-field>
+ * 
+ * API:
+ * • Attributes/Props:
+ *   – label (string)
+ *   – value (string) 
+ *   – placeholder (string)
+ *   – errorText (string)
+ *   – disabled (boolean)
+ * • Events:
+ *   – change (fires when user edits)
+ */
+class CttTextareaFieldElement extends LitElement {
+  static properties = {
+    label: { type: String },
+    value: { type: String },
+    placeholder: { type: String },
+    errorText: { type: String },
+    disabled: { type: Boolean },
+    name: { type: String },
+    required: { type: Boolean },
+    rows: { type: Number },
+    cols: { type: Number },
+    resize: { type: String },
+    id: { type: String },
+  };
+
+  static styles = css`
+    :host {
+      display: block;
+      width: 100%;
+    }
+  `;
+
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
+  constructor() {
+    super();
+    this.label = '';
+    this.value = '';
+    this.placeholder = '';
+    this.errorText = '';
+    this.disabled = false;
+    this.name = '';
+    this.required = false;
+    this.rows = 4;
+    this.cols = null;
+    this.resize = 'vertical';
+    this.id = null;
+  }
+
+  render() {
+    return TextareaField({
+      label: this.label,
+      value: this.value,
+      name: this.name,
+      placeholder: this.placeholder,
+      errorText: this.errorText,
+      disabled: this.disabled,
+      required: this.required,
+      rows: this.rows,
+      cols: this.cols,
+      resize: this.resize,
+      id: this.id,
+      onInput: this._onInput.bind(this),
+      onChange: this._onChange.bind(this),
+      onFocus: this._onFocus.bind(this),
+      onBlur: this._onBlur.bind(this),
+    });
+  }
+
+  /**
+   * Handle input events and dispatch custom events
+   */
+  _onInput(event) {
+    this.value = event.target.value;
+    this.dispatchEvent(new CustomEvent('ctt-input', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+
+  /**
+   * Handle change events and dispatch custom events
+   */
+  _onChange(event) {
+    this.value = event.target.value;
+    this.dispatchEvent(new CustomEvent('ctt-change', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+
+  /**
+   * Handle focus events and dispatch custom events
+   */
+  _onFocus(event) {
+    this.dispatchEvent(new CustomEvent('ctt-focus', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+
+  /**
+   * Handle blur events and dispatch custom events
+   */
+  _onBlur(event) {
+    this.dispatchEvent(new CustomEvent('ctt-blur', {
+      bubbles: true,
+      composed: true,
+      detail: { 
+        originalEvent: event,
+        value: this.value,
+        name: this.name
+      }
+    }));
+  }
+}
+
+// Register custom element with the specified tag name
+if (!customElements.get('textarea-field')) {
+  customElements.define('textarea-field', CttTextareaFieldElement);
+}
 
 /** TextareaField component with label, error states, and accessibility features */
 const TextareaField = ({ 
@@ -1004,6 +1505,85 @@ const TextareaField = ({
   `;
 };
 
+/**
+ * Header Web Component
+ * 
+ * A web component wrapper for the Header component.
+ * This allows the component to be used in any framework or vanilla HTML.
+ * 
+ * Usage:
+ * <ctt-header user="John Doe"></ctt-header>
+ */
+class CttHeader extends LitElement {
+  static properties = {
+    user: { type: String },
+  };
+
+  static styles = css`
+    :host {
+      display: block;
+    }
+  `;
+
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
+  constructor() {
+    super();
+    this.user = null;
+  }
+
+  render() {
+    return Header({
+      user: this.user,
+      onLogin: () => this._handleLogin(),
+      onLogout: () => this._handleLogout(),
+      onCreateAccount: () => this._handleCreateAccount(),
+    });
+  }
+
+  /**
+   * Handle login events
+   */
+  _handleLogin() {
+    this.dispatchEvent(new CustomEvent('ctt-header-login', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+
+  /**
+   * Handle logout events
+   */
+  _handleLogout() {
+    this.dispatchEvent(new CustomEvent('ctt-header-logout', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+
+  /**
+   * Handle create account events
+   */
+  _handleCreateAccount() {
+    this.dispatchEvent(new CustomEvent('ctt-header-create-account', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+}
+
+// Register custom element
+if (!customElements.get('ctt-header')) {
+  customElements.define('ctt-header', CttHeader);
+}
+
 const Header = ({ user, onLogin, onLogout, onCreateAccount }) => html`
   <header>
     <div class="storybook-header">
@@ -1041,6 +1621,85 @@ const Header = ({ user, onLogin, onLogout, onCreateAccount }) => html`
     </div>
   </header>
 `;
+
+/**
+ * Page Web Component
+ * 
+ * A web component wrapper for the Page component.
+ * This allows the component to be used in any framework or vanilla HTML.
+ * 
+ * Usage:
+ * <ctt-page user="John Doe"></ctt-page>
+ */
+class CttPage extends LitElement {
+  static properties = {
+    user: { type: String },
+  };
+
+  static styles = css`
+    :host {
+      display: block;
+    }
+  `;
+
+  // Override to render in light DOM instead of shadow DOM
+  // This allows global CSS to style the component
+  createRenderRoot() {
+    return this;
+  }
+
+  constructor() {
+    super();
+    this.user = null;
+  }
+
+  render() {
+    return Page({
+      user: this.user,
+      onLogin: () => this._handleLogin(),
+      onLogout: () => this._handleLogout(),
+      onCreateAccount: () => this._handleCreateAccount(),
+    });
+  }
+
+  /**
+   * Handle login events
+   */
+  _handleLogin() {
+    this.dispatchEvent(new CustomEvent('ctt-page-login', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+
+  /**
+   * Handle logout events
+   */
+  _handleLogout() {
+    this.dispatchEvent(new CustomEvent('ctt-page-logout', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+
+  /**
+   * Handle create account events
+   */
+  _handleCreateAccount() {
+    this.dispatchEvent(new CustomEvent('ctt-page-create-account', {
+      bubbles: true,
+      composed: true,
+      detail: { user: this.user }
+    }));
+  }
+}
+
+// Register custom element
+if (!customElements.get('ctt-page')) {
+  customElements.define('ctt-page', CttPage);
+}
 
 const Page = ({ user, onLogin, onLogout, onCreateAccount }) => html`
   <article>
@@ -1102,27 +1761,25 @@ const Page = ({ user, onLogin, onLogout, onCreateAccount }) => html`
 
 // src/index.js
 
-// …and any other tokens
 
-// 2. Client-only registration & styling
+// 3) Client-only registration & CSS injection
 if (typeof window !== 'undefined' && window.customElements) {
-  // load your bundled CSS
+  // Dynamically load your CSS bundle
   import('./styles-B_7aDZJb.js').catch(() => {
-    console.warn('ctt-ds: could not load styles.css');
+    console.warn('ctt-ds: failed to load styles.css');
   });
 
-  // map tag names → constructors
+  // List of [tagName, Constructor]
   const components = [
-    ['ctt-button',        CttButton],
-    ['ctt-radio-button',  CttRadioButton],
-    ['ctt-input-field',   CttInputField],
-    ['ctt-textarea-field',CttTextareaField],
-    ['ctt-header',        CttHeader],
-    ['ctt-page',          CttPage],
-    // …and any others you have
+    ['ctt-button',         CttButton],
+    ['ctt-radio-button',   RadioButtonElement],
+    ['ctt-input-field',    CttInputField],
+    ['ctt-textarea-field', CttTextareaFieldElement],
+    ['ctt-header',         CttHeader],
+    ['ctt-page',           CttPage],
   ];
 
-  // define them exactly once
+  // Define each one exactly once
   components.forEach(([tag, ctor]) => {
     if (!customElements.get(tag)) {
       customElements.define(tag, ctor);
@@ -1130,5 +1787,5 @@ if (typeof window !== 'undefined' && window.customElements) {
   });
 }
 
-export { Button, Header, InputField, Page, RadioButton, TextareaField, baseColors, baseTypographySizes, brandColors, colors, coreColors, fontFamilies, fontSizes, fontWeights, letterSpacing, lineHeights, tokens, typography, typographyScale };
+export { CttButton, CttHeader, CttInputField, CttPage, RadioButtonElement as CttRadioButton, CttTextareaFieldElement as CttTextareaField };
 //# sourceMappingURL=index.js.map

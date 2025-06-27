@@ -60,3 +60,6 @@ export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => html`
     </section>
   </article>
 `;
+
+// Export the web component class
+export { CttPage } from './PageElement.js';

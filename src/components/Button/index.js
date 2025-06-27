@@ -84,3 +84,6 @@ export const Button = ({
     </button>
   `;
 };
+
+// Export the web component class
+export { CttButton } from './ButtonElement.js';

@@ -90,3 +90,6 @@ export const RadioButton = ({
     </div>
   `;
 };
+
+// Export the web component class
+export { CttRadioButton } from './RadioButtonElement.js';

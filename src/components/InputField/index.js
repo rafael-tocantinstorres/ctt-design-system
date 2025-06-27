@@ -142,3 +142,6 @@ export const InputField = ({
     </div>
   `;
 };
+
+// Export the web component class
+export { CttInputField } from './InputFieldElement.js';

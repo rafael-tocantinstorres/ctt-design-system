@@ -43,3 +43,6 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => html`
     </div>
   </header>
 `;
+
+// Export the web component class
+export { CttHeader } from './HeaderElement.js';
