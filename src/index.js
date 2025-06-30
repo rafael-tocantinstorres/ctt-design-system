@@ -1,4 +1,5 @@
 // Export all components
+export { ToggleSwitch } from './components/ToggleSwitch/index.js';
 export { Checkbox } from './components/Checkbox/index.js';
 export { RadioButton } from './components/RadioButton/index.js';
 export { TextareaField } from './components/TextareaField/index.js';
@@ -12,6 +13,7 @@ export { tokens } from './tokens/index.js';
 export { buttonTokens, tokenStyles, typographyHelpers, getCSSVar } from './tokens/utils.js';
 
 // Export web component classes
+export { CttToggleSwitch } from './components/ToggleSwitch/ToggleSwitchElement.js';
 export { CttCheckbox } from './components/Checkbox/CheckboxElement.js';
 export { CttRadioButton } from './components/RadioButton/RadioButtonElement.js';
 export { CttTextareaFieldElement } from './components/TextareaField/TextareaFieldElement.js';

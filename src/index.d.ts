@@ -12,6 +12,15 @@ export interface CheckboxProps {
 
 export declare function Checkbox(props: CheckboxProps): TemplateResult;
 
+export interface ToggleSwitchProps {
+  variant?: 'default' | 'primary' | 'secondary';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+  className?: string;
+  id?: string;
+  // Add component-specific props here
+}
+
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'tertiary';
   size?: 'small' | 'medium' | 'large';
@@ -26,6 +35,8 @@ export interface ButtonProps {
   disabled?: boolean;
   ariaLabel?: string | null;
 }
+
+export declare function ToggleSwitch(props: ToggleSwitchProps): TemplateResult;
 
 export declare function Button(props: ButtonProps): TemplateResult;
 
@@ -104,6 +115,12 @@ export declare function Page(props: PageProps): TemplateResult;
 
 // Custom element classes
 export declare class CttCheckbox extends LitElement {
+  variant: 'default' | 'primary' | 'secondary';
+  size: 'small' | 'medium' | 'large';
+  disabled: boolean;
+}
+
+export declare class CttToggleSwitch extends LitElement {
   variant: 'default' | 'primary' | 'secondary';
   size: 'small' | 'medium' | 'large';
   disabled: boolean;
@@ -198,7 +215,14 @@ declare global {
         'onCtt-click'?: (event: CustomEvent) => void;
         // Add component-specific event handlers here
       };
-      'ctt-button': {
+      'ctt-toggle-switch': {
+        variant?: 'default' | 'primary' | 'secondary';
+        size?: 'small' | 'medium' | 'large';
+        disabled?: boolean;
+        'onCtt-click'?: (event: CustomEvent) => void;
+        // Add component-specific event handlers here
+      };
+            'ctt-button': {
         variant?: 'primary' | 'secondary' | 'tertiary';
         size?: 'small' | 'medium' | 'large';
         label?: string;
@@ -272,6 +296,7 @@ declare global {
 declare global {
   interface HTMLElementTagNameMap {
     'ctt-checkbox': CttCheckbox;
+        'ctt-toggle-switch': CttToggleSwitch;
         'ctt-button': CttButton;
     'ctt-radio-button': CttRadioButton;
     'ctt-input-field': CttInputField;
