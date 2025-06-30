@@ -12,6 +12,14 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
     },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.esm.js",
+      "require": "./dist/react.js"
+    },
+    "./jsx": {
+      "types": "./dist/jsx.d.ts"
+    },
     "./tokens": {
       "import": "./dist/tokens/index.esm.js",
       "require": "./dist/tokens/index.js"
@@ -60,16 +68,26 @@
   "dependencies": {
     "lit": "^3.3.0"
   },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.0",
     "@playwright/test": "^1.53.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@storybook/addon-a11y": "^9.0.11",
     "@storybook/addon-docs": "^9.0.11",
     "@storybook/addon-vitest": "^9.0.11",
     "@storybook/web-components-vite": "^9.0.11",
     "@types/node": "^24.0.4",
+    "@types/react": "^18.0.0",
     "@vitest/browser": "^3.2.3",
     "@vitest/coverage-v8": "^3.2.3",
     "concurrently": "^8.2.2",
@@ -81,6 +99,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^9.0.11",
+    "typescript": "^5.0.0",
     "vitest": "^3.2.3"
   }
 }

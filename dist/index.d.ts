@@ -171,76 +171,112 @@ export interface DesignTokens {
 
 export declare const tokens: DesignTokens;
 
-// Custom element declarations for TypeScript
+// Custom element declarations for TypeScript and JSX
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'ctt-button': {
-        variant?: 'primary' | 'secondary' | 'tertiary';
-        size?: 'small' | 'medium' | 'large';
-        label?: string;
-        'icon-left'?: boolean;
-        'icon-left-element'?: string;
-        'icon-right'?: boolean;
-        'icon-right-element'?: string;
-        'border-radius'?: 'pill' | 'small' | 'extraSmall';
-        'background-color'?: string;
-        disabled?: boolean;
-        'aria-label'?: string;
-        'onCtt-click'?: (event: CustomEvent) => void;
-      };
-      'ctt-radio-button': {
-        label?: string;
-        name?: string;
-        value?: string;
-        checked?: boolean;
-        disabled?: boolean;
-        'error-text'?: string;
-        'onCtt-change'?: (event: CustomEvent) => void;
-      };
-      'ctt-input-field': {
-        label?: string;
-        value?: string;
-        name?: string;
-        type?: string;
-        placeholder?: string;
-        error?: string;
-        disabled?: boolean;
-        required?: boolean;
-        size?: 'small' | 'medium' | 'large';
-        'onCtt-input'?: (event: CustomEvent) => void;
-        'onCtt-change'?: (event: CustomEvent) => void;
-        'onCtt-focus'?: (event: CustomEvent) => void;
-        'onCtt-blur'?: (event: CustomEvent) => void;
-      };
-      'ctt-textarea-field': {
-        label?: string;
-        value?: string;
-        name?: string;
-        placeholder?: string;
-        'error-text'?: string;
-        disabled?: boolean;
-        required?: boolean;
-        rows?: number;
-        cols?: number;
-        resize?: 'none' | 'vertical' | 'horizontal' | 'both';
-        'onCtt-input'?: (event: CustomEvent) => void;
-        'onCtt-change'?: (event: CustomEvent) => void;
-        'onCtt-focus'?: (event: CustomEvent) => void;
-        'onCtt-blur'?: (event: CustomEvent) => void;
-      };
-      'ctt-header': {
-        user?: any;
-        'onCtt-login'?: (event: CustomEvent) => void;
-        'onCtt-logout'?: (event: CustomEvent) => void;
-        'onCtt-create-account'?: (event: CustomEvent) => void;
-      };
-      'ctt-page': {
-        user?: any;
-        'onCtt-login'?: (event: CustomEvent) => void;
-        'onCtt-logout'?: (event: CustomEvent) => void;
-        'onCtt-create-account'?: (event: CustomEvent) => void;
-      };
+      'ctt-button': Partial<{
+        variant: 'primary' | 'secondary' | 'tertiary';
+        size: 'small' | 'medium' | 'large';
+        label: string;
+        'icon-left': boolean | string;
+        'icon-left-element': string;
+        'icon-right': boolean | string;
+        'icon-right-element': string;
+        'border-radius': 'pill' | 'small' | 'extraSmall';
+        'background-color': string;
+        disabled: boolean | string;
+        'aria-label': string;
+        className: string;
+        class: string;
+        style: string | Record<string, string | number>;
+        id: string;
+        key: string | number;
+        ref: any;
+        'onCtt-click': (event: CustomEvent) => void;
+      }> & Record<string, any>;
+      'ctt-radio-button': Partial<{
+        label: string;
+        name: string;
+        value: string;
+        checked: boolean | string;
+        disabled: boolean | string;
+        'error-text': string;
+        className: string;
+        class: string;
+        style: string | Record<string, string | number>;
+        id: string;
+        key: string | number;
+        ref: any;
+        'onCtt-change': (event: CustomEvent) => void;
+      }> & Record<string, any>;
+      'ctt-input-field': Partial<{
+        label: string;
+        value: string;
+        name: string;
+        type: string;
+        placeholder: string;
+        error: string;
+        disabled: boolean | string;
+        required: boolean | string;
+        size: 'small' | 'medium' | 'large';
+        className: string;
+        class: string;
+        style: string | Record<string, string | number>;
+        id: string;
+        key: string | number;
+        ref: any;
+        'onCtt-input': (event: CustomEvent) => void;
+        'onCtt-change': (event: CustomEvent) => void;
+        'onCtt-focus': (event: CustomEvent) => void;
+        'onCtt-blur': (event: CustomEvent) => void;
+      }> & Record<string, any>;
+      'ctt-textarea-field': Partial<{
+        label: string;
+        value: string;
+        name: string;
+        placeholder: string;
+        'error-text': string;
+        disabled: boolean | string;
+        required: boolean | string;
+        rows: number | string;
+        cols: number | string;
+        resize: 'none' | 'vertical' | 'horizontal' | 'both';
+        className: string;
+        class: string;
+        style: string | Record<string, string | number>;
+        id: string;
+        key: string | number;
+        ref: any;
+        'onCtt-input': (event: CustomEvent) => void;
+        'onCtt-change': (event: CustomEvent) => void;
+        'onCtt-focus': (event: CustomEvent) => void;
+        'onCtt-blur': (event: CustomEvent) => void;
+      }> & Record<string, any>;
+      'ctt-header': Partial<{
+        user: any;
+        className: string;
+        class: string;
+        style: string | Record<string, string | number>;
+        id: string;
+        key: string | number;
+        ref: any;
+        'onCtt-login': (event: CustomEvent) => void;
+        'onCtt-logout': (event: CustomEvent) => void;
+        'onCtt-create-account': (event: CustomEvent) => void;
+      }> & Record<string, any>;
+      'ctt-page': Partial<{
+        user: any;
+        className: string;
+        class: string;
+        style: string | Record<string, string | number>;
+        id: string;
+        key: string | number;
+        ref: any;
+        'onCtt-login': (event: CustomEvent) => void;
+        'onCtt-logout': (event: CustomEvent) => void;
+        'onCtt-create-account': (event: CustomEvent) => void;
+      }> & Record<string, any>;
     }
   }
 }
