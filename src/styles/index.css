@@ -28,6 +28,7 @@
 @import './components/input-field.css';
 @import './components/textarea-field.css';
 @import './components/radio-button.css';
+@import './components/checkbox.css';
 
 
 /* Base styles using the design system */

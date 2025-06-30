@@ -1,6 +1,17 @@
 import { LitElement, TemplateResult } from 'lit';
 
 // Component function types
+export interface CheckboxProps {
+  variant?: 'default' | 'primary' | 'secondary';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+  className?: string;
+  id?: string;
+  // Add component-specific props here
+}
+
+export declare function Checkbox(props: CheckboxProps): TemplateResult;
+
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'tertiary';
   size?: 'small' | 'medium' | 'large';
@@ -92,11 +103,16 @@ export interface PageProps {
 export declare function Page(props: PageProps): TemplateResult;
 
 // Custom element classes
+export declare class CttCheckbox extends LitElement {
+  variant: 'default' | 'primary' | 'secondary';
+  size: 'small' | 'medium' | 'large';
+  disabled: boolean;
+}
+
 export declare class CttButton extends LitElement {
   variant: 'primary' | 'secondary' | 'tertiary';
   size: 'small' | 'medium' | 'large';
   label: string;
-  onclick?: (event: Event) => void;
   iconLeft: boolean;
   iconLeftElement: string;
   iconRight: boolean;
@@ -104,7 +120,7 @@ export declare class CttButton extends LitElement {
   borderRadius: 'pill' | 'small' | 'extraSmall';
   backgroundColor?: string;
   disabled: boolean;
-  ariaLabel?: string | null;
+  ariaLabel: string | null;
 }
 
 export declare class CttRadioButton extends LitElement {
@@ -175,6 +191,13 @@ export declare const tokens: DesignTokens;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
+      'ctt-checkbox': {
+        variant?: 'default' | 'primary' | 'secondary';
+        size?: 'small' | 'medium' | 'large';
+        disabled?: boolean;
+        'onCtt-click'?: (event: CustomEvent) => void;
+        // Add component-specific event handlers here
+      };
       'ctt-button': {
         variant?: 'primary' | 'secondary' | 'tertiary';
         size?: 'small' | 'medium' | 'large';
@@ -248,7 +271,8 @@ declare global {
 // HTML element interfaces
 declare global {
   interface HTMLElementTagNameMap {
-    'ctt-button': CttButton;
+    'ctt-checkbox': CttCheckbox;
+        'ctt-button': CttButton;
     'ctt-radio-button': CttRadioButton;
     'ctt-input-field': CttInputField;
     'ctt-textarea-field': CttTextareaFieldElement;
